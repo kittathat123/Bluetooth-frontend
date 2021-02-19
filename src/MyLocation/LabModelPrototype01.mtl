@@ -1,0 +1,21 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Cladding_Stucco_White
+Ka 0.000000 0.000000 0.000000
+Kd 0.784314 0.784314 0.784314
+Ks 0.330000 0.330000 0.330000
+map_Kd LabModelPrototype01/Cladding_Stucco_White.jpg
+
+newmtl Tile_Limestone_Large
+Ka 0.000000 0.000000 0.000000
+Kd 0.933333 0.984314 0.901961
+Ks 0.330000 0.330000 0.330000
+map_Kd LabModelPrototype01/Tile_Limestone_Large.jpg
+

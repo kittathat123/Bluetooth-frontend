@@ -1,0 +1,186 @@
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  height: 800px;
+  border: 1px solid #000000;
+}
+
+.logo-box {
+  width: 240px;
+  height: 110px;
+}
+
+.content-box {
+  width: 240px;
+  height: 100%;
+}
+
+/* .content-title {
+  width: 79px;
+  left: 28px;
+  top: 123px;
+  font-family: Red Rose;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #000000;
+} */
+
+.my-location-box {
+  /* position: absolute; */
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  align-items: center;
+  /* align-content: center; */
+  /* align-self: center; */
+  /* top: 40px; */
+  margin-top: 40px;
+  width: 99%;
+  height: 41px;
+}
+.my-location-box:hover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  width: 99%;
+  height: 41px;
+  background-color: rgba(42, 157, 244, 0.7);
+}
+
+.pin-logo {
+  width: 16px;
+  height: 21px;
+  left: -42px;
+}
+
+.my-location-text {
+  width: 114px;
+  height: 27px;
+  margin: 20px;
+  font-family: Red Rose;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.other-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 99%;
+  height: 41px;
+}
+
+.other-box:hover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 99%;
+  height: 41px;
+  background-color: rgba(42, 157, 244, 0.7);
+}
+
+.history-logo {
+  width: 21px;
+  height: 21px;
+}
+
+.log-history-text {
+  width: 114px;
+  height: 26px;
+  margin: 20px;
+
+  font-family: Red Rose;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #000000;
+}
+
+.bell-logo {
+  width: 16px;
+  height: 20px;
+  font-family: Font Awesome 5 Free;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.notification-text {
+  width: 115px;
+  height: 33px;
+  margin: 20px;
+  font-family: Red Rose;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.quarantine-logo {
+  width: 35px;
+  height: 35px;
+  font-family: Font Awesome 5 Free;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.quarantine-text {
+  width: 115px;
+  height: 33px;
+  margin: 20px;
+  font-family: Red Rose;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #000000;
+}
+
+.profile-logo {
+  width: 23px;
+  height: 23px;
+  font-family: Font Awesome 5 Free;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #000000;
+}
+
+.profile-text {
+  width: 115px;
+  height: 33px;
+  margin: 20px;
+  font-family: Red Rose;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.line {
+  width: 199.01px;
+  height: 0px;
+  margin-top: 40px;
+  margin-left: 1rem;
+  border: 1px solid #000000;
+}

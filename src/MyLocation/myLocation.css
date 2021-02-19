@@ -1,0 +1,11 @@
+.page {
+  display: flex;
+  background: #fff9f4;
+}
+
+.page-content {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  /* display: block; */
+}
