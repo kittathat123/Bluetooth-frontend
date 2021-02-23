@@ -1,16 +1,46 @@
 import "./App.css";
-import Sidebar from "./components/Sidebar";
 import MyLocation from "./MyLocation/myLocation";
-import VRScene from "./MyLocation/VRScene";
 import React, { Component } from "react";
+import LogHistory from "./LogHistory/LogHistory";
+import Notification from "./Notification/Notification";
+import Quarantine from "./Quarantine/Quarantine";
+import Profile from "./Profile/Profile";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <MyLocation />
-      {/* <Sidebar /> */}
-      {/* <VRScene /> */}
+      <Router>
+        <Switch>
+          <Route exact path="/" component={MyLocation} />
+          <Route path="/LogHistory" component={LogHistory} />
+          <Route path="/Notification" component={Notification} />
+          <Route path="/Quarantine" component={Quarantine} />
+          <Route path="/Profile" component={Profile} />
+        </Switch>
+      </Router>
     </div>
+
+    // <div>
+    //   <Router>
+    //     <Switch>
+    //       <Route path="/">
+    //         <MyLocation />
+    //       </Route>
+    //       <Route path="/LogHistory">
+    //         <LogHistory />
+    //       </Route>
+    //       <Route path="/Notification">
+    //         <Notification />
+    //       </Route>
+    //     </Switch>
+    //   </Router>
+    //   {/* <MyLocation /> */}
+    //   {/* <LogHistory /> */}
+    //   {/* <Notification /> */}
+    //   {/* <Quarantine /> */}
+    //   {/* <Profile /> */}
+    // </div>
   );
 }
 

@@ -11,6 +11,7 @@ import {
   faIdCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 class Sidebar extends Component {
   render() {
@@ -24,16 +25,22 @@ class Sidebar extends Component {
             style={{ width: "239px", height: "110px" }}
           ></img>
         </div>
-        <div className="content-box">
-          {/* <h1 className="content-title">Menu</h1> */}
-          <div className="my-location-box">
-            <FontAwesomeIcon
-              icon={faMapMarkedAlt}
-              size="lg"
-              className="pin-logo"
-            />
-            <h4 className="my-location-text">My Location</h4>
+
+        <Link to="/">
+          <div className="content-box">
+            {/* <h1 className="content-title">Menu</h1> */}
+            <div className="my-location-box">
+              <FontAwesomeIcon
+                icon={faMapMarkedAlt}
+                size="lg"
+                className="pin-logo"
+              />
+              <h4 className="my-location-text">My Location</h4>
+            </div>
           </div>
+        </Link>
+
+        <Link to="/LogHistory">
           <div className="other-box">
             <FontAwesomeIcon
               icon={faHistory}
@@ -42,10 +49,15 @@ class Sidebar extends Component {
             />
             <h4 className="log-history-text">Log History</h4>
           </div>
+        </Link>
+        <Link to="/Notification">
           <div className="other-box">
             <FontAwesomeIcon icon={faBell} size="lg" className="bell-logo" />
             <h4 className="notification-text">Notification</h4>
           </div>
+        </Link>
+
+        <Link to="/Quarantine">
           <div className="other-box">
             <FontAwesomeIcon
               icon={faHouseUser}
@@ -54,6 +66,9 @@ class Sidebar extends Component {
             />
             <h4 className="quarantine-text">Quarantine</h4>
           </div>
+        </Link>
+
+        <Link to="/Profile">
           <div className="other-box">
             <FontAwesomeIcon
               icon={faIdCard}
@@ -62,8 +77,9 @@ class Sidebar extends Component {
             />
             <h4 className="profile-text">Profile</h4>
           </div>
-          <div className="line"></div>
-        </div>
+        </Link>
+
+        <div className="line"></div>
       </div>
     );
   }

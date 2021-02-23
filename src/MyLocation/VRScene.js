@@ -22,7 +22,7 @@ class VRScene extends React.Component {
       // </div>
 
       /* Example 3D A Frame */
-      <div style={{ display: "block", height: "100%", width: "100%" }}>
+      <div style={{ height: "500px", width: "600px" }}>
         <a-scene vr-mode-ui="enabled: false" embedded>
           {/* <a-entity model="./LabPlan.gltf" position="0 0 0"></a-entity> */}
 

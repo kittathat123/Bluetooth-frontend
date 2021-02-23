@@ -10,14 +10,13 @@ class myLocation extends Component {
         <div>
           <Sidebar />
         </div>
-        <div className="page-content">
-          <div>
-            <div
-              id="myEmbeddedScene"
-              style={{ width: "100px", height: "100xp" }}
-            >
-              <VRScene />
-            </div>
+        <div className="pageContent">
+          <div
+            className="boxMap"
+            // id="myEmbeddedScene"
+            // style={{ width: "100px", height: "100xp" }}
+          >
+            <VRScene />
           </div>
         </div>
       </div>

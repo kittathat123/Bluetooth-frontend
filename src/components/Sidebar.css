@@ -50,15 +50,20 @@
   width: 99%;
   height: 41px;
   background-color: rgba(42, 157, 244, 0.7);
+  text-decoration: ;
 }
 
 .pin-logo {
   width: 16px;
   height: 21px;
   left: -42px;
+  color: #000000;
 }
 
 .my-location-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 114px;
   height: 27px;
   margin: 20px;
@@ -90,20 +95,23 @@
 .history-logo {
   width: 21px;
   height: 21px;
+  color: #000000;
 }
 
 .log-history-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 114px;
   height: 26px;
   margin: 20px;
-
   font-family: Red Rose;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
-
   color: #000000;
+  text-decoration: none;
 }
 
 .bell-logo {
@@ -118,6 +126,9 @@
 }
 
 .notification-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 115px;
   height: 33px;
   margin: 20px;
@@ -127,6 +138,7 @@
   font-size: 18px;
   line-height: 22px;
   color: #000000;
+  text-decoration: none;
 }
 
 .quarantine-logo {
@@ -141,6 +153,9 @@
 }
 
 .quarantine-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 115px;
   height: 33px;
   margin: 20px;
@@ -149,7 +164,7 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
-
+  text-decoration: none;
   color: #000000;
 }
 
@@ -166,6 +181,9 @@
 }
 
 .profile-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 115px;
   height: 33px;
   margin: 20px;
@@ -175,6 +193,7 @@
   font-size: 18px;
   line-height: 22px;
   color: #000000;
+  text-decoration: none;
 }
 
 .line {
