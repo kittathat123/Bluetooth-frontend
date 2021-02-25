@@ -1,11 +1,11 @@
 import "./App.css";
 import MyLocation from "./MyLocation/myLocation";
-import React, { Component } from "react";
+import React from "react";
 import LogHistory from "./LogHistory/LogHistory";
 import Notification from "./Notification/Notification";
 import Quarantine from "./Quarantine/Quarantine";
 import Profile from "./Profile/Profile";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (

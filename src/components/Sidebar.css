@@ -50,7 +50,6 @@
   width: 99%;
   height: 41px;
   background-color: rgba(42, 157, 244, 0.7);
-  text-decoration: ;
 }
 
 .pin-logo {
@@ -58,6 +57,9 @@
   height: 21px;
   left: -42px;
   color: #000000;
+}
+a:link {
+  text-decoration: none;
 }
 
 .my-location-text {
@@ -111,7 +113,6 @@
   font-size: 18px;
   line-height: 22px;
   color: #000000;
-  text-decoration: none;
 }
 
 .bell-logo {
@@ -138,7 +139,6 @@
   font-size: 18px;
   line-height: 22px;
   color: #000000;
-  text-decoration: none;
 }
 
 .quarantine-logo {
@@ -164,7 +164,6 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
-  text-decoration: none;
   color: #000000;
 }
 
@@ -193,7 +192,6 @@
   font-size: 18px;
   line-height: 22px;
   color: #000000;
-  text-decoration: none;
 }
 
 .line {

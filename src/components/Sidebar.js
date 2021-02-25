@@ -1,6 +1,5 @@
 import logo from "../assets/IPSlogo.png";
 import React, { Component } from "react";
-import { Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Sidebar.css";
 import {
