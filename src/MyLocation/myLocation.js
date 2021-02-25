@@ -14,12 +14,18 @@ class myLocation extends Component {
           </div>
           <div className="col">
             <div className="pageContent">
-              <div className="header row-auto">
-                <Button className="backButton" color="primary">
-                  primary
+              <div className="header ">
+                <Button
+                  className="backButton"
+                  color="secondary"
+                  href="https://www.w3schools.com/"
+                >
+                  Back
                 </Button>
+
+                <h2 className="roomTitle">ECC 705</h2>
               </div>
-              <div className="boxMap row-auto">
+              <div className="boxMap">
                 <div className="borderBox">
                   <VRScene />
                 </div>

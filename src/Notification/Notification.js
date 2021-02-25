@@ -13,9 +13,9 @@ class Notification extends Component {
           </div>
           <div className="col">
             <div className="pageContent">
-              <h1>Notification</h1>
+              <h1 style={{ color: "rgba(42, 157, 244)" }}>Notification</h1>
               <div className="boxMap">
-                <div className="borderBox">
+                <div className="tableBox">
                   <Tables />
                 </div>
               </div>
