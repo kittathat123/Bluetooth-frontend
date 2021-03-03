@@ -1,5 +1,5 @@
 {
-  "homepage": "http://kittathat123.github.io/Bluetooth-frontend",
+  "homepage": "http://kittathat123.github.io/",
   "name": "year4",
   "version": "0.1.0",
   "private": true,
@@ -20,7 +20,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "reactstrap": "^8.7.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "ws": "^7.4.3"
   },
   "scripts": {
     "predeploy": "yarn run build",

@@ -1,16 +1,21 @@
 import "./App.css";
 import MyLocation from "./MyLocation/myLocation";
-import React from "react";
+import React, { useEffect } from "react";
 import LogHistory from "./LogHistory/LogHistory";
 import Notification from "./Notification/Notification";
 import Quarantine from "./Quarantine/Quarantine";
 import Profile from "./Profile/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { test } from "./test";
 
 function App() {
+  useEffect(() => {
+    test();
+  });
+
   return (
     <div>
-      <Router>
+      {/* <Router>
         <Switch>
           <Route exact path="/" component={MyLocation} />
           <Route path="/LogHistory" component={LogHistory} />
@@ -18,7 +23,7 @@ function App() {
           <Route path="/Quarantine" component={Quarantine} />
           <Route path="/Profile" component={Profile} />
         </Switch>
-      </Router>
+      </Router> */}
     </div>
 
     // <div>
