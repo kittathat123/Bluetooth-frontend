@@ -6,6 +6,14 @@ import ReactDOM from "react-dom";
 
 class VRScene extends React.Component {
   render() {
+    // document.getElementById("fan").addEventListener("pause", function () {
+    //   document
+    //     .querySelector("a-animation")
+    //     .setAttribute(
+    //       "from",
+    //       AFRAME.utils.coordinates.stringify(this.getAttribute("rotation"))
+    //     );
+    // });
     return (
       // <div style={{ height: "500px", width: "500px" }}>
       //   <a-scene embeded>

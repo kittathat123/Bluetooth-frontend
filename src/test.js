@@ -43,11 +43,35 @@
 
 // export default test;
 
+// const WebSocket = require("ws");
+// const socket = new WebSocket(
+//   // "wss://protected-brook-89084.herokuapp.com/ws/location/"
+//   "wss://192.168.4.209" + "/ws/tag/1/",
+//   "e7b26a88637b30ca2cec67c94aedf2d2f9b4e214"
+// );
+
+// socket.onopen = function (e) {
+//   console.log("Hello websocket");
+//   socket.send("Here's some text that the server is urgently awaiting!");
+// };
+
+// socket.onmessage = function (e) {
+//   const data = JSON.parse(e.data);
+
+//   // this.setState({ list: data });
+
+//   console.log("DATA : " + data + "\n");
+// };
+
+// socket.onclose = function (e) {
+//   console.error("Chat socket closed unexpectedly");
+// };
+
 export const test = () => {
   const socket = new WebSocket(
     // "wss://protected-brook-89084.herokuapp.com/ws/location/"
-    "wss://192.168.4.209" + "/ws/tag/1/",
-    "e7b26a88637b30ca2cec67c94aedf2d2f9b4e214"
+    "wss://192.168.4.209/ws/tag/1/",
+    "f3c9c59ea1cfb5eeabae3b3bb6be72ba2d1b67c7"
   );
 
   socket.onopen = function (e) {

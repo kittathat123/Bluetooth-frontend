@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./myLocation.css";
 import VRScene from "./VRScene";
 import { Button } from "reactstrap";
+import Room from "./AFrame-SmartHome-master/docVRoom";
 
 class myLocation extends Component {
   render() {
@@ -27,7 +28,7 @@ class myLocation extends Component {
               </div>
               <div className="boxMap">
                 <div className="borderBox">
-                  <VRScene />
+                  <Room />
                 </div>
               </div>
             </div>
