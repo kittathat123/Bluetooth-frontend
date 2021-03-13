@@ -89,7 +89,6 @@ export const test = () => {
     const data = JSON.parse(e.data);
 
     // this.setState({ list: data });
-
     console.log("DATA : " + data + "\n");
   };
 

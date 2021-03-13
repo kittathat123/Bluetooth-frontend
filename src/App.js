@@ -12,14 +12,12 @@ import { test } from "./test";
 function App() {
   useEffect(() => {
     test();
-
     // document.title = `You clicked ${test} times`;
   });
-  const [value, setValue] = useState(test());
+  const [value, setValue] = useState(226.193056);
   console.log(value);
   return (
     <div>
-      {/* test value: {value} */}
       <Router>
         <Switch>
           <Route exact path="/" component={MyLocation} />

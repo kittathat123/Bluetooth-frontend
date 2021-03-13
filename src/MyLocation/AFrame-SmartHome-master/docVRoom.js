@@ -10,7 +10,7 @@ class docVRoom extends Component {
             environment
             physics="gravity: -1.6"
             renderer="antialias: true"
-            vr-mode-ui="enabled: false"
+            // vr-mode-ui="enabled: false"
             embedded
           >
             {/* <a-mixin
