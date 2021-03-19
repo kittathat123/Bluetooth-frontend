@@ -7,17 +7,26 @@ import Quarantine from "./Quarantine/Quarantine";
 import Profile from "./Profile/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import with {} because import the function not the render app
-import { test } from "./test";
+import { test} from "./test";
 
 function App() {
-  useEffect(() => {
-    test();
-    // document.title = `You clicked ${test} times`;
-  });
-  const [value, setValue] = useState(226.193056);
-  console.log(value);
+
+  const values = test();
+  // var key = 2
+
+  // let value = [values ]
+
+
+
+  // useEffect(() => {
+   
+  // });
+  
+  console.log(`value of i is ${values}`)
+
   return (
     <div>
+      {/* <div>the value is {value}</div> */}
       <Router>
         <Switch>
           <Route exact path="/" component={MyLocation} />

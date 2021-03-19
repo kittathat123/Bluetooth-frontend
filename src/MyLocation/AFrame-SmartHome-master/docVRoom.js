@@ -10,32 +10,24 @@ class docVRoom extends Component {
             environment
             physics="gravity: -1.6"
             renderer="antialias: true"
-            // vr-mode-ui="enabled: false"
+            vr-mode-ui="enabled: false"
             embedded
           >
-            {/* <a-mixin
-              id="teleport"
-              teleport-controls="type: parabolic; cameraRig: #cameraRig; button: trigger;"
-            ></a-mixin> */}
+          
             <a-entity id="cameraRig">
               <a-entity camera position="0 1.6 0" wasd-controls look-controls>
                 <a-cursor></a-cursor>
               </a-entity>
-              {/* <a-entity
-                id="rightHand"
-                static-body="shape: sphere; sphereRadius: 0.02;"
-                vive-controls="hand: right"
-                sphere-collider="objects: .throwable"
-                grab
-                oculus-touch-controls="hand: right"
-              ></a-entity>
-              <a-entity
-                id="leftHand"
-                controller-cursor
-                oculus-touch-controls="hand: left"
-              ></a-entity> */}
+             
             </a-entity>
-            {/* terrain */}
+           
+            <a-entity
+            geometry="primitive: sphere; radius: 0.25;"
+            position="3 1 -5"
+            material="color: #EF2D5E"
+          />
+
+           
             <a-box
               width="75"
               height="0.1"
@@ -67,11 +59,11 @@ class docVRoom extends Component {
                 src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.7/LabPlan.gltf"
               ></a-asset-item>
             </a-assets>
-            {/* Lab GTLF */}
+         
             <a-entity id="labAll" position="0 0 3.75">
               <a-entity gltf-model="#lab" position="-4 0.1 0"></a-entity>
 
-              {/* Ceiling Light */}
+            
               <a-light
                 type="point"
                 color="orange"
@@ -80,7 +72,7 @@ class docVRoom extends Component {
                 light="castShadow: true"
               ></a-light>
 
-              {/* Furniture */}
+           
               <a-entity
                 gltf-model="#tv"
                 position="3.466 0.85 -1.25"
@@ -114,17 +106,6 @@ class docVRoom extends Component {
                   animation="property: rotation; to: 0 115 0; dir: alternate; loop: true; dur: 2000; startEvents:rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"
                 ></a-entity>
 
-                {/* <a-gui-button
-                  id="fanButton"
-                  width="0.75"
-                  height="0.25"
-                  position="0.9 1.1 -4.4"
-                  onclick="turnOffFan"
-                  value="Toggle Fan"
-                  font-family="Arial"
-                  font-size="30px"
-                  margin="0 0 0.05 0"
-                ></a-gui-button> */}
               </a-entity>
 
               <a-entity
@@ -135,43 +116,7 @@ class docVRoom extends Component {
                 rotation="0 90 0"
               ></a-entity>
 
-              {/* <a-entity
-                id="aircon2"
-                gltf-model="#airconModel"
-                position="-3.77 2.5 -3.3"
-                scale="0.0025 0.0025 0.0025"
-                rotation="0 90 0"
-              >
-                <a-text
-                  id="airTemp"
-                  value="24"
-                  align="center"
-                  color="#1fff2e"
-                  visible="true"
-                  position="0 -40 4"
-                  scale="130 130 130"
-                  geometry="primitive: plane; width: 1.75; height:0.26"
-                  material="color: #333"
-                ></a-text>
-
-                <a-gui-slider
-                  scale="240 240 240"
-                  position="0 -240 55"
-                  width="2.15"
-                  height="0.75"
-                  onclick="testSliderAction"
-                  percent="0.29"
-                  margin="0 0 0.05 0"
-                ></a-gui-slider>
-              </a-entity> */}
-
-              {/* <a-sphere
-                class="throwable"
-                dynamic-body
-                position="0 2.4 0"
-                radius="0.10"
-                color="green"
-              ></a-sphere> */}
+            
             </a-entity>
           </a-scene>
         </div>

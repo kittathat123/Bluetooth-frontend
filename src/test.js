@@ -76,12 +76,13 @@ export const test = () => {
 
   socket.onopen = function (e) {
     console.log("Hello websocket");
-    const data = {
+    const data = JSON.stringify({
       message: JSON.stringify({
         type: "add_tags",
         tags: ["meter_1phase.RI-F550.v1n"],
+        value: ""
       }),
-    };
+    });
     socket.send(data);
   };
 
