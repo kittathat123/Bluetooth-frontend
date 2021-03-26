@@ -1,20 +1,18 @@
 import React, { Component } from "react";
 
-import "https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/fanToggle.js";
+// import 'https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@1.3/fanToggle.js';
 
 class docVRoom extends Component {
  
   render() {
-    document.getElementById('fan').addEventListener('pause', function () {
-      document.querySelector('a-animation').setAttribute('from', AFRAME.utils.coordinates.stringify(this.getAttribute('rotation')))
-    })
+  
     return (
       <div>
         <div style={{ height: "500px", width: "700px" }}>
         <a-scene
 environment
 physics="gravity: -1.6"
-// renderer="antialias: true"
+renderer="antialias: true"   
 vr-mode-ui="enabled: false"
 embedded
 >

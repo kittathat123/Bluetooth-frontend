@@ -2249,10 +2249,10 @@ aframe-react@^4.4.0:
   resolved "https://registry.yarnpkg.com/aframe-react/-/aframe-react-4.4.0.tgz#f8af660bc4f64746d7cddb065ad9cc5e88f358b9"
   integrity sha512-/3C0fhCRJywLSP7JsZM/nG/bGQxbt8oEnRK3DLOUmcCtd6xulpwOf8i/Mb0Mbg/U77Y097wdSZ0mVXgEL2+u4Q==
 
-aframe@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/aframe/-/aframe-1.1.0.tgz#1b583b41728ef76786b6f534e83083394e292205"
-  integrity sha512-/8Lk7DsnSdy0ZnjDvC/0sQ4aALfp7P+EiOO5y9BGBngk9QCXdWPT1onLNwJixWrJNntLTfU5ULxFrkRZb561Hg==
+aframe@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/aframe/-/aframe-1.2.0.tgz#795027f656d51d59820536e7e6288744f78e80ae"
+  integrity sha512-e4lGvxLQ5CAptlbCqmnR4+qUf9s3f5SSnkMQaBsIFlJ2QMZhzEBr/SSV3+NEvMhsQf88EOvSpN1Vez942mBLcQ==
   dependencies:
     custom-event-polyfill "^1.0.6"
     debug ngokevin/debug#noTimestamp
@@ -2263,7 +2263,7 @@ aframe@^1.1.0:
     present "0.0.6"
     promise-polyfill "^3.1.0"
     super-animejs "^3.1.0"
-    super-three "^0.123.1"
+    super-three "^0.125.1"
     three-bmfont-text dmarcos/three-bmfont-text#1babdf8507c731a18f8af3b807292e2b9740955e
     webvr-polyfill "^0.10.12"
 
@@ -4041,7 +4041,7 @@ debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   dependencies:
     ms "2.1.2"
 
-debug@ngokevin/debug#noTimestamp:
+"debug@github:ngokevin/debug#noTimestamp":
   version "2.2.0"
   resolved "https://codeload.github.com/ngokevin/debug/tar.gz/ef5f8e66d49ce8bc64c6f282c15f8b7164409e3a"
 
@@ -4255,7 +4255,7 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-document-register-element@dmarcos/document-register-element#8ccc532b7f3744be954574caf3072a5fd260ca90:
+"document-register-element@github:dmarcos/document-register-element#8ccc532b7f3744be954574caf3072a5fd260ca90":
   version "0.5.4"
   resolved "https://codeload.github.com/dmarcos/document-register-element/tar.gz/8ccc532b7f3744be954574caf3072a5fd260ca90"
 
@@ -10849,10 +10849,10 @@ super-animejs@^3.1.0:
   resolved "https://registry.yarnpkg.com/super-animejs/-/super-animejs-3.1.0.tgz#59435946faafe880710e348cf24ad3126e45aed1"
   integrity sha512-6MFAFJDRuvwkovxQZPruuyHinTa4rgj4hNLOndjcYYhZLckoXtVRY9rJPuq8p6c/tgZJrFYEAYAfJ2/hhNtUCA==
 
-super-three@^0.123.1:
-  version "0.123.1"
-  resolved "https://registry.yarnpkg.com/super-three/-/super-three-0.123.1.tgz#48c9d61d059e9428c1a8a2f7079f359119f5a064"
-  integrity sha512-5P71owlReO9HmKG5OxSSb1qKBuEWVhvGIb59gZkIoqRX5WgmBfZPo7x0OZOYEd7r9nG87cRv+OyeHJCO1Qh0CA==
+super-three@^0.125.1:
+  version "0.125.1"
+  resolved "https://registry.yarnpkg.com/super-three/-/super-three-0.125.1.tgz#b4d440ea2e69a1f575994c412ab39b465831c8d1"
+  integrity sha512-poTMpd0fa5tWVJDtWKSFWuqbb+h2Z0m1Eop66hRsfaeOE2p9xnl78MDJmj0S/jYI0Ly4iMQOWIkS0LyKCZe0SA==
 
 supports-color@^5.3.0:
   version "5.5.0"
@@ -11023,7 +11023,7 @@ text-table@0.2.0, text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-three-bmfont-text@dmarcos/three-bmfont-text#1babdf8507c731a18f8af3b807292e2b9740955e:
+"three-bmfont-text@github:dmarcos/three-bmfont-text#1babdf8507c731a18f8af3b807292e2b9740955e":
   version "2.3.0"
   resolved "https://codeload.github.com/dmarcos/three-bmfont-text/tar.gz/1babdf8507c731a18f8af3b807292e2b9740955e"
   dependencies:
