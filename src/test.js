@@ -43,11 +43,11 @@
 
 // export default test;
 
-// const WebSocket = require("ws");
+// export const WebSocket = require("ws");
 // const socket = new WebSocket(
-//   // "wss://protected-brook-89084.herokuapp.com/ws/location/"
-//   "wss://192.168.4.209" + "/ws/tag/1/",
-//   "e7b26a88637b30ca2cec67c94aedf2d2f9b4e214"
+//   "wss://" + "protected-brook-89084.herokuapp.com" + "/ws/location" + "/"
+//   // "wss://192.168.4.209" + "/ws/tag/1/",
+//   // "e7b26a88637b30ca2cec67c94aedf2d2f9b4e214"
 // );
 
 // socket.onopen = function (e) {
@@ -67,6 +67,28 @@
 //   console.error("Chat socket closed unexpectedly");
 // };
 
+// const WebSocket = require("ws");
+
+// // const socket = new WebSocket(
+// //     'ws://'
+// //     + '127.0.0.1:8080'
+// //     + '/ws/location'
+// //     + '/'
+// // );
+
+// const socket = new WebSocket(
+//   "wss://" + "protected-brook-89084.herokuapp.com" + "/ws/location" + "/"
+// );
+
+// socket.onmessage = function (e) {
+//   const data = JSON.parse(e.data);
+//   console.log("DATA : " + e.data + "\n");
+// };
+
+// socket.onclose = function (e) {
+//   console.error("Chat socket closed unexpectedly");
+// };
+
 export const test = () => {
   const socket = new WebSocket(
     // "wss://protected-brook-89084.herokuapp.com/ws/location/"
@@ -80,10 +102,10 @@ export const test = () => {
       message: JSON.stringify({
         type: "add_tags",
         tags: ["meter_1phase.RI-F550.v1n"],
-        value: ""
       }),
     });
     socket.send(data);
+    return data;
   };
 
   socket.onmessage = function (e) {
@@ -91,6 +113,9 @@ export const test = () => {
 
     // this.setState({ list: data });
     console.log("DATA : " + data + "\n");
+    console.log(data.message);
+    console.log(data.message.type); //due to stringify
+    console.log(data.message.tags);
   };
 
   socket.onclose = function (e) {

@@ -10,14 +10,7 @@
       <a-cursor></a-cursor>
     </a-entity>
   </a-entity>
-
-  {/* X Z Y */}
-  <a-entity
-    geometry="primitive: sphere; radius: 0.25;"
-    position="3 1 -4"
-    material="color: #EF2D5E"
-  />
-
+  {/* X Z Y */}*
   <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
   <a-assets>
     <a-asset-item
@@ -42,7 +35,6 @@
       src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.7/LabPlan.gltf"
     ></a-asset-item>
   </a-assets>
-
   <a-entity id="labAll" position="0 0 3.75">
     <a-entity gltf-model="#lab" position="-4 0.1 0"></a-entity>
 

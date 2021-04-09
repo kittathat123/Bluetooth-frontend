@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "aframe";
 
 import { Entity, Scene } from "aframe-react";
-import Device from "./Device.js";
-import TV from "./TV";
+// import Device from "./Device.js";
+// import TV from "./TV";
 
 import "aframe-physics-system/dist/aframe-physics-system";
 // import DynamicObject from "./DynamicObject";
@@ -18,7 +18,7 @@ class docVRoom extends Component {
             physics="gravity: -1.6"
             environment="preset: default; lighting: none; ground: none"
             // style="position: absolute; height: 100%; width: 100%;"
-            vr-mode-ui="enabled: false"
+            // vr-mode-ui="enabled: false"
             embedded
           >
             <Entity id="cameraRig" rotation={{ x: 0, y: 0, z: 0 }}>
@@ -31,6 +31,13 @@ class docVRoom extends Component {
               >
                 {/* <a-cursor></a-cursor> */}
               </Entity>
+
+              <a-entity
+                geometry="primitive: sphere; radius: 0.25;"
+                // Y Z X center: 0.2,, 1, -1.3
+                position="0.2 1 -1.3"
+                material="color: #EF2D5E"
+              />
 
               <Entity
                 id="rightHand"

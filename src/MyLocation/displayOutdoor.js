@@ -1,11 +1,10 @@
-import Sidebar from "../components/Sidebar";
 import React, { Component } from "react";
-import "./myLocation.css";
-import VRScene from "./VRScene";
 import { Button } from "reactstrap";
-import Room from "./AFrame-SmartHome-master/docVRoom";
+import Sidebar from "../components/Sidebar";
+import Outdoor from "./outdoorMap";
+import "./myLocation.css";
 
-class myLocation extends Component {
+export default class outdoorMap extends Component {
   render() {
     return (
       <div className="page">
@@ -16,19 +15,15 @@ class myLocation extends Component {
           <div className="col">
             <div className="pageContent">
               <div className="header ">
-                <Button
-                  className="backButton"
-                  color="secondary"
-                  href="./Outdoor"
-                >
-                  Back
+                <Button className="backButton" color="secondary" href="./">
+                  NEXT
                 </Button>
 
                 <h2 className="roomTitle">ECC 705</h2>
               </div>
               <div className="boxMap">
                 <div className="borderBox">
-                  <Room />
+                  <Outdoor />
                 </div>
               </div>
             </div>
@@ -38,5 +33,3 @@ class myLocation extends Component {
     );
   }
 }
-
-export default myLocation;
