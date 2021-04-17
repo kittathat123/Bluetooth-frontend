@@ -48,7 +48,7 @@ function App() {
   // });
 
   useEffect(() => {
-    test();
+    // test();
   });
 
   // console.log(xCor, yCor);

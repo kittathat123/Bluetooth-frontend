@@ -10,7 +10,114 @@ import "aframe-physics-system/dist/aframe-physics-system";
 // import 'https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@1.3/fanToggle.js';
 
 class docVRoom extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      message: '',
+      spherePosition: { x: 0.5 , y: 1.20, z: -4}
+    }
+    this.setPayload = this.setPayload.bind(this);
+    this.setXandY = this.setXandY.bind(this);
+    // this.setX = this.setX.bind(this);
+    // this.setY = this.setY.bind(this);
+    // this.setZ = this.setZ.bind(this);
+
+    this.getX = this.getX.bind(this);
+    this.getY = this.getY.bind(this);
+    this.getZ = this.getZ.bind(this);
+  }
+
+  setPayload(message) {
+    console.log("TYPE : " + typeof(message))
+    console.log("MESSAGE : " + message);
+    
+    console.log(JSON.parse(message).payload.room);
+    console.log(JSON.parse(message).payload.x_coord);
+    console.log(JSON.parse(message).payload.y_coord);
+  
+
+    this.setXandY(JSON.parse(message).payload.x_coord, JSON.parse(message).payload.y_coord)
+    
+    this.setState({
+      message
+    }, () => {
+      // console.log("MESSAGE : ", this.state.message);
+    });
+  }
+
+  setXandY(x_coord, y_coord) {
+    this.setState({
+      spherePosition: {
+        x: x_coord,
+        y: y_coord
+      }
+    }, () => {
+      console.log("X(After) : " , this.getX());
+      console.log("Y(After) : " , this.getY());
+    });
+  }
+
+  getX() {
+    return this.state.spherePosition.x;
+  }
+
+  getY() {
+    return this.state.spherePosition.y;
+  }
+
+  getZ() {
+    return this.state.spherePosition.z;
+  }
+
+  generate_x() {
+    // Random (X) --> 0.5 - 0.7
+    return 0.5 + Math.random() * (0.7-0.5);
+  }
+
+  generate_y() {
+    // Random (Y) --> 1.2 - 1.3
+    return 1.2 + Math.random() * (1.3-1.2);
+  }
+
+  
+
+  componentDidMount() {
+
+    console.log("X(Before) : " + this.getX());
+    console.log("Y(Before) : " + this.getY());
+    // // this.setXandY(0.70, 1.30);
+    // // update value every 15 seconds == 15000
+    this.interval = setInterval(() => this.setXandY(this.generate_x(), this.generate_y()), 15000);
+
+
+    // const client = this.client = new WebSocket('ws://127.0.0.1:8080/ws/location/')
+    // const client = this.client = new WebSocket('wss://protected-brook-89084.herokuapp.com/ws/location/')
+    // client.onopen = () => {
+    //   console.log('websocket connected')
+    //   // client.send("{\"USERNAME\" : \"sarin_beam30\"}")
+    //   // client.send("Parameter : x and y")
+    //   // console.log("------- SEND DATA TO SERVER LEAW ------")
+    // }
+    // client.onmessage = ({ data }) => this.setPayload(data);
+
+    
+  
+  
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    // this.client.close()
+    // console.log('websocket closed')
+    // this.client = null
+  }
+
   render() {
+    
+    // console.log("TEST (X) : ", this.getX());
+    // console.log("TEST (Y) : ", this.getY());
+    // console.log("TEST (Z) : ", this.getZ());
+    
     return (
       <div>
         <div style={{ height: "500px", width: "700px" }}>
@@ -32,12 +139,6 @@ class docVRoom extends Component {
                 {/* <a-cursor></a-cursor> */}
               </Entity>
 
-              <a-entity
-                geometry="primitive: sphere; radius: 0.25;"
-                // Y Z X center: 0.2,, 1, -1.3
-                position="0.2 1 -1.3"
-                material="color: #EF2D5E"
-              />
 
               <Entity
                 id="rightHand"
@@ -59,84 +160,103 @@ class docVRoom extends Component {
 
             <a-assets>
               <a-asset-item
+                response-type="arraybuffer"
                 id="tv"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="airconModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="dysonModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/scene.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="lightbulbModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Lightbulb.gltf"
               ></a-asset-item>
 
               <a-asset-item
+                response-type="arraybuffer"
                 id="wallPartition"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="deskDrawerModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskDrawer.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="deskModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="deskLectureModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf"
               ></a-asset-item>
 
               <a-asset-item
+                response-type="arraybuffer"
                 id="cabinetModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/cabinet_double.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="shelfModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelf.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="shelfDoubleModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfDouble.gltf"
               ></a-asset-item>
 
               <a-asset-item
+                response-type="arraybuffer"
                 id="shelfLowerModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfLower.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="shelfGlassModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfGlass.gltf"
               ></a-asset-item>
 
               <a-asset-item
+                response-type="arraybuffer"
                 id="lockerModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/locker.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="tableModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/table.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="tableCurvedModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/tableCurved.gltf"
               ></a-asset-item>
 
               <a-asset-item
+                response-type="arraybuffer"
                 id="labModel"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/LabPlan.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="labWall"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
               ></a-asset-item>
 
               <a-asset-item
+                response-type="arraybuffer"
                 id="book"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/CHAHIN_NOTEBOOK.gltf"
               ></a-asset-item>
@@ -178,6 +298,28 @@ class docVRoom extends Component {
                 geometry-merger="preserveOriginal: false"
                 id="furnitureList"
               >
+                <Entity
+                  id="redSphere"
+                  primitive="a-sphere"
+                  detail={2}
+                  radius={0.25}
+                  position={this.state.spherePosition}
+                  color="#EF2D5E"
+
+                  animation__oscillate={{
+                    property: 'position',
+                    dur: 2000,
+                    dir: 'alternate',
+                    easing: 'linear',
+                    loop: true,
+                    from : this.state.spherePosition,
+                    to : {
+                      x : this.state.spherePosition.x,
+                      y : this.state.spherePosition.y,
+                      z : this.state.spherePosition.z
+                    }
+                  }}
+                />
                 <Entity
                   id="wallPartition1"
                   gltf-model="#wallPartition"
