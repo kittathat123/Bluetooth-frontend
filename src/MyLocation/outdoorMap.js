@@ -30,7 +30,29 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  InfoWindow,
 } from "react-google-maps";
+
+let markers = [
+  {
+    id: 1,
+    latitude: 13.7299,
+    longitude: 100.7782,
+    shelter: "marker 1",
+  },
+  {
+    id: 2,
+    latitude: 13.7599,
+    longitude: 100.6782,
+    shelter: "marker 2",
+  },
+  {
+    id: 3,
+    latitude: 13.7499,
+    longitude: 100.525,
+    shelter: "marker 3",
+  },
+];
 
 const MyMapComponent = compose(
   withProps({
@@ -48,12 +70,24 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) => (
   <GoogleMap defaultZoom={8} defaultCenter={{ lat: 13.7299, lng: 100.7782 }}>
-    {props.isMarkerShown && (
-      <Marker
-        position={{ lat: 13.7299, lng: 100.7782 }}
-        onClick={props.onMarkerClick}
-      />
-    )}
+    {props.isMarkerShown &&
+      // <Marker
+      //   position={{ lat: 13.7299, lng: 100.7782 }}
+      //   onClick={props.onMarkerClick}
+      // />
+      markers.map((marker) => {
+        // const onClick = props.onClick.bind(this, marker)
+        return (
+          <Marker
+            key={marker.id}
+            position={{ lat: marker.latitude, lng: marker.longitude }}
+          >
+            <InfoWindow>
+              <div>{marker.shelter}</div>
+            </InfoWindow>
+          </Marker>
+        );
+      })}
   </GoogleMap>
 ));
 

@@ -120,12 +120,8 @@ class docVRoom extends Component {
                 {/* <a-cursor></a-cursor> */}
               </Entity>
 
-              <a-asset-item
-                id="male"
-                src="../assets/archive/human_male.gltf"
-              ></a-asset-item>
-
               <Entity
+                id="male1"
                 gltf-model="#male"
                 // animation-mixer
                 position="0.2,1,-1.3"
@@ -162,6 +158,11 @@ class docVRoom extends Component {
             </Entity>
 
             <a-assets>
+              <a-asset-item
+                id="male"
+                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/human_male.gltf"
+                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/blob/main/src/assets/archive/human_male.gltf"git
+              ></a-asset-item>
               <a-asset-item
                 id="tv"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
