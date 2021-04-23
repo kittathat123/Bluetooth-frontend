@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import "aframe";
 import { Entity, Scene } from "aframe-react";
 // import Device from "./Device.js";
@@ -12,9 +12,6 @@ class docVRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      json_data: "",
-      x_coords: "",
-      y_coords: "",
       message: "",
       spherePosition: {
         x: 2,
@@ -25,6 +22,7 @@ class docVRoom extends Component {
     this.setMessage = this.setMessage.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleX = this.handleX.bind(this);
+    // this
 
     // this.setXandY = this.setXandY.bind(this);
   }
@@ -85,7 +83,7 @@ class docVRoom extends Component {
   // }
 
   handleX = () => {
-    this.setState({ x: this.state.x });
+    this.setState({ x: this.state.spherePosition.x });
   };
 
   render() {
@@ -97,6 +95,7 @@ class docVRoom extends Component {
     console.log(
       "show sphere position: " + Object.values(this.state.spherePosition)
     );
+    console.log("show sphere position x: " + this.state.spherePosition.x);
     // console.log("show sphere position x: " + Object.values(this.state.x));
     // this.setMessage();
 
@@ -120,18 +119,27 @@ class docVRoom extends Component {
               >
                 {/* <a-cursor></a-cursor> */}
               </Entity>
-              {/* 
+
+              <a-asset-item
+                id="male"
+                src="../assets/archive/human_male.gltf"
+              ></a-asset-item>
+
+              <Entity
+                gltf-model="#male"
+                // animation-mixer
+                position="0.2,1,-1.3"
+              ></Entity>
               <a-entity
-                gltf-model="#monster"
-                animation-mixer
-                position={"0.2,1,-1.3"}
-              ></a-entity> */}
-              <a-entity
-                // geometry="primitive: sphere; radius: 0.25;"
-                geometry="primitive: human"
+                geometry="primitive: sphere; radius: 0.25;"
                 // Y Z X center: 0.2,, 1, -1.3
                 // position={datass}
-                position=" 0.2,,   1, -1.3"
+                position=" 0.2,   1, -1.3"
+                // position={
+                //   ({ x: this.state.spherePostion.x },
+                //   { y: this.state.spherePostion.y },
+                //   { z: this.state.spherePostion.z })
+                // }
                 material="color: #EF2D5E"
               />
 

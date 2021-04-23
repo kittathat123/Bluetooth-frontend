@@ -57,9 +57,10 @@ class Login extends Component {
                 onChange={this.handleChange}
               />
               <br></br>
+              <input href="./Mylocation" type="submit" value="Submit"></input>
             </Form>
             {/* <Button> */}
-            <input type="submit" value="Submit"></input>
+
             {/* </Button> */}
             {/* <Button>Register</Button> */}
           </CardBody>
