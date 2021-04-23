@@ -8,48 +8,28 @@ import Profile from "./Profile/Profile";
 import Ourdoor from "./MyLocation/outdoorMap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import with {} because import the function not the render app
-import { test } from "./test";
+// import { test } from "./test"; // { test } to get funstion export file
 import Displayoutdoor from "./MyLocation/displayOutdoor";
 import ReactDoM from "react-dom";
 import Login from "./Login/Login";
 import Register from "./Register/register";
 
-// const socket = new WebSocket(
-//   "wss://" + "protected-brook-89084.herokuapp.com" + "/ws/location" + "/"
-//   // "wss://192.168.4.209" + "/ws/tag/1/",
-//   // "e7b26a88637b30ca2cec67c94aedf2d2f9b4e214"
-// );
-
-// socket.onopen = function (e) {
-//   console.log("Hello websocket");
-//   socket.send("Here's some text that the server is urgently awaiting!");
-// };
-
-// socket.onmessage = function (e) {
-//   const data = JSON.parse(e.data);
-
-//   // this.setState({ list: data });
-
-//   console.log("DATA : " + data + "\n");
-
-//   return data;
-// };
-
-// socket.onclose = function (e) {
-//   console.error("Chat socket closed unexpectedly");
-//   test();
-// };
-
 function App() {
-  // const [xCor, setxCor] = useState([]);
-  // const [yCor, setyCor] = useState({
-  //   X_COORD: "xCor_value",
-  //   Y_COORD: "yCor_value",
-  // });
+  //   // const [xCor, setxCor] = useState([]);
+  //   // const [yCor, setyCor] = useState({
+  //   //   X_COORD: "xCor_value",
+  //   //   Y_COORD: "yCor_value",
+  //   // });
 
+<<<<<<< HEAD
   useEffect(() => {
     // test();
   });
+=======
+  // useEffect(() => {
+  //   test();
+  // });
+>>>>>>> main
 
   // console.log(xCor, yCor);
 
@@ -82,6 +62,7 @@ function App() {
           <Route path="/Quarantine" component={Quarantine} />
           <Route path="/Profile" component={Profile} />
           <Route path="/Outdoor" component={Displayoutdoor} />
+          {/* <Route path="/test" component={Test} /> */}
         </Switch>
       </Router>
     </div>

@@ -15,7 +15,11 @@ export default class outdoorMap extends Component {
           <div className="col">
             <div className="pageContent">
               <div className="header ">
-                <Button className="backButton" color="secondary" href="./">
+                <Button
+                  className="backButton"
+                  color="secondary"
+                  href="./Mylocation"
+                >
                   NEXT
                 </Button>
 

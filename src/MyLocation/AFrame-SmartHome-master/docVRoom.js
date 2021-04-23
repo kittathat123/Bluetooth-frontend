@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import "aframe";
-
 import { Entity, Scene } from "aframe-react";
 // import Device from "./Device.js";
 // import TV from "./TV";
 
-import "aframe-physics-system/dist/aframe-physics-system";
+// import "aframe-physics-system/dist/aframe-physics-system";    have error
 // import DynamicObject from "./DynamicObject";
 // import 'https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@1.3/fanToggle.js';
 
 class docVRoom extends Component {
   constructor(props) {
+<<<<<<< HEAD
     super(props)
     this.state = {
       message: '',
@@ -118,6 +118,98 @@ class docVRoom extends Component {
     // console.log("TEST (Y) : ", this.getY());
     // console.log("TEST (Z) : ", this.getZ());
     
+=======
+    super(props);
+    this.state = {
+      json_data: "",
+      x_coords: "",
+      y_coords: "",
+      message: "",
+      spherePosition: {
+        x: 2,
+        y: 1,
+        z: -1.3,
+      },
+    };
+    this.setMessage = this.setMessage.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.handleX = this.handleX.bind(this);
+
+    // this.setXandY = this.setXandY.bind(this);
+  }
+
+  setMessage(message) {
+    console.log(JSON.parse(message).payload);
+    // console.log(this.value().datas.payload.x_coord);
+    // console.log(this.value().datas.payload.y_coord);
+  }
+
+  // setXandY(x_coord, y_coord) {
+  //   this.setState({
+  //     spherePosition: {
+  //       x: x_coord,
+  //       y: y_coord,
+  //       z: 1,
+  //     },
+  //   });
+
+  // }
+  // }
+  componentDidMount() {
+    const socket = new WebSocket(
+      "wss://protected-brook-89084.herokuapp.com/ws/location/"
+      // "wss://192.168.4.209/ws/tag/1/",
+      // "f3c9c59ea1cfb5eeabae3b3bb6be72ba2d1b67c7"
+    );
+
+    socket.onopen = function (e) {
+      console.log("Hello websocket");
+
+      const data = JSON.stringify({
+        message: JSON.stringify({
+          // BT_TAG_DEVICE_NAME: "BT_TAG_1",
+          bt_tag_owner: "1234",
+          // X_COORD: "",
+          // Y_COORD: "",
+        }),
+      });
+      socket.send(data);
+    };
+
+    socket.onmessage = function (e) {
+      const datas = JSON.parse(e.data);
+      console.log(datas.payload.x_coord);
+      console.log(datas.payload.y_coord);
+      // this.setState({ x: datas.payload.x_coord });
+      // console.log("show sphere position: " + this.spherePosition);
+    };
+
+    socket.onclose = function (e) {
+      console.error("Chat socket closed unexpectedly");
+    };
+  }
+
+  // componentWillUnmount() {
+  //   clearInterval(this.interval);
+  // }
+
+  handleX = () => {
+    this.setState({ x: this.state.x });
+  };
+
+  render() {
+    const datass = Object.values(this.state.spherePosition);
+    // for (var i = 0; i < 5; i++) {
+    //   this.setState({this.state.x: });
+    // }
+    // this.setState({x: });
+    console.log(
+      "show sphere position: " + Object.values(this.state.spherePosition)
+    );
+    // console.log("show sphere position x: " + Object.values(this.state.x));
+    // this.setMessage();
+
+>>>>>>> main
     return (
       <div>
         <div style={{ height: "500px", width: "700px" }}>
@@ -138,7 +230,24 @@ class docVRoom extends Component {
               >
                 {/* <a-cursor></a-cursor> */}
               </Entity>
+<<<<<<< HEAD
 
+=======
+              {/* 
+              <a-entity
+                gltf-model="#monster"
+                animation-mixer
+                position={"0.2,1,-1.3"}
+              ></a-entity> */}
+              <a-entity
+                // geometry="primitive: sphere; radius: 0.25;"
+                geometry="primitive: human"
+                // Y Z X center: 0.2,, 1, -1.3
+                // position={datass}
+                position=" 0.2,,   1, -1.3"
+                material="color: #EF2D5E"
+              />
+>>>>>>> main
 
               <Entity
                 id="rightHand"

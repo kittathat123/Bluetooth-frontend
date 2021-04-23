@@ -25,7 +25,7 @@ class Sidebar extends Component {
           ></img>
         </div>
 
-        <Link to="/">
+        <Link to="/Outdoor">
           <div className="content-box">
             {/* <h1 className="content-title">Menu</h1> */}
             <div className="my-location-box">
