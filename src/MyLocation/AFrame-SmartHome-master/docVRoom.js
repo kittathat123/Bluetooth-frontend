@@ -10,115 +10,6 @@ import { Entity, Scene } from "aframe-react";
 
 class docVRoom extends Component {
   constructor(props) {
-<<<<<<< HEAD
-    super(props)
-    this.state = {
-      message: '',
-      spherePosition: { x: 0.5 , y: 1.20, z: -4}
-    }
-    this.setPayload = this.setPayload.bind(this);
-    this.setXandY = this.setXandY.bind(this);
-    // this.setX = this.setX.bind(this);
-    // this.setY = this.setY.bind(this);
-    // this.setZ = this.setZ.bind(this);
-
-    this.getX = this.getX.bind(this);
-    this.getY = this.getY.bind(this);
-    this.getZ = this.getZ.bind(this);
-  }
-
-  setPayload(message) {
-    console.log("TYPE : " + typeof(message))
-    console.log("MESSAGE : " + message);
-    
-    console.log(JSON.parse(message).payload.room);
-    console.log(JSON.parse(message).payload.x_coord);
-    console.log(JSON.parse(message).payload.y_coord);
-  
-
-    this.setXandY(JSON.parse(message).payload.x_coord, JSON.parse(message).payload.y_coord)
-    
-    this.setState({
-      message
-    }, () => {
-      // console.log("MESSAGE : ", this.state.message);
-    });
-  }
-
-  setXandY(x_coord, y_coord) {
-    this.setState({
-      spherePosition: {
-        x: x_coord,
-        y: y_coord
-      }
-    }, () => {
-      console.log("X(After) : " , this.getX());
-      console.log("Y(After) : " , this.getY());
-    });
-  }
-
-  getX() {
-    return this.state.spherePosition.x;
-  }
-
-  getY() {
-    return this.state.spherePosition.y;
-  }
-
-  getZ() {
-    return this.state.spherePosition.z;
-  }
-
-  generate_x() {
-    // Random (X) --> 0.5 - 0.7
-    return 0.5 + Math.random() * (0.7-0.5);
-  }
-
-  generate_y() {
-    // Random (Y) --> 1.2 - 1.3
-    return 1.2 + Math.random() * (1.3-1.2);
-  }
-
-  
-
-  componentDidMount() {
-
-    console.log("X(Before) : " + this.getX());
-    console.log("Y(Before) : " + this.getY());
-    // // this.setXandY(0.70, 1.30);
-    // // update value every 15 seconds == 15000
-    this.interval = setInterval(() => this.setXandY(this.generate_x(), this.generate_y()), 15000);
-
-
-    // const client = this.client = new WebSocket('ws://127.0.0.1:8080/ws/location/')
-    // const client = this.client = new WebSocket('wss://protected-brook-89084.herokuapp.com/ws/location/')
-    // client.onopen = () => {
-    //   console.log('websocket connected')
-    //   // client.send("{\"USERNAME\" : \"sarin_beam30\"}")
-    //   // client.send("Parameter : x and y")
-    //   // console.log("------- SEND DATA TO SERVER LEAW ------")
-    // }
-    // client.onmessage = ({ data }) => this.setPayload(data);
-
-    
-  
-  
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-    // this.client.close()
-    // console.log('websocket closed')
-    // this.client = null
-  }
-
-  render() {
-    
-    // console.log("TEST (X) : ", this.getX());
-    // console.log("TEST (Y) : ", this.getY());
-    // console.log("TEST (Z) : ", this.getZ());
-    
-=======
     super(props);
     this.state = {
       json_data: "",
@@ -209,7 +100,6 @@ class docVRoom extends Component {
     // console.log("show sphere position x: " + Object.values(this.state.x));
     // this.setMessage();
 
->>>>>>> main
     return (
       <div>
         <div style={{ height: "500px", width: "700px" }}>
@@ -230,9 +120,6 @@ class docVRoom extends Component {
               >
                 {/* <a-cursor></a-cursor> */}
               </Entity>
-<<<<<<< HEAD
-
-=======
               {/* 
               <a-entity
                 gltf-model="#monster"
@@ -247,7 +134,6 @@ class docVRoom extends Component {
                 position=" 0.2,,   1, -1.3"
                 material="color: #EF2D5E"
               />
->>>>>>> main
 
               <Entity
                 id="rightHand"

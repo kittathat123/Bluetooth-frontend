@@ -13,6 +13,7 @@ import Displayoutdoor from "./MyLocation/displayOutdoor";
 import ReactDoM from "react-dom";
 import Login from "./Login/Login";
 import Register from "./Register/register";
+import useToken from '../src/Token/useToken';
 
 function App() {
   //   // const [xCor, setxCor] = useState([]);
@@ -21,15 +22,9 @@ function App() {
   //   //   Y_COORD: "yCor_value",
   //   // });
 
-<<<<<<< HEAD
-  useEffect(() => {
-    // test();
-  });
-=======
   // useEffect(() => {
   //   test();
   // });
->>>>>>> main
 
   // console.log(xCor, yCor);
 
@@ -38,6 +33,12 @@ function App() {
   // for (var i = 0; i < values.length; i++) {
   //   alert(values[i]["price"]);
   // }
+
+  const { token, setToken } = useToken();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
 
   return (
     <div>
@@ -52,9 +53,10 @@ function App() {
         );
       })} */}
       {/* <div>the value is {value}</div> */}
+      <MyLocation />
       <Router>
         <Switch>
-          <Route exact path="/" component={Login} />
+          {/* <Route exact path="/" component={Login} /> */}
           <Route path="/Register" component={Register} />
           <Route path="/Mylocation" component={MyLocation} />
           <Route path="/LogHistory" component={LogHistory} />
