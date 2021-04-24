@@ -75,7 +75,8 @@ import PropTypes from 'prop-types';
 // export default Login;
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:8090/login', {
+  console.log("CREDITIALS : ", credentials)
+  return fetch('http://127.0.0.1:8080/userLogin/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -86,59 +87,82 @@ async function loginUser(credentials) {
 }
 
 export default function Login({ setToken }) {
-    const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const message = "You put wrong either username or password.";
 
     const handleSubmit = async e => {
       e.preventDefault();
-      const token = await loginUser({
+      const response = await loginUser({
         username,
         password
       });
-      console.log("TOKEN : ", token);
-      setToken(token);
-      console.log("SET TOKEN LEAW");
+      console.log("RESPONSE : ", response);
+      
+      // CHECK THE RESPONSE WHICH GET FROM BACKEND
+      if(message.localeCompare(response.message) === 0){
+          alert("You put wrong either username or password.");
+          setUserName('');
+          setPassword('');
+      }
+
+      else {
+        // console.log(response.token, response.username);
+        setToken(response);
+        console.log("SET TOKEN LEAW");
+      }
+
+      
     }
 
     return(
-//       <div>
-//         <Card className="container">
-//           <CardHeader>WELCOME TO IPS TRACKING</CardHeader>
-//           <CardBody>
-//             <CardTitle tag="h5">Special Title Treatment</CardTitle>
-//             <Form onSubmit={this.handleSubmit}>
-//               <CardText>Username :</CardText>
-//               <input
-//                 type="text"
-//                 // id="fname"
-//                 // name="fname"
-//                 value={this.state.value}
-//                 onChange={this.handleChange}
-//               />
-//               <CardText>password :</CardText>
-//               <input
-//                 type="text"
-//                 id="lname"
-//                 name="lname"
-//                 value={this.state.value}
-//                 onChange={this.handleChange}
-//               />
-//               <br></br>
-//             </Form>
-//             {/* <Button> */}
-//             <input type="submit" value="Submit"></input>
-//             {/* </Button> */}
-//             {/* <Button>Register</Button> */}
-//           </CardBody>
-//           <CardFooter>
-//             <a href="../Register/register.js"> Register </a>
-//           </CardFooter>
-//         </Card>
-//       </div> 
+      <div>
+        <Card className="container">
+          <CardHeader>WELCOME TO IPS TRACKING</CardHeader>
+          <CardBody>
+            <CardTitle tag="h5">Special Title Treatment</CardTitle>
+            <Form onSubmit={handleSubmit}>
+              <CardText>Username :</CardText>
+              <input
+                type="text"
+                // id="fname"
+                // name="fname"
+                // value={this.state.value}
+                // onChange={this.handleChange}
+                value={username}
+                onChange={e => setUserName(e.target.value)}
+              />
+              <CardText>password :</CardText>
+              <input
+                type="text"
+                id="lname"
+                name="lname"
+                // value={this.state.value}
+                // onChange={this.handleChange}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+              <br></br>
+
+              <div>
+              <button type="submit" style={{marginTop: '20px'}}>Submit</button>
+              </div>
+
+            </Form>
+            {/* <Button> */}
+            {/* <input type="submit" value="Submit"></input> */}
+            {/* </Button> */}
+            {/* <Button>Register</Button> */}
+          </CardBody>
+          <CardFooter>
+            <a href="../Register/register.js"> Register </a>
+          </CardFooter>
+        </Card>
+      </div> 
     );
 
 }
 
-Login.PropTypes = {
+Login.propTypes = {
     setToken: PropTypes.func.isRequired
 }

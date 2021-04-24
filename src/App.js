@@ -40,6 +40,10 @@ function App() {
     return <Login setToken={setToken} />
   }
 
+  console.log("TOKEN_IN APP.JS_2 : ", token);
+
+  
+
   return (
     <div>
       {/* {this.value().map((experience, i) => {
@@ -53,8 +57,8 @@ function App() {
         );
       })} */}
       {/* <div>the value is {value}</div> */}
-      <MyLocation />
       <Router>
+        <MyLocation />
         <Switch>
           {/* <Route exact path="/" component={Login} /> */}
           <Route path="/Register" component={Register} />
