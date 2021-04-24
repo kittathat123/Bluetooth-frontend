@@ -120,12 +120,6 @@ class docVRoom extends Component {
                 {/* <a-cursor></a-cursor> */}
               </Entity>
 
-              <Entity
-                id="male1"
-                gltf-model="#male"
-                // animation-mixer
-                position="0.2,1,-1.3"
-              ></Entity>
               <a-entity
                 geometry="primitive: sphere; radius: 0.25;"
                 // Y Z X center: 0.2,, 1, -1.3
@@ -160,8 +154,9 @@ class docVRoom extends Component {
             <a-assets>
               <a-asset-item
                 id="male"
+                src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/blob/main/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
                 // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/human_male.gltf"
-                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/blob/main/src/assets/archive/human_male.gltf"git
+                // src="/assets/male/human_male.obj"
               ></a-asset-item>
               <a-asset-item
                 id="tv"
@@ -255,6 +250,12 @@ class docVRoom extends Component {
           visible="true"
         ></a-light> */}
 
+            <a-entity
+              id="male1"
+              gltf-model="#male"
+              // animation-mixer
+              position="0.2,1,-1.3"
+            ></a-entity>
             <a-light
               type="point"
               position="0.214 2.615 -2.02969"
