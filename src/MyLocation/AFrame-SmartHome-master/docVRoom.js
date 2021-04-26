@@ -154,10 +154,10 @@ class docVRoom extends Component {
             <a-assets>
               <a-asset-item
                 id="male"
-                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/blob/main/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
+                src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/blob/main/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
                 // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/blob/main/src/MyLocation/AFrame-SmartHome-master/human_male.gltf"
                 // src="./human_male.gltf"
-                src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/blob/main/src/MyLocation/AFrame-SmartHome-master/Air%20conditioner%201.gltf"
+                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend@v1.0/blob/main/src/MyLocation/AFrame-SmartHome-master/TV_01.gltf"
               ></a-asset-item>
               <a-asset-item
                 id="tv"
