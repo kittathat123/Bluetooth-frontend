@@ -6,7 +6,7 @@ import Notification from "./Notification/Notification";
 import Quarantine from "./Quarantine/Quarantine";
 import Profile from "./Profile/Profile";
 import Ourdoor from "./MyLocation/outdoorMap";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useLocation } from "react-router-dom";
 // import with {} because import the function not the render app
 // import { test } from "./test"; // { test } to get funstion export file
 import Displayoutdoor from "./MyLocation/displayOutdoor";
@@ -35,12 +35,22 @@ function App() {
   // }
 
   const { token, setToken } = useToken();
+  const register_path_name = "/Register/register.js";
 
   if(!token) {
+    console.log("TOKEN_IN APP.JS_1 : ", token);
+    console.log("PATH : " , window.location.pathname);
+    
+    if(register_path_name.localeCompare(window.location.pathname) === 0) {
+        return <Register />
+    }
+
     return <Login setToken={setToken} />
   }
 
-  console.log("TOKEN_IN APP.JS_2 : ", token);
+  
+
+  // console.log("TOKEN_IN APP.JS_2 : ", token);
 
   
 

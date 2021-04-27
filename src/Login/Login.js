@@ -75,8 +75,11 @@ import PropTypes from 'prop-types';
 // export default Login;
 
 async function loginUser(credentials) {
-  console.log("CREDITIALS : ", credentials)
-  return fetch('http://127.0.0.1:8080/userLogin/', {
+  // console.log("CREDITIALS : ", credentials)
+  const hostnameProduction = 'http://127.0.0.1:8080/userLogin/';
+  const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userLogin/';
+
+  return fetch(hostnameProduction, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -89,7 +92,8 @@ async function loginUser(credentials) {
 export default function Login({ setToken }) {
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const message = "You put wrong either username or password.";
+    const message_1 = "You put wrong either username or password.";
+    const message_2 = "User already login in the system.";
 
     const handleSubmit = async e => {
       e.preventDefault();
@@ -97,11 +101,17 @@ export default function Login({ setToken }) {
         username,
         password
       });
-      console.log("RESPONSE : ", response);
+      // console.log("RESPONSE : ", response);
       
       // CHECK THE RESPONSE WHICH GET FROM BACKEND
-      if(message.localeCompare(response.message) === 0){
+      if(message_1.localeCompare(response.message) === 0){
           alert("You put wrong either username or password.");
+          setUserName('');
+          setPassword('');
+      }
+
+      else if(message_2.localeCompare(response.message) === 0){
+          alert("User already login in the system.");
           setUserName('');
           setPassword('');
       }
@@ -109,7 +119,7 @@ export default function Login({ setToken }) {
       else {
         // console.log(response.token, response.username);
         setToken(response);
-        console.log("SET TOKEN LEAW");
+        console.log("SET USER_INFO LEAW");
       }
 
       
