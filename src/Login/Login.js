@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useHistory } from "react-router-dom";
 import {
   Card,
   Button,
@@ -11,6 +12,7 @@ import {
 } from "reactstrap";
 import "./Login.css";
 import PropTypes from 'prop-types';
+
 
 // class Login extends Component {
 //   constructor(props) {
@@ -94,6 +96,7 @@ export default function Login({ setToken }) {
     const [password, setPassword] = useState('');
     const message_1 = "You put wrong either username or password.";
     const message_2 = "User already login in the system.";
+    let redirect = useHistory('');
 
     const handleSubmit = async e => {
       e.preventDefault();
@@ -117,9 +120,11 @@ export default function Login({ setToken }) {
       }
 
       else {
-        // console.log(response.token, response.username);
-        setToken(response);
-        console.log("SET USER_INFO LEAW");
+          // console.log(response.token, response.username);
+          setToken(response);
+          console.log("SET USER_INFO LEAW");
+          alert("Login successful");
+          redirect.push("/Mylocation")     
       }
 
       

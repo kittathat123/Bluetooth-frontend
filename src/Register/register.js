@@ -11,6 +11,7 @@ import {
   Form,
 } from "reactstrap";
 import "./register.css";
+import { useHistory } from "react-router-dom";
 
 // IMPORT DATEPICKER LIBRARY
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -132,43 +133,64 @@ async function RegisterUser(credentials) {
     .then(data => data.json())
 }
 
-
-
-
-
 export default function Register() {
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [dateOfBirth, setDateOfBirth] = useState(new Date());
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState(new Date().toLocaleDateString('en-TH'));
     const [gender, setGender] = useState('');
     const [homeAddr, setHomeAddr] = useState('');
     const message_1 = "User already exist in the system.";
+    const message_2 = "New User and Got some data!";
+    let redirect = useHistory('');
     
     const handleSubmit = async e => {
       e.preventDefault();
-      const response = await RegisterUser({
-        firstname,
-        lastname,
-        username,
-        password,
-        dateOfBirth,
-        gender,
-        homeAddr
-      });
-
-      // CHECK THE RESPONSE FROM BACKEND
-      if(message_1.localeCompare(response.message) === 0){
-          alert("User already register in the system");
-          setFirstname('');
-          setLastname('');
-          setUserName('');
-          setPassword('');
-          setDateOfBirth('');
-          setGender('');
-          setPassword('');
+      
+      // CHECK MATCHING OF PASSWORD AND CONFIRM_PASSWORD
+      if(password !== confirmPassword)
+      {
+          alert("Password not match")
       }
+      
+      // IF BOTH PASSWORD AND CONFIRM_PASSWORD ARE MATCH
+      else 
+      {
+          const response = await RegisterUser({
+            firstname,
+            lastname,
+            username,
+            password,
+            dateOfBirth,
+            gender,
+            homeAddr
+          });
+
+          // console.log("RESPONSE_FROM_BACKEND : ", response);
+  
+          // CHECK THE RESPONSE FROM BACKEND (MESSAGE_1)
+          if(message_1.localeCompare(response.message) === 0){
+              alert("User already register in the system");
+              setFirstname('');
+              setLastname('');
+              setUserName('');
+              setPassword('');
+              setConfirmPassword('');
+              setDateOfBirth(new Date());
+              setGender('');
+              setPassword('');
+          }
+
+          // CHECK THE RESPONSE FROM BACKEND (MESSAGE_2)
+          else if(message_2.localeCompare(response.message) === 0) {
+              alert("Register successful");
+              redirect.push('/');
+          }
+
+      }
+
     }
 
     return (
@@ -213,8 +235,8 @@ export default function Register() {
               <input 
                 type="text"
                 id="input-box"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
               />
               <CardText>Date of Birth :</CardText>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -222,12 +244,10 @@ export default function Register() {
                   id="input-box"
                   format="dd/MM/yyyy"
                   value={dateOfBirth}
-                  onChange={e => console.log(e.toLocaleDateString())}
+                  onChange={e => setDateOfBirth(e.toLocaleDateString('en-TH'))}
                 />
               </MuiPickersUtilsProvider>
       
-
-
               <CardText>Gender :</CardText>
               <input
                 type="text"
