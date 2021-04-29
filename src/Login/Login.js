@@ -152,10 +152,6 @@ export default function Login() {
               <CardText>Username :</CardText>
               <input
                 type="text"
-                // id="fname"
-                // name="fname"
-                // value={this.state.value}
-                // onChange={this.handleChange}
                 value={username}
                 onChange={e => setUserName(e.target.value)}
               />
@@ -164,8 +160,6 @@ export default function Login() {
                 type="text"
                 id="lname"
                 name="lname"
-                // value={this.state.value}
-                // onChange={this.handleChange}
                 value={password}
                 onChange={e => setPassword(e.target.value)}
               />
@@ -176,10 +170,6 @@ export default function Login() {
               </div>
 
             </Form>
-            {/* <Button> */}
-            {/* <input type="submit" value="Submit"></input> */}
-            {/* </Button> */}
-            {/* <Button>Register</Button> */}
           </CardBody>
           <CardFooter>
             <a href={"/Register"}> Register </a>
