@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import Sidebar from "./components/Sidebar";
 
 ReactDOM.render(
-   <App />,
+  <App />,
   document.getElementById("root")
 );
 

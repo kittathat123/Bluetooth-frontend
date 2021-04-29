@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import { Component } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   Button,
@@ -12,6 +11,7 @@ import {
 } from "reactstrap";
 import "./register.css";
 import { useHistory } from "react-router-dom";
+
 
 // IMPORT DATEPICKER LIBRARY
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -134,6 +134,7 @@ async function RegisterUser(credentials) {
 }
 
 export default function Register() {
+    let history = useHistory();
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [username, setUserName] = useState('');
@@ -142,9 +143,11 @@ export default function Register() {
     const [dateOfBirth, setDateOfBirth] = useState(new Date().toLocaleDateString('en-TH'));
     const [gender, setGender] = useState('');
     const [homeAddr, setHomeAddr] = useState('');
+    const [registerStatus, setRegisterStatus] = useState(false);
     const message_1 = "User already exist in the system.";
     const message_2 = "New User and Got some data!";
-    let redirect = useHistory('');
+    
+    
     
     const handleSubmit = async e => {
       e.preventDefault();
@@ -168,7 +171,7 @@ export default function Register() {
             homeAddr
           });
 
-          // console.log("RESPONSE_FROM_BACKEND : ", response);
+          console.log("RESPONSE_FROM_BACKEND : ", response);
   
           // CHECK THE RESPONSE FROM BACKEND (MESSAGE_1)
           if(message_1.localeCompare(response.message) === 0){
@@ -186,12 +189,23 @@ export default function Register() {
           // CHECK THE RESPONSE FROM BACKEND (MESSAGE_2)
           else if(message_2.localeCompare(response.message) === 0) {
               alert("Register successful");
-              redirect.push('/');
+              setRegisterStatus(true);
           }
-
       }
-
     }
+
+    useEffect(() => {
+        if(registerStatus) {
+            console.log("Redirecting to Login Page");
+            history.push("/");
+            
+        } 
+        else 
+        {
+            console.log("Not Redirect to Login Page");
+        }
+
+    }, [history, registerStatus]);
 
     return (
       <div>
@@ -271,13 +285,11 @@ export default function Register() {
               </div>
 
             </Form>
-            {/* <Button> */}
-            {/* <input type="submit" value="Submit"></input> */}
-            {/* </Button> */}
-            {/* <Button>Register</Button> */}
           </CardBody>
         </Card>
       </div>
     );
 
 }
+
+

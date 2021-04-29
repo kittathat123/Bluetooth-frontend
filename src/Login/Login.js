@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import {
   Card,
@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import "./Login.css";
 import PropTypes from 'prop-types';
+import useToken from '../Token/useToken';
 
 
 // class Login extends Component {
@@ -91,12 +92,16 @@ async function loginUser(credentials) {
     .then(data => data.json())
 }
 
-export default function Login({ setToken }) {
+
+
+export default function Login() {
+    const { setToken } = useToken();
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const message_1 = "You put wrong either username or password.";
     const message_2 = "User already login in the system.";
-    let redirect = useHistory('');
+    const [redirect, setRedirect] = useState(false);
+    const history = useHistory();
 
     const handleSubmit = async e => {
       e.preventDefault();
@@ -122,13 +127,20 @@ export default function Login({ setToken }) {
       else {
           // console.log(response.token, response.username);
           setToken(response);
+          setRedirect(true);
           console.log("SET USER_INFO LEAW");
-          alert("Login successful");
-          redirect.push("/Mylocation")     
-      }
-
-      
+          alert("Login successful");        
+      }   
     }
+
+    // Redirect to Mylocation PAGE
+    useEffect(() => {
+      if(redirect) {
+          history.push({
+            pathname: '/Mylocation',
+          });
+      }
+    }, [history, redirect]);  
 
     return(
       <div>
@@ -170,7 +182,7 @@ export default function Login({ setToken }) {
             {/* <Button>Register</Button> */}
           </CardBody>
           <CardFooter>
-            <a href="../Register/register.js"> Register </a>
+            <a href={"/Register"}> Register </a>
           </CardFooter>
         </Card>
       </div> 
@@ -178,6 +190,6 @@ export default function Login({ setToken }) {
 
 }
 
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-}
+// Login.propTypes = {
+//     setToken: PropTypes.func.isRequired
+// }
