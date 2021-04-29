@@ -1,12 +1,24 @@
 import Sidebar from "../components/Sidebar";
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "./myLocation.css";
 import VRScene from "./VRScene";
 import { Button } from "reactstrap";
 import Room from "./AFrame-SmartHome-master/docVRoom";
+import { useHistory } from "react-router-dom";
+import useToken from '../Token/useToken';
 
-class myLocation extends Component {
-  render() {
+export default function MyLocation() {
+    const history = useHistory();
+    
+    // CHECK STATUS USER IS LOGIN OR NOT
+    const localStorage_string = localStorage.getItem('user_info');
+    console.log("LOCAL_STORAGE : " , (localStorage.getItem('user_info')) );
+    if(localStorage_string === null){
+        alert("!!! Please Log-in to the system first !!!");
+        history.push("/");
+        
+    }
+
     return (
       <div className="page">
         <div className="row" style={{ width: "100%" }}>
@@ -36,7 +48,5 @@ class myLocation extends Component {
         </div>
       </div>
     );
-  }
 }
 
-export default myLocation;
