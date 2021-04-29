@@ -99,11 +99,18 @@ class docVRoom extends Component {
     // console.log("show sphere position x: " + Object.values(this.state.x));
     // this.setMessage();
 
+    // var sceneEl = document.querySelector("a-scene");
+
+    var entityEl = document.createElement("a-entity");
+
+    // console.log(sceneEl.querySelector("#redBox"));
+
+    entityEl.object3D.position.set(1, 2, 3);
     return (
       <div>
-        <div style={{ height: "500px", width: "700px" }}>
+        <div style={{ height: "70vh", width: "70vw" }}>
           <Scene
-            physics="gravity: -1.6"
+            physics="gravity: -1.6" 
             environment="preset: default; lighting: none; ground: none"
             // style="position: absolute; height: 100%; width: 100%;"
             // vr-mode-ui="enabled: false"
@@ -119,19 +126,6 @@ class docVRoom extends Component {
               >
                 {/* <a-cursor></a-cursor> */}
               </Entity>
-
-              <a-entity
-                geometry="primitive: sphere; radius: 0.25;"
-                // Y Z X center: 0.2,, 1, -1.3
-                // position={datass}
-                position=" 0.2,   1, -1.3"
-                // position={
-                //   ({ x: this.state.spherePostion.x },
-                //   { y: this.state.spherePostion.y },
-                //   { z: this.state.spherePostion.z })
-                // }
-                material="color: #EF2D5E"
-              />
 
               <Entity
                 id="rightHand"
@@ -152,13 +146,22 @@ class docVRoom extends Component {
             </Entity>
 
             <a-assets>
-              <a-asset-item
+              {/* <a-asset-item
                 id="male"
-                src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/blob/main/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
-                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/blob/main/src/MyLocation/AFrame-SmartHome-master/human_male.gltf"
-                // src="./human_male.gltf"
+                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend@v1.0/blob/main/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
+                // src="https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/tree/master/2.0/CesiumMan/glTF"
+                src="/TV_01.gltf"
                 // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend@v1.0/blob/main/src/MyLocation/AFrame-SmartHome-master/TV_01.gltf"
+                // src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
+              ></a-asset-item> */}
+              {/* <a-asset-item
+                id="human_male_obj"
+                src="human_male.obj"
               ></a-asset-item>
+              <a-asset-item
+                id="human_male_mtl"
+                src="human_male.mtl"
+              ></a-asset-item> */}
               <a-asset-item
                 id="tv"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
@@ -251,11 +254,6 @@ class docVRoom extends Component {
           visible="true"
         ></a-light> */}
 
-            <Entity
-              gltf-model="#male"
-              // animation-mixer
-              position="0.2,1,-1.3"
-            ></Entity>
             <a-light
               type="point"
               position="0.214 2.615 -2.02969"
@@ -266,12 +264,29 @@ class docVRoom extends Component {
             ></a-light>
 
             <Entity id="labAll" position="-0.8 0 2.353">
-              <Entity
-                id="lab"
-                gltf-model="#labModel"
-                position={{ x: -4, y: 0.06, z: 0 }}
-                visible="false"
+              {/* <Entity obj-model="obj: #human_male_obj;  mtl: #human_male_mtl"></Entity> */}
+
+              {/* <Entity
+              gltf-model="#male"
+              animation-mixer
+              position="0.2,1,-1.3"
+            ></Entity> */}
+
+              <a-entity
+                geometry="primitive: sphere; radius: 0.25;"
+                // Y Z X center: 0.2,, 1, -1.3
+                // position={datass}
+                position=" 2, 1, -1.3"
+                // position={{ x: 2, y: 1, z: -1.3 }}
+                // position={
+                //   ({ x: this.state.spherePostion.x },
+                //   { y: this.state.spherePostion.y },
+                //   { z: this.state.spherePostion.z })
+                // }
+                material="color: #EF2D5E"
               />
+              {/* {entityEl.object3D.position.set(1, 2, 3)} */}
+              {/* {sceneEl.appendChild(entityEl)} */}
               <Entity
                 static-body={{}}
                 id="labWall"
