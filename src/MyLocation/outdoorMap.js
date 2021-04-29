@@ -60,9 +60,7 @@ const MyMapComponent = compose(
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyDq0QmikhnR5WnGaijIX5Km-ABXyMyPrGs",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: (
-      <div
-        style={{ "margin-top": "-100px", height: `700px`, width: "700px" }}
-      />
+      <div style={{ "margin-top": "-100px", height: `70vh`, width: "70vw" }} />
     ),
     mapElement: <div style={{ height: `100%` }} />,
   }),

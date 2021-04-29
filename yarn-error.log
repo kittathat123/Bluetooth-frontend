@@ -47,7 +47,11 @@ npm manifest:
       "aframe-react": "^4.4.0",
       "aframe-react-components": "^0.0.1",
       "bootstrap": "^4.5.3",
+<<<<<<< HEAD
       "moment": "^2.29.1",
+=======
+      "jquery": "^3.6.0",
+>>>>>>> 36e0a829a309b8f4a0712887c75a897ee1dd1c85
       "react": "^17.0.2",
       "react-bootstrap": "^1.4.0",
       "react-dom": "^17.0.2",
@@ -7125,6 +7129,11 @@ Lockfile:
       "@jest/core" "^26.6.0"
       import-local "^3.0.2"
       jest-cli "^26.6.0"
+  
+  jquery@^3.6.0:
+    version "3.6.0"
+    resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
+    integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
   
   "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
     version "4.0.0"
