@@ -23,7 +23,7 @@ class Quarantine extends Component {
                   <img
                     src={geoFence}
                     style={{ width: "600px", height: "400px" }}
-                    alt="Geo Fencing Image"
+                    alt="Geo Fencing"
                   />
                 </div>
               </div>
