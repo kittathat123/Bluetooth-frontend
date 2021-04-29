@@ -1,5 +1,5 @@
 import "./App.css";
-import MyLocation from "./MyLocation/myLocation";
+import MyLocation from "./MyLocation/MyLocation";
 import React, { useEffect, useState } from "react";
 import LogHistory from "./LogHistory/LogHistory";
 import Notification from "./Notification/Notification";
@@ -13,7 +13,7 @@ import Displayoutdoor from "./MyLocation/displayOutdoor";
 import ReactDoM from "react-dom";
 import Login from "./Login/Login";
 import Register from "./Register/register";
-import myLocation from "./MyLocation/MyLocation";
+
 
 function App() {
   return (

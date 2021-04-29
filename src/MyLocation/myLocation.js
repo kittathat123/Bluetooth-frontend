@@ -15,8 +15,7 @@ export default function MyLocation() {
     console.log("LOCAL_STORAGE : " , (localStorage.getItem('user_info')) );
     if(localStorage_string === null){
         alert("!!! Please Log-in to the system first !!!");
-        history.push("/");
-        
+        history.push("/"); 
     }
 
     return (
