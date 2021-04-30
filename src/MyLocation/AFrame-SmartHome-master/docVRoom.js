@@ -110,7 +110,7 @@ class docVRoom extends Component {
       <div>
         <div style={{ height: "70vh", width: "70vw" }}>
           <Scene
-            physics="gravity: -1.6" 
+            physics="gravity: -1.6"
             environment="preset: default; lighting: none; ground: none"
             // style="position: absolute; height: 100%; width: 100%;"
             // vr-mode-ui="enabled: false"
@@ -146,14 +146,14 @@ class docVRoom extends Component {
             </Entity>
 
             <a-assets>
-              {/* <a-asset-item
+              <a-asset-item
                 id="male"
-                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend@v1.0/blob/main/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
+                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/assets/pim/Pim.gltf"
                 // src="https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/tree/master/2.0/CesiumMan/glTF"
-                src="/TV_01.gltf"
+                src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
                 // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend@v1.0/blob/main/src/MyLocation/AFrame-SmartHome-master/TV_01.gltf"
                 // src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
-              ></a-asset-item> */}
+              ></a-asset-item>
               {/* <a-asset-item
                 id="human_male_obj"
                 src="human_male.obj"
@@ -284,11 +284,13 @@ class docVRoom extends Component {
             <Entity id="labAll" position="-0.8 0 2.353">
               {/* <Entity obj-model="obj: #human_male_obj;  mtl: #human_male_mtl"></Entity> */}
 
-              {/* <Entity
-              gltf-model="#male"
-              animation-mixer
-              position="0.2,1,-1.3"
-            ></Entity> */}
+              <Entity
+                scale="0.02 0.03  0.04 "
+                gltf-model="#male"
+                animation-mixer
+                // position="0.2,1,-1.3"
+                position={{ x: 1, y: 1.2, z: -3 }}
+              ></Entity>
 
               <a-entity
                 geometry="primitive: sphere; radius: 0.25;"
@@ -324,19 +326,18 @@ class docVRoom extends Component {
                   radius={0.25}
                   position={this.state.spherePosition}
                   color="#EF2D5E"
-
                   animation__oscillate={{
-                    property: 'position',
+                    property: "position",
                     dur: 2000,
-                    dir: 'alternate',
-                    easing: 'linear',
+                    dir: "alternate",
+                    easing: "linear",
                     loop: true,
-                    from : this.state.spherePosition,
-                    to : {
-                      x : this.state.spherePosition.x,
-                      y : this.state.spherePosition.y,
-                      z : this.state.spherePosition.z
-                    }
+                    from: this.state.spherePosition,
+                    to: {
+                      x: this.state.spherePosition.x,
+                      y: this.state.spherePosition.y,
+                      z: this.state.spherePosition.z,
+                    },
                   }}
                 />
                 <Entity

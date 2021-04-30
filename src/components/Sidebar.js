@@ -78,6 +78,17 @@ class Sidebar extends Component {
           </div>
         </Link>
 
+        <Link to="/">
+          <div className="other-box">
+            {/* <FontAwesomeIcon
+              icon={faIdCard}
+              size="lg"
+              className="profile-logo"
+            /> */}
+            <h4 className="logout-text">Logout</h4>
+          </div>
+        </Link>
+
         <div className="line"></div>
       </div>
     );

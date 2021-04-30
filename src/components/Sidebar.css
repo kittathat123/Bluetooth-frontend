@@ -201,3 +201,18 @@ a:link {
   margin-left: 1rem;
   border: 1px solid #000000;
 }
+
+.logout-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 115px;
+  height: 33px;
+  margin: 20px;
+  font-family: Red Rose;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
