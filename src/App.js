@@ -12,7 +12,7 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Displayoutdoor from "./MyLocation/displayOutdoor";
 import ReactDoM from "react-dom";
 import Login from "./Login/Login";
-import Register from "./Register/register";
+import Register from "./Register/Register";
 
 
 function App() {

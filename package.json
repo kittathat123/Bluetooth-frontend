@@ -20,6 +20,7 @@
     "aframe-react": "^4.4.0",
     "aframe-react-components": "^0.0.1",
     "bootstrap": "^4.5.3",
+    "date-fns": "^2.21.1",
     "jquery": "^3.6.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.4.0",

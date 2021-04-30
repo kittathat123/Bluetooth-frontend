@@ -21,7 +21,7 @@ class profileCard extends Component {
             top
             width="70px"
             height="70vh"
-            // src="http://esg.buu.ac.th/wp-content/uploads/2018/09/none.png"
+            src="http://esg.buu.ac.th/wp-content/uploads/2018/09/none.png"
             alt="Profile image cap"
           />
           <CardBody>

@@ -9,7 +9,7 @@ import {
   CardText,
   Form,
 } from "reactstrap";
-import "./register.css";
+import "./Register.css";
 import { useHistory } from "react-router-dom";
 
 
@@ -31,8 +31,18 @@ async function RegisterUser(credentials) {
     .then(data => data.json())
 }
 
+var onKeyPressOnlyAlphabet = (event) => {
+  if((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && 
+    event.charCode < 123)){
+      return true;
+  }
+      event.preventDefault();
+      alert("Type only alpahbet");
+      return false
+}
+
 export default function Register() {
-    let history = useHistory();
+    const history = useHistory();
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [username, setUserName] = useState('');
@@ -44,7 +54,6 @@ export default function Register() {
     const [registerStatus, setRegisterStatus] = useState(false);
     const message_1 = "User already exist in the system.";
     const message_2 = "New User and Got some data!";
-    
     
     
     const handleSubmit = async e => {
@@ -117,6 +126,7 @@ export default function Register() {
                 type="text"
                 id="input-box"
                 value={firstname}
+                onKeyPress={onKeyPressOnlyAlphabet}
                 onChange={e => setFirstname(e.target.value)}
               />
               <CardText>Last Name :</CardText>
@@ -125,6 +135,7 @@ export default function Register() {
                 id="input-box"
                 name="lname"
                 value={lastname}
+                onKeyPress={onKeyPressOnlyAlphabet}
                 onChange={e => setLastname(e.target.value)}
               />
               <CardText>Username :</CardText>
@@ -160,13 +171,11 @@ export default function Register() {
               </MuiPickersUtilsProvider>
       
               <CardText>Gender :</CardText>
-              <input
-                type="text"
-                id="input-box"
-                // name="lname"
-                value={gender}
-                onChange={e => setGender(e.target.value)}
-              />
+              <div onChange={e => setGender(e.target.value)}>
+                  <input id="radiobutton" type="radio" value="Male" name="gender" /> Male
+                  <input id="radiobutton" type="radio" value="Female" name="gender" /> Female
+                  <input id="radiobutton" type="radio" value="Other" name="gender" /> Other
+              </div>
               <CardText>Home Address :</CardText>
               <input
                 type="text"

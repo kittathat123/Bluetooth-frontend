@@ -2,6 +2,14 @@
     margin-bottom: 2.75%;
 }
 
+#radiobutton:first-child{
+    margin-right: 10px;
+}
+
+#radiobutton:not(:first-child) {
+    margin: 0% 10px 2.75% 10px;
+}
+
 div.MuiFormControl-root{
     margin-bottom: 2.75%;
 }
@@ -9,3 +17,4 @@ div.MuiFormControl-root{
 p.card-text {
     margin-bottom: 0.5%;
 }
+

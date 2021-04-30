@@ -12,10 +12,11 @@ export default function MyLocation() {
     
     // CHECK STATUS USER IS LOGIN OR NOT
     const localStorage_string = localStorage.getItem('user_info');
-    console.log("LOCAL_STORAGE : " , (localStorage.getItem('user_info')) );
     if(localStorage_string === null){
         alert("!!! Please Log-in to the system first !!!");
         history.push("/"); 
+    } else if(localStorage_string !== null) {
+        console.log("username : ", JSON.parse(localStorage_string).username);
     }
 
     return (
