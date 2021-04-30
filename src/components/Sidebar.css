@@ -216,3 +216,7 @@ a:link {
   line-height: 22px;
   color: #000000;
 }
+
+.logout-box {
+  cursor: pointer;
+}

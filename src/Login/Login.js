@@ -19,7 +19,7 @@ async function loginUser(credentials) {
   const hostnameProduction = 'http://127.0.0.1:8080/userLogin/';
   const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userLogin/';
 
-  return fetch(hostnameProduction, {
+  return fetch(hostnameHeroku, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

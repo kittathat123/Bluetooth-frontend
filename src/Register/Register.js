@@ -19,9 +19,9 @@ import DateFnsUtils from '@date-io/date-fns';
 
 async function RegisterUser(credentials) {
   const hostnameProduction = 'http://127.0.0.1:8080/userRegistration/';
-  const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userLogin/';
+  const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userRegistration/';
 
-  return fetch(hostnameProduction, {
+  return fetch(hostnameHeroku, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -104,8 +104,7 @@ export default function Register() {
     useEffect(() => {
         if(registerStatus) {
             console.log("Redirecting to Login Page");
-            history.push("/");
-            
+            history.push("/");   
         } 
         else 
         {

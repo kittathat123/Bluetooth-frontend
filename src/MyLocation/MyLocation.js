@@ -11,22 +11,15 @@ export default function MyLocation() {
     const history = useHistory();
     
     // CHECK STATUS USER IS LOGIN OR NOT
-    const localStorage_string = localStorage.getItem('user_info');
-    if(localStorage_string === null){
+    const localStorageString = localStorage.getItem('user_info');
+    if(localStorageString === null){
         alert("!!! Please Log-in to the system first !!!");
         history.push("/"); 
-    } else if(localStorage_string !== null) {
-        console.log("username : ", JSON.parse(localStorage_string).username);
+    } else if(localStorageString !== null) {
+        console.log("[MyLocation] username : ", JSON.parse(localStorageString).username);
     }
 
-  // // CHECK STATUS USER IS LOGIN OR NOT
-  // const localStorage_string = localStorage.getItem("user_info");
-  // console.log("LOCAL_STORAGE : ", localStorage.getItem("user_info"));
-  // if (localStorage_string === null) {
-  //   alert("!!! Please Log-in to the system first !!!");
-  //   history.push("/");
-  // }
-
+    
   return (
     <div className="page">
       <div className="row" style={{ width: "100%" }}>
