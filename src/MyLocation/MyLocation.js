@@ -1,11 +1,11 @@
 import Sidebar from "../components/Sidebar";
 import React, { useState, useEffect } from "react";
-import "./myLocation.css";
 import VRScene from "./VRScene";
 import { Button } from "reactstrap";
 import Room from "./AFrame-SmartHome-master/docVRoom";
 import { useHistory } from "react-router-dom";
 import useToken from "../Token/useToken";
+import "./MyLocation.css";
 
 export default function MyLocation() {
     const history = useHistory();

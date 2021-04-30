@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import Outdoor from "./outdoorMap";
-import "./myLocation.css";
+import "./MyLocation.css";
 
 export default class outdoorMap extends Component {
   render() {
