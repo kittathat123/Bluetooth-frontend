@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Sidebar from "../components/Sidebar";
 import "./Notification.css";
-import Tables from "../components/Tables";
+import Tables from "../components/TableNotification";
 
 class Notification extends Component {
   render() {

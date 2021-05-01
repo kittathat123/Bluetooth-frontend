@@ -285,7 +285,7 @@ class docVRoom extends Component {
               {/* <Entity obj-model="obj: #human_male_obj;  mtl: #human_male_mtl"></Entity> */}
 
               <Entity
-                scale="0.02 0.03  0.04 "
+                scale="0.03 0.03  0.02 "
                 gltf-model="#male"
                 animation-mixer
                 // position="0.2,1,-1.3"

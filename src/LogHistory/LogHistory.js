@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Sidebar from "../components/Sidebar";
 import "./LogHistory.css";
-import Tables from "../components/Tables";
+import Tables from "../components/TableHistory";
 
 export default function LogHistory() {
   return (
