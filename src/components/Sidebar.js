@@ -19,7 +19,7 @@ async function logoutUser(credentials) {
   const hostnameProduction = 'http://127.0.0.1:8080/userLogout/';
   const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userLogout/';
 
-  return fetch(hostnameHeroku, {
+  return fetch(hostnameProduction, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ export default function Sidebar() {
         'username': JSON.parse(localStorage.getItem('user_info')).username,
       });
       
-      // console.log("[Logout] response : ", response);
+      // console.log("[LOGOUT] RESPONSE_FROM_BACKEND : ", response);
       if(message_1.localeCompare(response.message) === 0) {
           localStorage.removeItem('user_info');
           history.push('/');
