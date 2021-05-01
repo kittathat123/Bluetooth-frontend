@@ -34,8 +34,8 @@ const TableHistory = (props) => {
     <div className="wrapper">
       <h1>My Grocery List</h1>
       <ul>
-        {list.map((item) => (
-          <li key={item}>{item}</li>
+        {list.slice(0, 10).map((item) => (
+          <li key={item.x_coord}>{item.x_coord}</li>
         ))}
       </ul>
     </div>

@@ -8,18 +8,17 @@ import useToken from "../Token/useToken";
 import "./MyLocation.css";
 
 export default function MyLocation() {
-    const history = useHistory();
-    
-    // CHECK STATUS USER IS LOGIN OR NOT
-    const localStorageString = localStorage.getItem('user_info');
-    if(localStorageString === null){
-        alert("!!! Please Log-in to the system first !!!");
-        history.push("/"); 
-    } else if(localStorageString !== null) {
-        console.log("[MyLocation] username : ", JSON.parse(localStorageString).username);
-    }
+  const history = useHistory();
 
-    
+  // CHECK STATUS USER IS LOGIN OR NOT
+  // const localStorageString = localStorage.getItem('user_info');
+  // if(localStorageString === null){
+  //     alert("!!! Please Log-in to the system first !!!");
+  //     history.push("/");
+  // } else if(localStorageString !== null) {
+  //     console.log("[MyLocation] username : ", JSON.parse(localStorageString).username);
+  // }
+
   return (
     <div className="page">
       <div className="row" style={{ width: "100%" }}>
