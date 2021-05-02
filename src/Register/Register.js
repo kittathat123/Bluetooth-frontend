@@ -36,9 +36,10 @@ var onKeyPressOnlyAlphabet = (event) => {
     event.charCode < 123)){
       return true;
   }
-      event.preventDefault();
-      alert("Type only alpahbet");
-      return false
+  
+  event.preventDefault();
+  alert("Type only alpahbet");
+  return false
 }
 
 export default function Register() {

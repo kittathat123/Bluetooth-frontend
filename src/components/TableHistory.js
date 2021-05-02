@@ -20,16 +20,18 @@ async function getList() {
 const TableHistory = (props) => {
   const [list, setList] = useState([]);
 
+  // console.log("TEST STH")
   useEffect(() => {
     let mounted = true;
     getList().then((items) => {
       if (mounted) {
         console.log("send data part" + getList());
-        setList(items);
+         setList(items);
       }
     });
     return () => (mounted = false);
   }, []);
+  
   return (
     <div className="wrapper">
       <h1>My Grocery List</h1>
