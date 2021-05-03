@@ -89,9 +89,9 @@ class docVRoom extends Component {
   render() {
     const datass = Object.values(this.state.spherePosition);
     // for (var i = 0; i < 5; i++) {
-    //   this.setState({this.state.x: });
+    //   this.setState({ x: this.state.x + 1 });
     // }
-    // this.setState({x: });
+
     console.log(
       "show sphere position: " + Object.values(this.state.spherePosition)
     );
@@ -284,15 +284,7 @@ class docVRoom extends Component {
             <Entity id="labAll" position="-0.8 0 2.353">
               {/* <Entity obj-model="obj: #human_male_obj;  mtl: #human_male_mtl"></Entity> */}
 
-              <Entity
-                scale="0.03 0.03  0.02 "
-                gltf-model="#male"
-                animation-mixer
-                // position="0.2,1,-1.3"
-                position={{ x: 1, y: 1.2, z: -3 }}
-              ></Entity>
-
-              <a-entity
+              {/* <a-entity
                 geometry="primitive: sphere; radius: 0.25;"
                 // Y Z X center: 0.2,, 1, -1.3
                 // position={datass}
@@ -304,7 +296,7 @@ class docVRoom extends Component {
                 //   { z: this.state.spherePostion.z })
                 // }
                 material="color: #EF2D5E"
-              />
+              /> */}
               {/* {entityEl.object3D.position.set(1, 2, 3)} */}
               {/* {sceneEl.appendChild(entityEl)} */}
               <Entity
@@ -319,7 +311,7 @@ class docVRoom extends Component {
                 geometry-merger="preserveOriginal: false"
                 id="furnitureList"
               >
-                <Entity
+                {/* <Entity
                   id="redSphere"
                   primitive="a-sphere"
                   detail={2}
@@ -339,7 +331,15 @@ class docVRoom extends Component {
                       z: this.state.spherePosition.z,
                     },
                   }}
-                />
+                /> */}
+
+                <Entity
+                  scale="0.03 0.03  0.02 "
+                  gltf-model="#male"
+                  animation-mixer
+                  // position="0.2,1,-1.3"
+                  position={{ x: 1, y: 1.2, z: -3 }}
+                ></Entity>
                 <Entity
                   id="wallPartition1"
                   gltf-model="#wallPartition"
@@ -649,6 +649,20 @@ class docVRoom extends Component {
                   position="1.599 0.06978 -9.97823"
                   rotation="0 -90 0"
                 />
+                <Entity
+                  id="aircon"
+                  gltf-model="#airconModel"
+                  scale="0.0025 0.0025 0.0025"
+                  position={{ x: -3.77, y: 2.5, z: -8.3 }}
+                  rotation={{ x: 0, y: 90, z: 0 }}
+                />
+                <Entity
+                  id="aircon"
+                  gltf-model="#airconModel"
+                  scale="0.0025 0.0025 0.0025"
+                  position={{ x: -3.77, y: 2.5, z: -3.3 }}
+                  rotation={{ x: 0, y: 90, z: 0 }}
+                />
               </Entity>
 
               {/* <Entity>
@@ -673,21 +687,6 @@ class docVRoom extends Component {
           </Entity> */}
 
               {/* <Device></Device> */}
-
-              <Entity
-                id="aircon"
-                gltf-model="#airconModel"
-                scale="0.0025 0.0025 0.0025"
-                position={{ x: -3.77, y: 2.5, z: -8.3 }}
-                rotation={{ x: 0, y: 90, z: 0 }}
-              />
-              <Entity
-                id="aircon"
-                gltf-model="#airconModel"
-                scale="0.0025 0.0025 0.0025"
-                position={{ x: -3.77, y: 2.5, z: -3.3 }}
-                rotation={{ x: 0, y: 90, z: 0 }}
-              />
 
               {/* <DynamicObject></DynamicObject> */}
             </Entity>

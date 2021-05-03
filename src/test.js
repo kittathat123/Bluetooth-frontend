@@ -351,3 +351,12 @@ import { render } from "@testing-library/react";
     // console.log('websocket closed')
     // this.client = null
   }
+
+   <div className="wrapper">
+      <h1>My Grocery List</h1>
+      <ul>
+        {list.slice(0, 10).map((item) => (
+          <li key={item.x_coord}>{item.x_coord}</li>
+        ))}
+      </ul>
+    </div>
