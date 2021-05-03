@@ -21,7 +21,7 @@ async function RegisterUser(credentials) {
   const hostnameProduction = 'http://127.0.0.1:8080/userRegistration/';
   const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userRegistration/';
 
-  return fetch(hostnameHeroku, {
+  return fetch(hostnameProduction, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -36,9 +36,10 @@ var onKeyPressOnlyAlphabet = (event) => {
     event.charCode < 123)){
       return true;
   }
-      event.preventDefault();
-      alert("Type only alpahbet");
-      return false
+  
+  event.preventDefault();
+  alert("Type only alpahbet");
+  return false
 }
 
 export default function Register() {
@@ -78,7 +79,7 @@ export default function Register() {
             homeAddr
           });
 
-          console.log("RESPONSE_FROM_BACKEND : ", response);
+          console.log("[REGISTER] RESPONSE_FROM_BACKEND : ", response);
   
           // CHECK THE RESPONSE FROM BACKEND (MESSAGE_1)
           if(message_1.localeCompare(response.message) === 0){
@@ -106,10 +107,10 @@ export default function Register() {
             console.log("Redirecting to Login Page");
             history.push("/");   
         } 
-        else 
-        {
-            console.log("Not Redirect to Login Page");
-        }
+        // else 
+        // {
+        //     console.log("Not Redirect to Login Page");
+        // }
 
     }, [history, registerStatus]);
 
@@ -123,7 +124,7 @@ export default function Register() {
               <CardText>First Name :</CardText>
               <input
                 type="text"
-                id="input-box"
+                className="input-box"
                 value={firstname}
                 onKeyPress={onKeyPressOnlyAlphabet}
                 onChange={e => setFirstname(e.target.value)}
@@ -131,7 +132,7 @@ export default function Register() {
               <CardText>Last Name :</CardText>
               <input
                 type="text"
-                id="input-box"
+                className="input-box"
                 name="lname"
                 value={lastname}
                 onKeyPress={onKeyPressOnlyAlphabet}
@@ -140,29 +141,29 @@ export default function Register() {
               <CardText>Username :</CardText>
               <input
                 type="text"
-                id="input-box"
+                className="input-box"
                 value={username}
                 onChange={e => setUserName(e.target.value)}
               />
               <CardText>Password :</CardText>
               <input
-                type="text"
-                id="input-box"
+                type="password"
+                className="input-box"
                 // name="lname"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
               />
               <CardText>Confirmed Password :</CardText>
               <input 
-                type="text"
-                id="input-box"
+                type="password"
+                className="input-box"
                 value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
               />
               <CardText>Date of Birth :</CardText>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker
-                  id="input-box"
+                  className="input-box"
                   format="dd/MM/yyyy"
                   value={dateOfBirth}
                   onChange={e => setDateOfBirth(e.toLocaleDateString('en-TH'))}
@@ -171,14 +172,14 @@ export default function Register() {
       
               <CardText>Gender :</CardText>
               <div onChange={e => setGender(e.target.value)}>
-                  <input id="radiobutton" type="radio" value="Male" name="gender" /> Male
-                  <input id="radiobutton" type="radio" value="Female" name="gender" /> Female
-                  <input id="radiobutton" type="radio" value="Other" name="gender" /> Other
+                  <input className="radiobutton" type="radio" value="Male" name="gender" /> Male
+                  <input className="radiobutton" type="radio" value="Female" name="gender" /> Female
+                  <input className="radiobutton" type="radio" value="Other" name="gender" /> Other
               </div>
               <CardText>Home Address :</CardText>
               <input
                 type="text"
-                id="input-box"
+                className="input-box"
                 // name="lname"
                 value={homeAddr}
                 onChange={e => setHomeAddr(e.target.value)}

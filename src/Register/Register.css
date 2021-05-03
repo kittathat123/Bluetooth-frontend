@@ -1,12 +1,12 @@
-#input-box {
+.input-box {
     margin-bottom: 2.75%;
 }
 
-#radiobutton:first-child{
+.radiobutton:first-child{
     margin-right: 10px;
 }
 
-#radiobutton:not(:first-child) {
+.radiobutton:not(:first-child) {
     margin: 0% 10px 2.75% 10px;
 }
 

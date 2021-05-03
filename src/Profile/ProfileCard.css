@@ -1,0 +1,16 @@
+.profileContainer {
+  display: flex;
+}
+.infoSpace {
+  margin-bottom: 50px;
+}
+
+.btn-group-customize {
+  display: flex;
+  flex-direction: row;
+  margin: 0% 0%;
+}
+
+.btn-warning {
+  margin-right: 8%;
+}

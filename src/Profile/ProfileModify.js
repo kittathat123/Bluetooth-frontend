@@ -1,9 +1,9 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
-import "./Profile.css";
-import ProfileCard from "./ProfileCard";
+import "./ProfileModify.css";
+import ProfileCardModify from "./ProfileCardModify";
 
-export default function Profile() {
+export default function ProfileModifyPage() {
   return (
     <div className="page">
       <div className="row" style={{ width: "100%" }}>
@@ -12,10 +12,10 @@ export default function Profile() {
         </div>
         <div className="col">
           <div className="pageContent">
-            <h1 style={{ color: "rgba(42, 157, 244)" }}>Profile</h1>
+            <h1 style={{ color: "rgba(42, 157, 244)" }}>Profile Edit</h1>
             <div className="boxMap">
               <div className="profileBox">
-                <ProfileCard />
+                <ProfileCardModify />
               </div>
             </div>
           </div>
