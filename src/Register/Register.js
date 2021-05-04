@@ -12,7 +12,6 @@ import {
 import "./Register.css";
 import { useHistory } from "react-router-dom";
 
-
 // IMPORT DATEPICKER LIBRARY
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';

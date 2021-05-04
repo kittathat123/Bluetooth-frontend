@@ -26,13 +26,8 @@ const TableHistory = (props) => {
     let mounted = true;
     getList().then((items) => {
       if (mounted) {
-<<<<<<< HEAD
-        console.log("send data part: " + getList(items));
-        setList(items);
-=======
         console.log("send data part" + getList());
          setList(items);
->>>>>>> 640bff3c267b0d7f51642ea67956bfad6564cfea
       }
     });
     return () => (mounted = false);

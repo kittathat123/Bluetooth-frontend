@@ -36,6 +36,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const message_1 = "You put wrong either username or password.";
     const message_2 = "User already login in the system.";
+    
     const [redirect, setRedirect] = useState(false);
     const history = useHistory();
 
@@ -45,6 +46,7 @@ export default function Login() {
         username,
         password
       });
+      
       // console.log("RESPONSE : ", response);
       
       // CHECK THE RESPONSE WHICH GET FROM BACKEND
