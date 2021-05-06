@@ -10,9 +10,16 @@ import {
   CardText,
   Form,
 } from "reactstrap";
-import "./Login.css";
+import "./Login.css"
 import PropTypes from 'prop-types';
 import useToken from '../Token/useToken';
+
+// FONTAWESOME
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+const eye = <FontAwesomeIcon icon={faEye} />;
+const eyeslash = <FontAwesomeIcon icon={faEyeSlash}/>;
 
 async function loginUser(credentials) {
   // console.log("CREDITIALS : ", credentials)
@@ -34,11 +41,15 @@ export default function Login() {
     const { setToken } = useToken();
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordShown, setPasswordShown] = useState(false);
     const message_1 = "You put wrong either username or password.";
     const message_2 = "User already login in the system.";
     
     const [redirect, setRedirect] = useState(false);
     const history = useHistory();
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
 
     const handleSubmit = async e => {
       e.preventDefault();
@@ -93,18 +104,24 @@ export default function Login() {
                 value={username}
                 onChange={e => setUserName(e.target.value)}
               />
-              <CardText>Password :</CardText>
-              <input
-                type="password"
-                id="lname"
-                name="lname"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
+              <CardText className="password">Password :</CardText>
+                <div className="pass-wrapper">
+                  <input
+                    type={passwordShown ? "text":"password"}
+                    className="pass-input"
+                    name="lname"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
+
+                  <i style={{display: passwordShown ? "block" : "none"}} onClick={togglePasswordVisiblity}>{eyeslash}</i>
+                  <i style={{display: passwordShown ? "none" : "block"}} onClick={togglePasswordVisiblity}>{eye}</i>
+                </div>
               <br></br>
 
               <div>
-              <button type="submit" style={{marginTop: '20px'}}>Submit</button>
+              {/* <button type="submit" style={{marginTop: '20px'}}>Submit</button> */}
+              <Button outline color="primary" type="submit" style={{marginTop: '20px'}}>Submit</Button>
               </div>
 
             </Form>
