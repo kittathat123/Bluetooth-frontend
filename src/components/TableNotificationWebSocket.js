@@ -2,7 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import { useHistory } from "react-router";
 
+// export default function TableNotification() {
+//   const [list, setList] = useState([]);
 
+//   useEffect(() => {
+//     let mounted = true;
+//     getList().then((items) => {
+//       if (mounted) {
+//         console.log("send data part");
+//       }
+//     });
+//     return () => (mounted = false);
+//   }, []);
+//   return (
+//     <div className="wrapper">
+//       <h1>My Grocery List</h1>
+//       <ul>
+//         {list.map((item) => (
+//           <li key={item.x_coord}>{item.x_coord}</li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
 
 const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/API/contact/";
 const hostnameProduction = "http://127.0.0.1:8080/API/contact/";

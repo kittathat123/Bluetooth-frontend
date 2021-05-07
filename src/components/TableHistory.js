@@ -47,28 +47,12 @@ const TableHistory = (props) => {
     let mounted = true;
     getList().then((items) => {
       if (mounted) {
-        console.log("send data part" + getList());
+        // console.log("send data part" + getList());
          setList(items);
       }
     });
     return () => (mounted = false);
   }, []);
-
-
-  // GET_BLUETOOTH_TAG_DATA_FROM_SERVER
-  // useEffect(() => {
-  //   fetch(hostnameProduction, {
-  //     method: 'GET',
-  //     headers : {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     }
-  //   })
-  //     .then(respone => respone.json())
-  //     .then(dataFromServer => {
-  //         console.log("[TableHistory] : ", dataFromServer);
-  //     })
-  // })
   
   return (
     <Table style={{ width: "60vw" }}>
@@ -87,7 +71,7 @@ const TableHistory = (props) => {
         {
           list
           .filter(item => item.bt_tag_owner === username)
-          .slice(50).reverse()
+          .slice(0, 50).reverse()
           .map((item, index) => (
             <tr key={index}>
               <td>{item.bt_tag_owner}</td>

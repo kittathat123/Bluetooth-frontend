@@ -54,19 +54,35 @@ export default function Register() {
     const [registerStatus, setRegisterStatus] = useState(false);
     const message_1 = "User already exist in the system.";
     const message_2 = "New User and Got some data!";
+    const message_3 = "Please fill in all section";
     
     
     const handleSubmit = async e => {
+      var handleSubmitStatus = true
       e.preventDefault();
+      console.log("[DATE] : ", dateOfBirth)
+      console.log("[DATE TODAY] : ", new Date().toLocaleDateString('en-TH'));
+      console.log(dateOfBirth === new Date().toLocaleDateString('en-TH'))
+
+      if(firstname === "" || lastname === "" || username === "" || password === "" || confirmPassword === "" || gender === "" || homeAddr === "") {
+          handleSubmitStatus = false
+          alert("--- Please fill in all section ---")
+      }
+
+      if(dateOfBirth  === new Date().toLocaleDateString('en-TH')) {
+          handleSubmitStatus = false  
+          alert("--- Enter your real birthday ---")
+      }
       
       // CHECK MATCHING OF PASSWORD AND CONFIRM_PASSWORD
       if(password !== confirmPassword)
       {
-          alert("Password not match")
+          handleSubmitStatus = false
+          alert("--- Password not match ---")
       }
       
       // IF BOTH PASSWORD AND CONFIRM_PASSWORD ARE MATCH
-      else 
+      if(handleSubmitStatus === true)
       {
           const response = await RegisterUser({
             firstname,
@@ -88,9 +104,10 @@ export default function Register() {
               setUserName('');
               setPassword('');
               setConfirmPassword('');
-              setDateOfBirth(new Date());
+              setDateOfBirth(new Date().toLocaleDateString('en-TH'));
               setGender('');
               setPassword('');
+              setHomeAddr('');
           }
 
           // CHECK THE RESPONSE FROM BACKEND (MESSAGE_2)
@@ -98,6 +115,8 @@ export default function Register() {
               alert("Register successful");
               setRegisterStatus(true);
           }
+
+          
       }
     }
 
