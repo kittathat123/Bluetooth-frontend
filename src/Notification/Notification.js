@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "../components/Sidebar";
 import "./Notification.css";
 import Tables from "../components/TableNotification";
-// import Tables from "../components/TableNotificationWebSocket";
+
 
 class Notification extends Component {
   render() {
