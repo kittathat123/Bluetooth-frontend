@@ -13,49 +13,48 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useHistory } from "react-router-dom";
 
-
 async function logoutUser(credentials) {
   // console.log("CREDITIALS : ", credentials)
-  const hostnameProduction = 'http://127.0.0.1:8080/userLogout/';
-  const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userLogout/';
+  const hostnameProduction = "http://127.0.0.1:8080/userLogout/";
+  const hostnameHeroku =
+    "https://protected-brook-89084.herokuapp.com/userLogout/";
 
-  return fetch(hostnameProduction, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
-
+  return fetch(hostnameHeroku, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  }).then((data) => data.json());
 }
 
 export default function Sidebar() {
   const history = useHistory();
   const message_1 = "Logout Success";
 
-
-  const handleLogout = async e => {
+  const handleLogout = async (e) => {
     // CHECK LOCAL_STORAGE VALUE
-    if(localStorage.getItem('user_info') !== null) {
-      console.log("[Logout] username : ", JSON.parse(localStorage.getItem('user_info')).username);
+    if (localStorage.getItem("user_info") !== null) {
+      console.log(
+        "[Logout] username : ",
+        JSON.parse(localStorage.getItem("user_info")).username
+      );
     }
-    
-    var answer = window.confirm('Do you want to logout ?');
-    if(answer) {
+
+    var answer = window.confirm("Do you want to logout ?");
+    if (answer) {
       e.preventDefault();
       const response = await logoutUser({
-        'username': JSON.parse(localStorage.getItem('user_info')).username,
+        username: JSON.parse(localStorage.getItem("user_info")).username,
       });
-      
-      // console.log("[LOGOUT] RESPONSE_FROM_BACKEND : ", response);
-      if(message_1.localeCompare(response.message) === 0) {
-          localStorage.removeItem('user_info');
-          history.push('/');
-      }
 
+      // console.log("[LOGOUT] RESPONSE_FROM_BACKEND : ", response);
+      if (message_1.localeCompare(response.message) === 0) {
+        localStorage.removeItem("user_info");
+        history.push("/");
+      }
     }
-  }
+  };
 
   // console.log(logo);
   return (
@@ -112,11 +111,7 @@ export default function Sidebar() {
 
       <Link to="/Profile">
         <div className="other-box">
-          <FontAwesomeIcon
-            icon={faIdCard}
-            size="lg"
-            className="profile-logo"
-          />
+          <FontAwesomeIcon icon={faIdCard} size="lg" className="profile-logo" />
           <h4 className="profile-text">Profile</h4>
         </div>
       </Link>
@@ -134,4 +129,3 @@ export default function Sidebar() {
     </div>
   );
 }
-

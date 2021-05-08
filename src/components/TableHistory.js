@@ -26,18 +26,13 @@ const TableHistory = (props) => {
     let mounted = true;
     getList().then((items) => {
       if (mounted) {
-<<<<<<< HEAD
         console.log("send data part: " + getList(items));
         setList(items);
-=======
-        console.log("send data part" + getList());
-         setList(items);
->>>>>>> 640bff3c267b0d7f51642ea67956bfad6564cfea
       }
     });
     return () => (mounted = false);
   }, []);
-  
+
   return (
     <Table style={{ width: "60vw" }}>
       <thead>
@@ -46,9 +41,9 @@ const TableHistory = (props) => {
           <th>Timestamp</th>
           <th>X_coord</th>
           <th>Y_coord</th>
-          <th>Location</th>
-          <th>Floor</th>
           <th>Room</th>
+          <th>Floor</th>
+          <th>Location</th>
         </tr>
       </thead>
       <tbody>
@@ -58,9 +53,9 @@ const TableHistory = (props) => {
             <td>{item.timestamp}</td>
             <td>{item.x_coord}</td>
             <td>{item.y_coord}</td>
-            <td>{item.location}</td>
-            <td>{item.floor}</td>
             <td>{item.room}</td>
+            <td>{item.floor}</td>
+            <td>{item.location}</td>
           </tr>
         ))}
       </tbody>
