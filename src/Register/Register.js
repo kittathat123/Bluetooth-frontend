@@ -59,17 +59,41 @@ export default function Register() {
   const [registerStatus, setRegisterStatus] = useState(false);
   const message_1 = "User already exist in the system.";
   const message_2 = "New User and Got some data!";
+  const message_3 = "Please fill in all section";
 
   const handleSubmit = async (e) => {
+    var handleSubmitStatus = true;
     e.preventDefault();
+    console.log("[DATE] : ", dateOfBirth);
+    console.log("[DATE TODAY] : ", new Date().toLocaleDateString("en-TH"));
+    console.log(dateOfBirth === new Date().toLocaleDateString("en-TH"));
+
+    if (
+      firstname === "" ||
+      lastname === "" ||
+      username === "" ||
+      password === "" ||
+      confirmPassword === "" ||
+      gender === "" ||
+      homeAddr === ""
+    ) {
+      handleSubmitStatus = false;
+      alert("--- Please fill in all section ---");
+    }
+
+    if (dateOfBirth === new Date().toLocaleDateString("en-TH")) {
+      handleSubmitStatus = false;
+      alert("--- Enter your real birthday ---");
+    }
 
     // CHECK MATCHING OF PASSWORD AND CONFIRM_PASSWORD
     if (password !== confirmPassword) {
-      alert("Password not match");
+      handleSubmitStatus = false;
+      alert("--- Password not match ---");
     }
 
     // IF BOTH PASSWORD AND CONFIRM_PASSWORD ARE MATCH
-    else {
+    if (handleSubmitStatus === true) {
       const response = await RegisterUser({
         firstname,
         lastname,
@@ -90,9 +114,10 @@ export default function Register() {
         setUserName("");
         setPassword("");
         setConfirmPassword("");
-        setDateOfBirth(new Date());
+        setDateOfBirth(new Date().toLocaleDateString("en-TH"));
         setGender("");
         setPassword("");
+        setHomeAddr("");
       }
 
       // CHECK THE RESPONSE FROM BACKEND (MESSAGE_2)
@@ -115,19 +140,18 @@ export default function Register() {
   }, [history, registerStatus]);
 
   return (
-    <div className="register_page ">
+    <div className="register_page">
       <Card className="container_register">
-        {/* <CardHeader>WELCOME TO IPS TRACKING</CardHeader> */}
         <CardHeader>
+          {" "}
           <img
             src={logo}
             alt="IPS TRACK"
             style={{ width: "179px", height: "80px" }}
           ></img>
-          <span> </span>{" "}
         </CardHeader>
         <CardBody>
-          <CardTitle tag="h5">Fill In Each Form</CardTitle>
+          <CardTitle tag="h5">WELCOME TO REGISTRATIOM PAGE</CardTitle>
           <Form onSubmit={handleSubmit}>
             <CardText>First Name :</CardText>
             <input
@@ -194,6 +218,7 @@ export default function Register() {
                 name="gender"
               />{" "}
               Female
+              {/* <input className="radiobutton" type="radio" value="Other" name="gender" /> Other */}
             </div>
             <CardText>Home Address :</CardText>
             <input

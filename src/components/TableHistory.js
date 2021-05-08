@@ -1,11 +1,14 @@
 import { TableBody, TableRow } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { Table } from "reactstrap";
 
+const hostnameHeroku =
+  "https://protected-brook-89084.herokuapp.com/API/location/";
+const hostnameProduction = "http://127.0.0.1:8080/API/location";
+
 async function getList() {
-  return await fetch(
-    "https://protected-brook-89084.herokuapp.com/API/location/"
-  ).then((data) => data.json());
+  return await fetch(hostnameHeroku).then((data) => data.json());
 }
 
 // export function setItem(item) {
@@ -19,14 +22,26 @@ async function getList() {
 // }
 
 const TableHistory = (props) => {
-  const [list, setList] = useState([]);
+  const history = useHistory();
+  var [list, setList] = useState([]);
+  var [username, setUserName] = useState("");
 
-  // console.log("TEST STH")
+  // GET USERNAME FROM LOCALSTORAGE
+  if (localStorage.getItem("user_info") === null) {
+    alert("!!! Please Log-in to the system first !!!");
+    history.push("/");
+  } else if (localStorage.getItem("user_info") !== null) {
+    // console.log("[Profile] token : ", JSON.parse(localStorageString).token);
+    username = JSON.parse(localStorage.getItem("user_info")).username;
+    // token = JSON.parse(localStorage.getItem('user_info')).token;
+  }
+
+  // GET_BLUETOOTH_TAG_DATA_FROM_SERVER
   useEffect(() => {
     let mounted = true;
     getList().then((items) => {
       if (mounted) {
-        console.log("send data part: " + getList(items));
+        // console.log("send data part" + getList());
         setList(items);
       }
     });
@@ -47,17 +62,21 @@ const TableHistory = (props) => {
         </tr>
       </thead>
       <tbody>
-        {list.slice(0, 50).map((item) => (
-          <tr key={item}>
-            <td>{item.bt_tag_owner}</td>
-            <td>{item.timestamp}</td>
-            <td>{item.x_coord}</td>
-            <td>{item.y_coord}</td>
-            <td>{item.room}</td>
-            <td>{item.floor}</td>
-            <td>{item.location}</td>
-          </tr>
-        ))}
+        {list
+          .filter((item) => item.bt_tag_owner === username)
+          .slice(0, 50)
+          .reverse()
+          .map((item, index) => (
+            <tr key={index}>
+              <td>{item.bt_tag_owner}</td>
+              <td>{item.timestamp}</td>
+              <td>{item.x_coord}</td>
+              <td>{item.y_coord}</td>
+              <td>{item.location}</td>
+              <td>{item.floor}</td>
+              <td>{item.room}</td>
+            </tr>
+          ))}
       </tbody>
 
       {/* <thead>
