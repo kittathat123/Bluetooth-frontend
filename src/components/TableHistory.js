@@ -47,7 +47,7 @@ const TableHistory = (props) => {
     let mounted = true;
     getList().then((items) => {
       if (mounted) {
-        // console.log("send data part" + getList());
+        console.log("[TableHistory] send data part" + getList());
          setList(items);
       }
     });
