@@ -83,14 +83,11 @@ class docVRoom extends Component {
   // }
 
   handleX = () => {
-    this.setState({ x: this.state.spherePosition.x });
+    this.setState({ x: this.state.spherePosition.x + 1 });
   };
 
   render() {
     const datass = Object.values(this.state.spherePosition);
-    // for (var i = 0; i < 5; i++) {
-    //   this.setState({ x: this.state.x + 1 });
-    // }
 
     console.log(
       "show sphere position: " + Object.values(this.state.spherePosition)
@@ -108,6 +105,7 @@ class docVRoom extends Component {
     entityEl.object3D.position.set(1, 2, 3);
     return (
       <div>
+        <button onClick={this.handleX}>Increment by 1</button>
         <div style={{ height: "70vh", width: "70vw" }}>
           <Scene
             physics="gravity: -1.6"

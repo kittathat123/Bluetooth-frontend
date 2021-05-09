@@ -12,6 +12,11 @@
   margin: 0% 0%;
 }
 
-.btn-warning {
-  margin-right: 8%;
+.btn-cancel-group {
+  justify-content: flex-end;
 }
+
+.btn-warning {
+  margin-right: 2.5%;
+}
+

@@ -3,15 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Table } from "reactstrap";
 
-
-const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/API/location/";
+const hostnameHeroku =
+  "https://protected-brook-89084.herokuapp.com/API/location/";
 const hostnameProduction = "http://127.0.0.1:8080/API/location";
 
 async function getList() {
-  return await fetch(
-    hostnameHeroku
-  )
-  .then((data) => data.json())
+  return await fetch(hostnameHeroku).then((data) => data.json());
 }
 
 // export function setItem(item) {
@@ -24,23 +21,20 @@ async function getList() {
 //   }).then((data) => data.json());
 // }
 
-
-
 const TableHistory = (props) => {
   const history = useHistory();
   var [list, setList] = useState([]);
-  var [username, setUserName] = useState('');
-
+  var [username, setUserName] = useState("");
 
   // GET USERNAME FROM LOCALSTORAGE
-  if(localStorage.getItem('user_info') === null) {
+  if (localStorage.getItem("user_info") === null) {
     alert("!!! Please Log-in to the system first !!!");
-    history.push("/"); 
-  } else if(localStorage.getItem('user_info') !== null) {
+    history.push("/");
+  } else if (localStorage.getItem("user_info") !== null) {
     // console.log("[Profile] token : ", JSON.parse(localStorageString).token);
-    username = JSON.parse(localStorage.getItem('user_info')).username;
+    username = JSON.parse(localStorage.getItem("user_info")).username;
     // token = JSON.parse(localStorage.getItem('user_info')).token;
-  } 
+  }
 
   // GET_BLUETOOTH_TAG_DATA_FROM_SERVER
   useEffect(() => {
@@ -53,7 +47,7 @@ const TableHistory = (props) => {
     });
     return () => (mounted = false);
   }, []);
-  
+
   return (
     <Table style={{ width: "60vw" }}>
       <thead>
@@ -62,16 +56,16 @@ const TableHistory = (props) => {
           <th>Timestamp</th>
           <th>X_coord</th>
           <th>Y_coord</th>
-          <th>Location</th>
-          <th>Floor</th>
           <th>Room</th>
+          <th>Floor</th>
+          <th>Location</th>
         </tr>
       </thead>
       <tbody>
-        {
-          list
-          .filter(item => item.bt_tag_owner === username)
-          .slice(0, 50).reverse()
+        {list
+          .filter((item) => item.bt_tag_owner === username)
+          .slice(0, 50)
+          .reverse()
           .map((item, index) => (
             <tr key={index}>
               <td>{item.bt_tag_owner}</td>
@@ -82,8 +76,7 @@ const TableHistory = (props) => {
               <td>{item.floor}</td>
               <td>{item.room}</td>
             </tr>
-          ))
-        }
+          ))}
       </tbody>
 
       {/* <thead>

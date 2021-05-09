@@ -8,6 +8,9 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
+  Container,
+  Row,
+  Col
 } from "reactstrap";
 import "./ProfileCard.css"
 
@@ -20,7 +23,7 @@ async function logoutUser(credentials) {
   const hostnameProduction = 'http://127.0.0.1:8080/userLogout/';
   const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userLogout/';
 
-  return fetch(hostnameProduction, {
+  return fetch(hostnameHeroku, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -33,9 +36,9 @@ async function logoutUser(credentials) {
 
 async function updateUserInformation(credentials) {
   const hostnameUpdateUserInformationProduction = 'http://127.0.0.1:8080/updateUserInformation/';
-  const hostnameUpdateUserInformationHeroku = 'https://protected-brook-89084.herokuapp.com/userInformation/';
+  const hostnameUpdateUserInformationHeroku = 'https://protected-brook-89084.herokuapp.com/updateUserInformation/';
 
-  return fetch(hostnameUpdateUserInformationProduction, {
+  return fetch(hostnameUpdateUserInformationHeroku, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -108,9 +111,9 @@ export default function ProfileCard() {
       token = JSON.parse(localStorageString).token;
   }   
 
-  const handleClick = async e => {
+  const handleEdit = async e => {
       e.preventDefault();
-      console.log("Edit button");
+      console.log("[ProfileCard] Edit button");
       setDisabled(!disabled);
       setSubmitButtonStatus(true);
       setBorderColor("rgb(0, 0, 0)");
@@ -123,11 +126,18 @@ export default function ProfileCard() {
 
   }
 
+  const handleCancel = async e => {
+      e.preventDefault();
+      console.log("[ProfileCard] Cancel button");
+      window.location.reload();
+  }
+
   const message_1 = "Your username were update.";
   const message_2 = "Your profile were update.";
   const message_3 = "Your profile did not update.";
   const handleSubmit = async e => {
       e.preventDefault();
+      console.log("[ProfileCard] Submit button");
       const response = await updateUserInformation({
           token,
           userID,
@@ -166,7 +176,7 @@ export default function ProfileCard() {
   const hostnameGetUserInformationHeroku = 'https://protected-brook-89084.herokuapp.com/userInformation/';
 
   useEffect(() => {
-    fetch(hostnameGetUserInformationProduction, {
+    fetch(hostnameGetUserInformationHeroku, {
         method: 'POST',
         headers : {
           'Content-Type': 'application/json',
@@ -303,10 +313,13 @@ export default function ProfileCard() {
           </div>
 
           <div className="infoSpace row">
-            <div className="btn-group-customize">
-              <Button color="warning" onClick={handleClick}>EDIT</Button>
-              <Button outline color="secondary" style={{display: submitButtonStatus ? 'block': 'none'}} onClick={handleSubmit}>Submit</Button>
-            </div>
+            <Col className="btn-group-customize">
+              <Button color="warning" onClick={handleEdit}>EDIT</Button>
+              <Button outline color="primary" style={{display: submitButtonStatus ? 'block': 'none'}} onClick={handleSubmit}>Submit</Button>
+            </Col>
+            <Col xs lg="2" className="btn-cancel-group">
+                <Button outline color="danger" style={{display: submitButtonStatus ? 'block': 'none'}} onClick={handleCancel}>Cancel</Button>
+            </Col>
           </div>
         </CardBody>
       </Card>
