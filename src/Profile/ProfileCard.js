@@ -296,7 +296,6 @@ export default function ProfileCard() {
               <div style={{display: inputStatus ? 'inline' : 'none', marginTop: '10px' }} onChange={e => setGender(e.target.value)}>
                   <input className="radiobutton" type="radio" value="Male" name="gender" /> Male
                   <input className="radiobutton" type="radio" value="Female" name="gender" /> Female
-                  <input className="radiobutton" type="radio" value="Other" name="gender" /> Other
               </div>
               <CardText style={{display: cardTextStatus ? 'inline': 'none'}} >{gender}</CardText>
             </div>
