@@ -13,7 +13,7 @@ import Displayoutdoor from "./MyLocation/displayOutdoor";
 import ReactDoM from "react-dom";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
-
+import Admin from "./admin/admin";
 
 function App() {
   return (
@@ -21,13 +21,14 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route path="/Register" component={Register} /> 
+          <Route path="/Register" component={Register} />
           <Route path="/Mylocation" component={MyLocation} />
           <Route path="/LogHistory" component={LogHistory} />
           <Route path="/Notification" component={Notification} />
           <Route path="/Quarantine" component={Quarantine} />
           <Route path="/Profile" component={Profile} />
-          <Route path="/Outdoor" component={Displayoutdoor} />          
+          <Route path="/Outdoor" component={Displayoutdoor} />
+          <Route path="/Admin" component={Admin} />
         </Switch>
       </BrowserRouter>
     </div>

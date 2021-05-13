@@ -14,24 +14,25 @@ class docVRoom extends Component {
     this.state = {
       message: "",
       spherePosition: {
-        x: 2,
-        y: 1,
-        z: -1.3,
+        x: 0,
+        y: 1.2,
+        z: 0,
       },
     };
-    this.setMessage = this.setMessage.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.handleX = this.handleX.bind(this);
-    // this
 
+    // this.setMessage = this.setMessage.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    // this.handleX = this.handleX.bind(this);
     // this.setXandY = this.setXandY.bind(this);
   }
 
-  setMessage(message) {
-    console.log(JSON.parse(message).payload);
-    // console.log(this.value().datas.payload.x_coord);
-    // console.log(this.value().datas.payload.y_coord);
-  }
+  // setMessage(message) {
+  //   console.log(
+  //     "using message from websocket: " + JSON.parse(message).payload.x_coord
+  //   );
+  //   // console.log(this.value().datas.payload.x_coord);
+  //   // console.log(this.value().datas.payload.y_coord);
+  // }
 
   // setXandY(x_coord, y_coord) {
   //   this.setState({
@@ -69,9 +70,12 @@ class docVRoom extends Component {
       const datas = JSON.parse(e.data);
       console.log(datas.payload.x_coord);
       console.log(datas.payload.y_coord);
+      // console.log("test set message" + this.setMessage(e.data));
       // this.setState({ x: datas.payload.x_coord });
       // console.log("show sphere position: " + this.spherePosition);
+      // socket.onmessage = ({ data }) => this.setMessage(data);
     };
+    // socket.onmessage = ({ data }) => this.setPayload(data);
 
     socket.onclose = function (e) {
       console.error("Chat socket closed unexpectedly");
@@ -82,9 +86,9 @@ class docVRoom extends Component {
   //   clearInterval(this.interval);
   // }
 
-  handleX = () => {
-    this.setState({ x: this.state.spherePosition.x + 1 });
-  };
+  // handleX = () => {
+  //   this.setState({ x: this.state.spherePosition.x + 1 });
+  // };
 
   render() {
     const datass = Object.values(this.state.spherePosition);
@@ -93,19 +97,21 @@ class docVRoom extends Component {
       "show sphere position: " + Object.values(this.state.spherePosition)
     );
     console.log("show sphere position x: " + this.state.spherePosition.x);
+    // console.log("from websocket: " + this.value().datas.payload.x_coord);
     // console.log("show sphere position x: " + Object.values(this.state.x));
     // this.setMessage();
 
     // var sceneEl = document.querySelector("a-scene");
 
     var entityEl = document.createElement("a-entity");
+    // this.setState({ x: this.state.spherePosition.x + 1 });
 
     // console.log(sceneEl.querySelector("#redBox"));
 
     entityEl.object3D.position.set(1, 2, 3);
     return (
       <div>
-        <button onClick={this.handleX}>Increment by 1</button>
+        {/* <button onClick={this.handleX}>Increment by 1</button> */}
         <div style={{ height: "70vh", width: "70vw" }}>
           <Scene
             physics="gravity: -1.6"
@@ -282,7 +288,7 @@ class docVRoom extends Component {
             <Entity id="labAll" position="-0.8 0 2.353">
               {/* <Entity obj-model="obj: #human_male_obj;  mtl: #human_male_mtl"></Entity> */}
 
-              {/* <a-entity
+              <a-entity
                 geometry="primitive: sphere; radius: 0.25;"
                 // Y Z X center: 0.2,, 1, -1.3
                 // position={datass}
@@ -294,7 +300,20 @@ class docVRoom extends Component {
                 //   { z: this.state.spherePostion.z })
                 // }
                 material="color: #EF2D5E"
-              /> */}
+              >
+                {" "}
+                <a-animation
+                  attribute="position"
+                  dur="3000"
+                  from={{
+                    x: this.state.spherePosition.x,
+                    y: this.state.spherePosition.y,
+                    z: this.state.spherePosition.z,
+                  }}
+                  to="2 ,1.2, 2"
+                  repeat="indefinite "
+                ></a-animation>
+              </a-entity>
               {/* {entityEl.object3D.position.set(1, 2, 3)} */}
               {/* {sceneEl.appendChild(entityEl)} */}
               <Entity
@@ -336,8 +355,14 @@ class docVRoom extends Component {
                   gltf-model="#male"
                   animation-mixer
                   // position="0.2,1,-1.3"
-                  position={{ x: 1, y: 1.2, z: -3 }}
+                  // position = 2 , 1 -3
+                  position={{
+                    x: this.state.spherePosition.x,
+                    y: this.state.spherePosition.y,
+                    z: this.state.spherePosition.z,
+                  }}
                 ></Entity>
+
                 <Entity
                   id="wallPartition1"
                   gltf-model="#wallPartition"
