@@ -18,7 +18,7 @@ import "./ProfileCard.css"
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-async function logoutUser(credentials) {
+async function postUsername(credentials) {
   // console.log("CREDITIALS : ", credentials)
   const hostnameProduction = 'http://127.0.0.1:8080/userLogout/';
   const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userLogout/';
@@ -58,12 +58,6 @@ function calculateAge(dateString) {
         age--;
     }
     return age
-}
-
-function convertDateType(dateString) {
-    var splitedDate = dateString.split("-");
-    var newDateString = splitedDate[2] + "-" + splitedDate[1] + "-" + splitedDate[0];
-    return newDateString
 }
 
 var onKeyPressOnlyAlphabet = (event) => {
@@ -150,25 +144,15 @@ export default function ProfileCard() {
           homeAddr
       });
 
-      console.log("[REGISTER] RESPONSE_FROM_BACKEND : ", response);
+      console.log("[ProfileCard] RESPONSE_FROM_BACKEND : ", response);
 
       // CHECK THE RESPONSE WHICH GET FROM BACKEND
-      if(message_1.localeCompare(response.message) === 0){
-          alert("Your change your username. You need to re-login");
-          await logoutUser({
-            'username': username
-          });
-
-          localStorage.removeItem('user_info');
-          
-
-      } else if(message_2.localeCompare(response.message) === 0) {
+      if(message_2.localeCompare(response.message) === 0) {
           alert("Your profile were update.");
           window.location.reload();
       } else {
           alert("Your profile did not update.");
       }
-
 
   }
 
@@ -188,19 +172,23 @@ export default function ProfileCard() {
       .then(dataFromServer => {
           console.log("DATA : " , dataFromServer.userInformation[0]);
           
-          // SET ALL USED VARIBLE
-          setUserId(dataFromServer.userInformation[0].USER_ID);
-          setFirstname(dataFromServer.userInformation[0].FIRST_NAME);
-          setLastname(dataFromServer.userInformation[0].LAST_NAME);
-          setUserName(dataFromServer.userInformation[0].USER_NAME);
-          setPassword(dataFromServer.userInformation[0].PASSWORD);
-          setDateOfBirth(dataFromServer.userInformation[0].DATE_OF_BIRTH);
-          setAge(calculateAge(dataFromServer.userInformation[0].DATE_OF_BIRTH));
-          setGender(dataFromServer.userInformation[0].GENDER);
-          setHomeAddr(dataFromServer.userInformation[0].HOME_ADDR);
+          try {
+              // SET ALL USED VARIBLE
+              setUserId(dataFromServer.userInformation[0].USER_ID);
+              setFirstname(dataFromServer.userInformation[0].FIRST_NAME);
+              setLastname(dataFromServer.userInformation[0].LAST_NAME);
+              setUserName(dataFromServer.userInformation[0].USER_NAME);
+              setPassword(dataFromServer.userInformation[0].PASSWORD);
+              setDateOfBirth(dataFromServer.userInformation[0].DATE_OF_BIRTH);
+              setAge(calculateAge(dataFromServer.userInformation[0].DATE_OF_BIRTH));
+              setGender(dataFromServer.userInformation[0].GENDER);
+              setHomeAddr(dataFromServer.userInformation[0].HOME_ADDR);
+          } catch (err) {
+              history.push("/");
+          }
           
       })
-  }, [token]);
+  }, [history, token]);
 
   return (
     
