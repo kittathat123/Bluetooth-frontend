@@ -44,6 +44,8 @@ export default function Login() {
   const [passwordShown, setPasswordShown] = useState(false);
   const message_1 = "You put wrong either username or password.";
   const message_2 = "User already login in the system.";
+  const message_3 = "You login as an admin.";
+
 
   const [redirect, setRedirect] = useState(false);
   const history = useHistory();
@@ -69,6 +71,9 @@ export default function Login() {
       alert("User already login in the system.");
       setUserName("");
       setPassword("");
+    } else if (message_3.localeCompare(response.message) === 0) {
+      alert("You login as admin")
+      history.push("/Admin")
     } else {
       // console.log(response.token, response.username);
       setToken(response);

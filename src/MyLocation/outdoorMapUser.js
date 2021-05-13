@@ -34,33 +34,11 @@ import {
 } from "react-google-maps";
 import { useHistory } from "react-router";
 
-let markers = [
-  {
-    id: 1,
-    latitude: 13.7299,
-    longitude: 100.7782,
-    shelter: "marker 1",
-  },
-  {
-    id: 2,
-    latitude: 13.7599,
-    longitude: 100.6782,
-    shelter: "marker 2",
-  },
-  {
-    id: 3,
-    latitude: 13.7499,
-    longitude: 100.525,
-    shelter: "marker 3",
-  },
-];
-
-
-export default function OutdoorMap() {
+export default function OutdoorMapUser() {
 
     // DECLARE ALL USED VARIABLE
     const history = useHistory();
-    var [token, setToken] = useState('');
+    var [token] = useState('');
     var [isMarkerShown, setIsMarkerShown] = useState(false);
     var [locationList, setLocationList] = useState([]);
     var localStorageString = localStorage.getItem('user_info');
@@ -70,10 +48,7 @@ export default function OutdoorMap() {
         alert("!!! Please Log-in to the system first !!!");
         history.push("/"); 
     } else if(localStorage.getItem('user_info') !== null) {
-        // console.log("[Profile] token : ", JSON.parse(localStorageString).token);
-        // username = JSON.parse(localStorageString).username;
         token = JSON.parse(localStorageString).token;
-        
     }  
 
     function delayedShowMarker(){
@@ -101,26 +76,23 @@ export default function OutdoorMap() {
       withGoogleMap
     )((props) => (
       <GoogleMap defaultZoom={8} defaultCenter={{ lat: 13.7299, lng: 100.7782 }}>
-        {props.isMarkerShown &&
-          // <Marker
-          //   position={{ lat: 13.7299, lng: 100.7782 }}
-          //   onClick={props.onMarkerClick}
-          // />
-          
-          locationList.map((marker) => {
+        {props.isMarkerShown &&          
+          locationList.map((marker, index) => {
             // const onClick = props.onClick.bind(this, marker)
             return (
               <Marker
-                key={marker.id}
-                position={{ lat: marker.latitude, lng: marker.longitude }}
+                key={index}
+                position={{ lat: JSON.parse(marker.latitude_longtitude).coordinates[1], lng: JSON.parse(marker.latitude_longtitude).coordinates[0] }}
               >
                 <InfoWindow>
                   <div>{marker.location}</div>
-                  <div>{marker.shelter}</div>
                 </InfoWindow>
               </Marker>
             );
-            // console.log(marker);
+            // console.log(marker.location);
+            // // console.log(JSON.parse(marker.latitude_longtitude));
+            // console.log("latitude : " ,JSON.parse(marker.latitude_longtitude).coordinates[1]);
+            // console.log("longtitude : " ,JSON.parse(marker.latitude_longtitude).coordinates[0]);
           })}
       </GoogleMap>
     ));
@@ -139,7 +111,7 @@ export default function OutdoorMap() {
         })
             .then(response => response.json())
             .then(dataFromServer => {
-              console.log("[outdoorMap] DATA : " , (dataFromServer.message));
+              console.log("[outdoorMapUser] DATA : " , (dataFromServer.message));
               setLocationList(dataFromServer.message);
             })
         delayedShowMarker();
@@ -154,80 +126,3 @@ export default function OutdoorMap() {
     );
 }
 
-// export default class outdoorMap extends React.Component {
-  
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       isMarkerShown: false,
-//       locationList : [],
-//       token : "",
-//     };
-
-//     this.delayedShowMarker = this.delayedShowMarker.bind(this);
-//     this.postUsername = this.postUsername.bind(this);
-    
-//   }
-
-//   componentDidMount() {
-//     // GET TOKEN FROM LOCALSTORAGE
-//     if(localStorage.getItem('user_info') === null){
-//         alert("!!! Please Log-in to the system first !!!");
-//         this.props.history.push("/"); 
-//     } else if(localStorage.getItem('user_info') !== null) {
-//         console.log("token : " ,JSON.parse(localStorage.getItem('user_info')).token);
-//         this.setState({
-//           token: JSON.parse(localStorage.getItem('user_info')).token
-//         })
-//     } 
-//     this.delayedShowMarker();
-//     this.postUsername(this.state.token);
-
-    
-//     // this.fetchLocationFromAPI();
-//     // this.manageData(this.state.locationList);
-//   }
-
-//   async postUsername(credentials) {
-//     console.log("CREDITIALS : ", credentials)
-//     return await fetch(this.hostnameProduction, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(credentials)
-//     })
-//       .then(data => data.json())
-//       .then(result => {
-//         console.log("RESULT : ", result)
-//       })
-//       .catch(e => {
-//         console.log("e : ",e)
-//       })
-//   }
-
-//   manageData(locationList) {
-//     console.log("manage :" ,locationList)
-//   }
-
-
-//   delayedShowMarker = () => {
-//     setTimeout(() => {
-//       this.setState({ isMarkerShown: true });
-//     }, 3000);
-//   };
-
-//   handleMarkerClick = () => {
-//     this.setState({ isMarkerShown: false });
-//     this.delayedShowMarker();
-//   };
-
-//   render() {
-//     return (
-//       <MyMapComponent
-//         isMarkerShown={this.state.isMarkerShown}
-//         onMarkerClick={this.handleMarkerClick}
-//       />
-//     );
-//   }
-// }

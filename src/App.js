@@ -5,7 +5,7 @@ import LogHistory from "./LogHistory/LogHistory";
 import Notification from "./Notification/Notification";
 import Quarantine from "./Quarantine/Quarantine";
 import Profile from "./Profile/Profile";
-import Ourdoor from "./MyLocation/outdoorMap";
+import Ourdoor from "./MyLocation/outdoorMapUser";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 // import with {} because import the function not the render app
 // import { test } from "./test"; // { test } to get funstion export file
