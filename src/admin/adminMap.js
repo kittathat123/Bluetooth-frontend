@@ -60,7 +60,7 @@ export default function OutdoorMapAdmin() {
   ));
   
   useEffect(() => {
-    fetch(hostnameProduction, {
+    fetch(hostnameHeroku, {
           method: 'GET',
           headers : {
             'Content-Type' : 'application/json',

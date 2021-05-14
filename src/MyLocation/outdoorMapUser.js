@@ -101,7 +101,7 @@ export default function OutdoorMapUser() {
     const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/outDoorlocationService/";
     
     useEffect(() => {
-        fetch(hostnameProduction, {
+        fetch(hostnameHeroku, {
             method: 'POST',
             headers : {
               'Content-Type': 'application/json',

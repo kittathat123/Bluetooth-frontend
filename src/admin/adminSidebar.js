@@ -34,25 +34,27 @@ export default function Sidebar() {
 
   const handleLogout = async (e) => {
     // CHECK LOCAL_STORAGE VALUE
-    if (localStorage.getItem("user_info") !== null) {
-      console.log(
-        "[Logout] username : ",
-        JSON.parse(localStorage.getItem("user_info")).username
-      );
-    }
+    // if (localStorage.getItem("user_info") !== null) {
+    //   console.log(
+    //     "[Logout] username : ",
+    //     JSON.parse(localStorage.getItem("user_info")).username
+    //   );
+    // }
 
     var answer = window.confirm("Do you want to logout ?");
     if (answer) {
       e.preventDefault();
-      const response = await logoutUser({
-        username: JSON.parse(localStorage.getItem("user_info")).username,
-      });
+      history.push("/");
+      
+      // const response = await logoutUser({
+      //   username: JSON.parse(localStorage.getItem("user_info")).username,
+      // });
 
       // console.log("[LOGOUT] RESPONSE_FROM_BACKEND : ", response);
-      if (message_1.localeCompare(response.message) === 0) {
-        localStorage.removeItem("user_info");
-        history.push("/");
-      }
+      // if (message_1.localeCompare(response.message) === 0) {
+      //   localStorage.removeItem("user_info");
+      //   history.push("/");
+      // }
     }
   };
 
