@@ -10,8 +10,8 @@ import {
 
 export default function OutdoorMapAdmin() {
   // DECLARE ALL USED VARIABLE
-  const hostnameProduction = "http://127.0.0.1:8080/adminInformation/";
-  const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/adminInformation/";
+  const hostnameProduction = "http://127.0.0.1:8080/userAndAdminInformation/";
+  const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
   var [isMarkerShown, setIsMarkerShown] = useState(false);
   var [locationList, setLocationList] = useState([]);
 

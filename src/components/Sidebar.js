@@ -45,7 +45,8 @@ export default function Sidebar() {
     if (answer) {
       e.preventDefault();
       const response = await logoutUser({
-        username: JSON.parse(localStorage.getItem("user_info")).username,
+        // username: JSON.parse(localStorage.getItem("user_info")).username,
+        token: JSON.parse(localStorage.getItem("user_info")).token
       });
 
       // console.log("[LOGOUT] RESPONSE_FROM_BACKEND : ", response);

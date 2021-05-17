@@ -156,8 +156,8 @@ export default function ProfileCard() {
 
   }
 
-  const hostnameGetUserInformationProduction = 'http://127.0.0.1:8080/userInformation/';
-  const hostnameGetUserInformationHeroku = 'https://protected-brook-89084.herokuapp.com/userInformation/';
+  const hostnameGetUserInformationProduction = 'http://127.0.0.1:8080/userAndAdminInformation/';
+  const hostnameGetUserInformationHeroku = 'https://protected-brook-89084.herokuapp.com/userAndAdminInformation/';
 
   useEffect(() => {
     fetch(hostnameGetUserInformationHeroku, {
@@ -197,13 +197,14 @@ export default function ProfileCard() {
         className="profileContainer"
         style={{ width: "60vw", height: "60vh" }}
       >
-        {/* <CardImg
+        <CardImg
           top
           width="70px"
           height="70vh"
           src="http://esg.buu.ac.th/wp-content/uploads/2018/09/none.png"
           alt="Profile image cap"
-        /> */}
+        />
+        
         <CardBody>
           <CardTitle tag="h4">{heading}</CardTitle>
           <div className="infoSpace row">
