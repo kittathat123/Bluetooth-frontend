@@ -13,10 +13,12 @@ import {
   Col
 } from "reactstrap";
 import "./ProfileCard.css"
+import ProfileIconImage from "../assets/ProfileIcon.png";
 
 // IMPORT DATEPICKER LIBRARY
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+
 
 async function postUsername(credentials) {
   // console.log("CREDITIALS : ", credentials)
@@ -49,7 +51,7 @@ async function updateUserInformation(credentials) {
 }
 
 function calculateAge(dateString) {
-  console.log("DATESTRING : " , dateString);
+  // console.log("DATESTRING : " , dateString);
     var today = new Date();
     var birthDate = new Date(dateString);
     var age = today.getFullYear() - birthDate.getFullYear();
@@ -83,7 +85,7 @@ export default function ProfileCard() {
   var [datePickerStatus, setDatePickerStatus] = useState(false);
   var [cardTextDateOfBirth, setCardTextDateOfBirth] = useState(true);
 
-  var [token, setToken] = useState('');
+  var [token] = useState('');
   var [userID, setUserId] = useState('');
   var [firstname, setFirstname] = useState('');
   var [lastname, setLastname] = useState('');
@@ -93,6 +95,8 @@ export default function ProfileCard() {
   var [age, setAge] = useState('');
   var [gender, setGender] = useState('');
   var [homeAddr, setHomeAddr] = useState('');
+  var [newImage, setNewImage] = useState('');
+  var [url, setUrl] = useState(ProfileIconImage);
   var localStorageString = localStorage.getItem('user_info');
 
   // GET USERNAME FROM LOCALSTORAGE
@@ -117,7 +121,6 @@ export default function ProfileCard() {
       setDatePickerStatus(true);
       setCardTextDateOfBirth(false);
       setAge(dateOfBirth);
-
   }
 
   const handleCancel = async e => {
@@ -131,6 +134,7 @@ export default function ProfileCard() {
   const message_3 = "Your profile did not update.";
   const handleSubmit = async e => {
       e.preventDefault();
+      await uploadImageToTheServer();
       console.log("[ProfileCard] Submit button");
       const response = await updateUserInformation({
           token,
@@ -141,7 +145,8 @@ export default function ProfileCard() {
           password,
           dateOfBirth,
           gender,
-          homeAddr
+          homeAddr, 
+          newImage,
       });
 
       console.log("[ProfileCard] RESPONSE_FROM_BACKEND : ", response);
@@ -156,9 +161,31 @@ export default function ProfileCard() {
 
   }
 
+  const cloudinaryHostname = "https://api.cloudinary.com/v1_1/hiznwi5vk/image/upload";
+  const cloudinaryUploadPresent = "wct9lfuu"
+  async function uploadImageToTheServer() {
+    const data = new FormData()
+    console.log("NEW IMAGE : ", newImage);
+    data.append("file", newImage)
+    data.append("upload_preset", cloudinaryUploadPresent)
+    data.append("cloud_name", "hiznwi5vk")
+    await fetch(cloudinaryHostname, {
+        method: "POST",
+        body: data
+    })
+        .then(resp => resp.json())
+        .then(data => {
+            // console.log("DATA_IMAGE_URL : ", data.url);
+            setUrl(data.url);
+            newImage = (new URL(data.url).pathname.split('/')[5]);
+            console.log("(uploadImageToTheServer) : SET NEW IMAGE LEAW")
+        })
+        .catch(err => console.log(err))
+  }
+
   const hostnameGetUserInformationProduction = 'http://127.0.0.1:8080/userAndAdminInformation/';
   const hostnameGetUserInformationHeroku = 'https://protected-brook-89084.herokuapp.com/userAndAdminInformation/';
-
+  const cloudinaryImageHostName = 'http://res.cloudinary.com/hiznwi5vk/image/upload/v1621272433/';
   useEffect(() => {
     fetch(hostnameGetUserInformationHeroku, {
         method: 'POST',
@@ -183,6 +210,11 @@ export default function ProfileCard() {
               setAge(calculateAge(dataFromServer.userInformation[0].DATE_OF_BIRTH));
               setGender(dataFromServer.userInformation[0].GENDER);
               setHomeAddr(dataFromServer.userInformation[0].HOME_ADDR);
+
+              if(dataFromServer.userInformation[0].IMAGE_PROFILE.localeCompare("/profilePicture/defaultProfilePicture.jpg") !== 0){
+                setUrl(cloudinaryImageHostName + dataFromServer.userInformation[0].IMAGE_PROFILE);
+              }
+                
           } catch (err) {
               history.push("/");
           }
@@ -196,17 +228,24 @@ export default function ProfileCard() {
       <Card
         className="profileContainer"
         style={{ width: "60vw", height: "60vh" }}
-      >
-        <CardImg
-          top
-          width="70px"
-          height="70vh"
-          src="http://esg.buu.ac.th/wp-content/uploads/2018/09/none.png"
-          alt="Profile image cap"
-        />
-        
+      >        
         <CardBody>
           <CardTitle tag="h4">{heading}</CardTitle>
+          <div className="infoSpace row">
+            <div className="imageProfile-div">
+              <img 
+                  src={url} 
+                  alt="profile-preview"
+                  width="150px"
+                  height="150px"
+                  className="image-profile"
+              />
+              <div style={{display: inputStatus ? 'inline' : 'none'}} className="profile-image-button-group">
+                  <input type="file" onChange= {(e)=> setNewImage(e.target.files[0])} />
+                  {/* <button onClick={uploadImageToTheServer}>Upload</button> */}
+              </div>
+            </div>
+          </div>
           <div className="infoSpace row">
             <div className="col">
               <CardSubtitle tag="h6">First Name :</CardSubtitle>
