@@ -211,7 +211,14 @@ export default function ProfileCard() {
               setGender(dataFromServer.userInformation[0].GENDER);
               setHomeAddr(dataFromServer.userInformation[0].HOME_ADDR);
 
-              if(dataFromServer.userInformation[0].IMAGE_PROFILE.localeCompare("/profilePicture/defaultProfilePicture.jpg") !== 0){
+              var imageNameFromServer = dataFromServer.userInformation[0].IMAGE_PROFILE
+
+              if( (imageNameFromServer.localeCompare("defaultProfilePicture.jpg") === 0) 
+                || (imageNameFromServer.localeCompare("/profilePicture/defaultProfilePicture.jpg") === 0) ) 
+              {
+                console.log("(ProfileCard.js) : KO CHECK NOI_1")
+              } else {
+                console.log("(ProfileCard.js) : KO CHECK NOI_2")
                 setUrl(cloudinaryImageHostName + dataFromServer.userInformation[0].IMAGE_PROFILE);
               }
                 
