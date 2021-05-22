@@ -13,7 +13,7 @@ export default function TableNotification() {
   const history = useHistory();
   var [list, setList] = useState([]);
   var [username, setUserName] = useState("");
-
+  // WebSocket
   const [isPaused, setPause] = useState(false);
   const ws = useRef(null);
 
@@ -27,66 +27,60 @@ export default function TableNotification() {
 
   // GET_CONTACT_DATA_FROM_SERVER
   useEffect(() => {
-    ws.current = new WebSocket(WebSocketHostnameHeroku);
-    ws.current.onopen = () => console.log("ws opened");
-    ws.current.onclose = () => console.log("ws closed");
+      ws.current = new WebSocket(WebSocketHostnameProduction);
+      ws.current.onopen = () => console.log("ws opened");
+      ws.current.onclose = () => console.log("ws closed");
 
-    return () => {
-      ws.current.close();
-    };
+      return () => {
+          ws.current.close();
+      };
+
   }, []);
 
-    // GET_CONTACT_DATA_FROM_SERVER
-    useEffect(() => {
-        ws.current = new WebSocket(WebSocketHostnameHeroku);
-        ws.current.onopen = () => console.log("ws opened");
-        ws.current.onclose = () => console.log("ws closed");
+  // SET_CONTACT_DATA_LIST
+  useEffect(() => {
+      if(!ws.current) return;
 
-        return () => {
-            ws.current.close();
-        };
-
-    }, []);
-
-    useEffect(() => {
-        if(!ws.current) return;
-
-        ws.current.onmessage = e => {
-            if (isPaused) return;
-            const message = JSON.parse(e.data);
-            console.log("WS [CONTACT_DATA] : ", message.contact_payload);
-            setList(message.contact_payload);
-        }
-    }, [isPaused]);
+      ws.current.onmessage = e => {
+          if (isPaused) return;
+          const message = JSON.parse(e.data);
+          console.log("WS [CONTACT_DATA] : ", message.contact_payload);
+          setList(message.contact_payload);
+      }
+  }, [isPaused, ws]);
     
   
-    return (
-        <Table style={{ width: "60vw" }}>
-            <thead>
-                <tr>
-                <th>Timestamp</th>
-                <th>User_1</th>
-                <th>User_2</th>
-                <th>Contact Level</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    list
-                    .filter(item => item.user_1 === username || item.user_2 === username)
-                    .slice(0, 25).reverse()
-                    .map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.timestamp}</td>
-                            <td>{item.user_1}</td>
-                            <td>{item.user_2}</td>
-                            <td>{item.contact_tracing_level}</td>
-                        </tr>
-                    ))
-                }
-            </tbody>
-        </Table>
-    );
+  return (
+      <Table style={{ width: "60vw" }}>
+          <thead>
+              <tr>
+              <th>Timestamp</th>
+              <th>User_1</th>
+              <th>Covid-19 Status (User_1)</th>
+              <th>User_2</th>
+              <th>Covid-19 Status (User_2)</th>
+              <th>Contact Level</th>
+              </tr>
+          </thead>
+          <tbody>
+              {
+                  list
+                  .filter(item => item.user_1 === username)
+                  .slice(0, 25).reverse()
+                  .map((item, index) => (
+                      <tr key={index}>
+                          <td>{item.timestamp}</td>
+                          <td>{item.user_1}</td>
+                          <td>{item.covid_19_status_user_1}</td>
+                          <td>{item.user_2}</td>
+                          <td>{item.covid_19_status_user_2}</td>
+                          <td>{item.contact_tracing_level}</td>
+                      </tr>
+                  ))
+              }
+          </tbody>
+      </Table>
+  );
 };
 
   

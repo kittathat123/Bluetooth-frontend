@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Card,
-  CardImg,
   CardText,
   CardBody,
   CardTitle,
   CardSubtitle,
   Button,
-  Container,
-  Row,
-  Col
+  Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from "reactstrap";
 import "./ProfileCard.css"
 import ProfileIconImage from "../assets/ProfileIcon.png";
@@ -19,22 +20,6 @@ import ProfileIconImage from "../assets/ProfileIcon.png";
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-
-async function postUsername(credentials) {
-  // console.log("CREDITIALS : ", credentials)
-  const hostnameProduction = 'http://127.0.0.1:8080/userLogout/';
-  const hostnameHeroku = 'https://protected-brook-89084.herokuapp.com/userLogout/';
-
-  return fetch(hostnameHeroku, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
-
-}
 
 async function updateUserInformation(credentials) {
   const hostnameUpdateUserInformationProduction = 'http://127.0.0.1:8080/updateUserInformation/';
@@ -84,6 +69,9 @@ export default function ProfileCard() {
   var [cardTextStatus, setCardTextStatus] = useState(true);
   var [datePickerStatus, setDatePickerStatus] = useState(false);
   var [cardTextDateOfBirth, setCardTextDateOfBirth] = useState(true);
+  // dropdownComponent
+  var [dropdownOpen, setDropdownOpen] = useState(false);
+  var toggle = () => setDropdownOpen(prevState => !prevState);
 
   var [token] = useState('');
   var [userID, setUserId] = useState('');
@@ -96,6 +84,7 @@ export default function ProfileCard() {
   var [gender, setGender] = useState('');
   var [homeAddr, setHomeAddr] = useState('');
   var [newImage, setNewImage] = useState('');
+  var [covid19Status, setCovid19Status] = useState('');
   var [url, setUrl] = useState(ProfileIconImage);
   var localStorageString = localStorage.getItem('user_info');
 
@@ -134,7 +123,11 @@ export default function ProfileCard() {
   const message_3 = "Your profile did not update.";
   const handleSubmit = async e => {
       e.preventDefault();
-      await uploadImageToTheServer();
+
+      if(newImage.localeCompare("") !== 0){
+        await uploadImageToTheServer();
+      }
+      
       console.log("[ProfileCard] Submit button");
       const response = await updateUserInformation({
           token,
@@ -145,6 +138,7 @@ export default function ProfileCard() {
           password,
           dateOfBirth,
           gender,
+          covid19Status,
           homeAddr, 
           newImage,
       });
@@ -165,7 +159,7 @@ export default function ProfileCard() {
   const cloudinaryUploadPresent = "wct9lfuu"
   async function uploadImageToTheServer() {
     const data = new FormData()
-    console.log("NEW IMAGE : ", newImage);
+    console.log("(uploadImageToTheServer) NEW IMAGE : ", newImage);
     data.append("file", newImage)
     data.append("upload_preset", cloudinaryUploadPresent)
     data.append("cloud_name", "hiznwi5vk")
@@ -175,7 +169,7 @@ export default function ProfileCard() {
     })
         .then(resp => resp.json())
         .then(data => {
-            // console.log("DATA_IMAGE_URL : ", data.url);
+            console.log("(uploadImageToTheServer) DATA_IMAGE_URL : ", data.url);
             setUrl(data.url);
             newImage = (new URL(data.url).pathname.split('/')[5]);
             console.log("(uploadImageToTheServer) : SET NEW IMAGE LEAW")
@@ -210,11 +204,12 @@ export default function ProfileCard() {
               setAge(calculateAge(dataFromServer.userInformation[0].DATE_OF_BIRTH));
               setGender(dataFromServer.userInformation[0].GENDER);
               setHomeAddr(dataFromServer.userInformation[0].HOME_ADDR);
+              setCovid19Status(dataFromServer.userInformation[0].COVID_19_STATUS);
 
               var imageNameFromServer = dataFromServer.userInformation[0].IMAGE_PROFILE
-
               if( (imageNameFromServer.localeCompare("defaultProfilePicture.jpg") === 0) 
-                || (imageNameFromServer.localeCompare("/profilePicture/defaultProfilePicture.jpg") === 0) ) 
+                || (imageNameFromServer.localeCompare("/profilePicture/defaultProfilePicture.jpg") === 0) 
+                || (imageNameFromServer.localeCompare("") === 0) ) 
               {
                 console.log("(ProfileCard.js) : KO CHECK NOI_1")
               } else {
@@ -306,7 +301,7 @@ export default function ProfileCard() {
           <div className="infoSpace row ">
             
             <div className="col">
-              <CardSubtitle tag="h6">DATE OF BIRTH :</CardSubtitle>
+              <CardSubtitle tag="h6">Date of birth :</CardSubtitle>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker
                   className=""
@@ -319,7 +314,7 @@ export default function ProfileCard() {
               <CardText style={{display: cardTextDateOfBirth ? 'inline': 'none'}} >{dateOfBirth}</CardText>
             </div>
             <div className="col" style={{display: cardTextStatus ? 'inline': 'none'}}>
-              <CardSubtitle tag="h6">AGE :</CardSubtitle>
+              <CardSubtitle tag="h6">Age :</CardSubtitle>
               <CardText>{age}</CardText>
             </div>
 
@@ -327,13 +322,29 @@ export default function ProfileCard() {
 
           <div className="infoSpace row ">
             <div className="col">
-              <CardSubtitle tag="h6">GENDER :</CardSubtitle>
+              <CardSubtitle tag="h6">Gender :</CardSubtitle>
               <div style={{display: inputStatus ? 'inline' : 'none', marginTop: '10px' }} onChange={e => setGender(e.target.value)}>
-                  <input className="radiobutton" type="radio" value="Male" name="gender" /> Male
-                  <input className="radiobutton" type="radio" value="Female" name="gender" /> Female
+                  <input className="radiobuttonGender" type="radio" value="Male" name="gender" /> Male
+                  <input className="radiobuttonGender" type="radio" value="Female" name="gender" /> Female
               </div>
               <CardText style={{display: cardTextStatus ? 'inline': 'none'}} >{gender}</CardText>
             </div>
+            <div className="col">
+              <CardSubtitle tag="h6">Covid-19 status :</CardSubtitle>
+              <CardText style={{display: cardTextStatus ? 'inline': 'none'}}>{covid19Status}</CardText>
+              <Dropdown isOpen={dropdownOpen}  toggle={toggle} style={{display: inputStatus ? 'inline' : 'none', marginTop: '10px' }}>
+                <DropdownToggle caret style={{marginTop:'15px'}}>
+                  {covid19Status}
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem onClick={() => setCovid19Status("Positive")} >Positive</DropdownItem>
+                  <DropdownItem onClick={() => setCovid19Status("Negative")} >Negative</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="infoSpace row">
             <div className="col">
               <CardSubtitle tag="h6">Home Address :</CardSubtitle>
               <CardText style={{display: cardTextStatus ? 'inline': 'none'}}>{homeAddr}</CardText>

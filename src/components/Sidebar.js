@@ -13,7 +13,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useHistory } from "react-router-dom";
 
-async function logoutUser(credentials) {
+
+export let logoutUser = async(credentials) => {
   // console.log("CREDITIALS : ", credentials)
   const hostnameProduction = "http://127.0.0.1:8080/userLogout/";
   const hostnameHeroku =
@@ -130,3 +131,5 @@ export default function Sidebar() {
     </div>
   );
 }
+
+

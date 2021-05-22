@@ -42,3 +42,11 @@
   width: 25%;
 }
 
+.radiobuttonGender:first-child {
+  margin: 15px 5px 0 5px;
+}
+
+.radiobuttonGender:not(:first-child) {
+  margin: 15px 5px 0 8px;
+}
+

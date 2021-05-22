@@ -1,6 +1,6 @@
 import "./App.css";
 import MyLocation from "./MyLocation/MyLocation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LogHistory from "./LogHistory/LogHistory";
 import Notification from "./Notification/Notification";
 import Quarantine from "./Quarantine/Quarantine";
@@ -14,6 +14,7 @@ import ReactDoM from "react-dom";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import Admin from "./admin/admin";
+import SessionTimeout from "./components/SessionTimeout";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/Outdoor" component={Displayoutdoor} />
           <Route path="/Admin" component={Admin} />
         </Switch>
+        {/* <SessionTimeout /> */}
       </BrowserRouter>
     </div>
   );

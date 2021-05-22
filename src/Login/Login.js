@@ -12,7 +12,6 @@ import {
   Form,
 } from "reactstrap";
 import "./Login.css";
-import PropTypes from "prop-types";
 import useToken from "../Token/useToken";
 
 // FONTAWESOME
@@ -163,13 +162,13 @@ export default function Login() {
 //     <div className="login_page">
 //       <Card className="container_login">
 //         <CardHeader>
-{
-  /* <img
-  src={logo}
-  alt="IPS TRACK"
-  style={{ width: "179px", height: "80px" }}
-></img>; */
-}
+// {
+//   /* <img
+//   src={logo}
+//   alt="IPS TRACK"
+//   style={{ width: "179px", height: "80px" }}
+// ></img>; */
+// }
 //           <span> </span>{" "}
 //         </CardHeader>
 //         <CardBody>
