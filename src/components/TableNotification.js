@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Table } from "reactstrap";
 import { useHistory } from "react-router";
+import ReactHtmlParser from 'react-html-parser'; 
 
 // const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/API/contact/";
 // const hostnameProduction = "http://127.0.0.1:8080/API/contact/";
@@ -45,9 +46,25 @@ export default function TableNotification() {
           if (isPaused) return;
           const message = JSON.parse(e.data);
           console.log("WS [CONTACT_DATA] : ", message.contact_payload);
-          setList(message.contact_payload);
+          setList(convertLevelToColor(message.contact_payload));
       }
   }, [isPaused, ws]);
+
+  function convertLevelToColor(contactList) {
+    for(var item of contactList){
+      if(item.contact_tracing_level === 0) {
+        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid green; background-color: green;\"></div>"
+      } else if (item.contact_tracing_level === 1) {
+        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid yellow; background-color: yellow;\"></div>"
+      } else if (item.contact_tracing_level === 2) {
+        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid DarkOrange; background-color: DarkOrange;\"></div>"
+      } else if (item.contact_tracing_level === 3){
+        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid Crimson; background-color: Crimson;\"></div>"
+      }
+    }
+    
+    return contactList;
+  }
     
   
   return (
@@ -74,7 +91,9 @@ export default function TableNotification() {
                           <td>{item.covid_19_status_user_1}</td>
                           <td>{item.user_2}</td>
                           <td>{item.covid_19_status_user_2}</td>
-                          <td>{item.contact_tracing_level}</td>
+                          <td>
+                            {ReactHtmlParser(item.contact_tracing_level)}
+                          </td>
                       </tr>
                   ))
               }
