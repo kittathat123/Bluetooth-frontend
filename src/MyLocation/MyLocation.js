@@ -6,6 +6,8 @@ import Room from "./AFrame-SmartHome-master/docVRoom";
 import { useHistory } from "react-router-dom";
 import useToken from "../Token/useToken";
 import "./MyLocation.css";
+import { logoutUser } from "../components/Sidebar";
+import BeforeUnload from "../components/BeforeUnload";
 
 export default function MyLocation() {
   const history = useHistory();
@@ -19,29 +21,37 @@ export default function MyLocation() {
   //     console.log("[MyLocation] username : ", JSON.parse(localStorageString).username);
   // }
 
+
+
+
+
+
+
+
+
   return (
     <div className="page">
-      <div className="row" style={{ width: "100%" }}>
-        <div className="col-auto">
-          <Sidebar />
-        </div>
-        <div className="col">
-          <div className="pageContent">
-            <div className="header ">
-              <Button className="backButton" color="secondary" href="./Outdoor">
-                Back
-              </Button>
+        <div className="row" style={{ width: "100%" }}>
+          <div className="col-auto">
+            <Sidebar />
+          </div>
+          <div className="col">
+            <div className="pageContent">
+              <div className="header ">
+                <Button className="backButton" color="secondary" href="./Outdoor">
+                  Back
+                </Button>
 
-              <h2 className="roomTitle">ECC 705</h2>
-            </div>
-            <div className="boxMap">
-              <div className="borderBox">
-                <Room />
+                <h2 className="roomTitle">ECC 705</h2>
+              </div>
+              <div className="boxMap">
+                <div className="borderBox">
+                  <Room />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

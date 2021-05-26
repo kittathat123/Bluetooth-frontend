@@ -14,9 +14,9 @@ class docVRoom extends Component {
     this.state = {
       message: "",
       spherePosition: {
-        x: 0,
+        x: -2.8,
         y: 1.2,
-        z: 0,
+        z: -2.45,
       },
     };
 
@@ -94,9 +94,9 @@ class docVRoom extends Component {
     const datass = Object.values(this.state.spherePosition);
 
     console.log(
-      "show sphere position: " + Object.values(this.state.spherePosition)
+      "(docVRoom.js) show sphere position: " + Object.values(this.state.spherePosition)
     );
-    console.log("show sphere position x: " + this.state.spherePosition.x);
+    console.log("(docVRoom.js) show sphere position x: " + this.state.spherePosition.x);
     // console.log("from websocket: " + this.value().datas.payload.x_coord);
     // console.log("show sphere position x: " + Object.values(this.state.x));
     // this.setMessage();

@@ -1,6 +1,6 @@
 import "./App.css";
 import MyLocation from "./MyLocation/MyLocation";
-import React from "react";
+import React, { useEffect } from "react";
 import LogHistory from "./LogHistory/LogHistory";
 import Notification from "./Notification/Notification";
 import Quarantine from "./Quarantine/Quarantine";
@@ -15,8 +15,38 @@ import Login from "./Login/Login";
 import Register from "./Register/Register";
 import Admin from "./admin/admin";
 import SessionTimeout from "./components/SessionTimeout";
+import { logoutUser } from "../src/components/Sidebar";
 
 function App() {
+
+  // const alertUser = async() => {
+  //   if(localStorage.getItem("user_info") !== null) {
+  //     var answer = window.confirm("Do you want to exit our application");
+  //     if(answer) {
+  //         try {
+  //           await logoutUser({
+  //             token: JSON.parse(localStorage.getItem("user_info")).token
+  //           });
+  //           localStorage.removeItem("user_info");
+  //         } catch (err) {
+  //           console.log("(App.js) alertUser : ", err);
+  //         }
+  //     }
+  //   }
+  // }
+  // function handleTabClosing() {
+  //   alert("handle Tab closing");
+  // }
+
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', alertUser);
+  //   window.addEventListener('unload', handleTabClosing);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', alertUser);
+  //     window.removeEventListener('unload', handleTabClosing);
+  //   }
+  // })
+
   return (
     <div>
       <BrowserRouter>

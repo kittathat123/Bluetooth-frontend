@@ -124,7 +124,7 @@ export default function ProfileCard() {
   const handleSubmit = async e => {
       e.preventDefault();
 
-      if(newImage.localeCompare("") !== 0){
+      if(typeof(newImage) === "object"){
         await uploadImageToTheServer();
       }
       
@@ -213,7 +213,7 @@ export default function ProfileCard() {
               {
                 console.log("(ProfileCard.js) : KO CHECK NOI_1")
               } else {
-                console.log("(ProfileCard.js) : KO CHECK NOI_2")
+                // console.log("(ProfileCard.js) : KO CHECK NOI_2")
                 setUrl(cloudinaryImageHostName + dataFromServer.userInformation[0].IMAGE_PROFILE);
               }
                 

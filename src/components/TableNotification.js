@@ -45,8 +45,11 @@ export default function TableNotification() {
       ws.current.onmessage = e => {
           if (isPaused) return;
           const message = JSON.parse(e.data);
-          console.log("WS [CONTACT_DATA] : ", message.contact_payload);
-          setList(convertLevelToColor(message.contact_payload));
+          
+          if(message.contact_payload.length !== 0) {
+            console.log("WS [CONTACT_DATA] : ", message.contact_payload);
+            setList(convertLevelToColor(message.contact_payload));
+          }
       }
   }, [isPaused, ws]);
 
