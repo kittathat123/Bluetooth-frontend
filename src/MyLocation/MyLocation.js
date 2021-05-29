@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import VRScene from "./VRScene";
 import { Button } from "reactstrap";
 import Room from "./AFrame-SmartHome-master/docVRoom";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import useToken from "../Token/useToken";
 import "./MyLocation.css";
+// import Link from "react-router";
 
 export default function MyLocation() {
   const history = useHistory();
@@ -28,9 +29,11 @@ export default function MyLocation() {
         <div className="col">
           <div className="pageContent">
             <div className="header ">
-              <Button className="backButton" color="secondary" href="./Outdoor">
+              {/* <Button className="backButton" color="secondary" href="./Outdoor">
                 Back
-              </Button>
+              </Button> */}
+              <Link to="/Outdoor">Outdoor </Link>
+              <Link to="/Mylocation"> Indoor</Link>
 
               <h2 className="roomTitle">ECC 705</h2>
             </div>
