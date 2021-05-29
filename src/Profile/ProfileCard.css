@@ -20,3 +20,33 @@
   margin-right: 2.5%;
 }
 
+.imageProfile-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.image-profile {
+  border: 3px solid black;
+}
+
+.profile-image-button-group {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 80px; */
+  margin-top: 120px;
+  margin-left: 20px;
+}
+
+.profile-image-button-group > button {
+  margin-top: 10px;
+  width: 25%;
+}
+
+.radiobuttonGender:first-child {
+  margin: 15px 5px 0 5px;
+}
+
+.radiobuttonGender:not(:first-child) {
+  margin: 15px 5px 0 8px;
+}
+

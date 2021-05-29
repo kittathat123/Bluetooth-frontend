@@ -6,7 +6,8 @@ import Room from "./AFrame-SmartHome-master/docVRoom";
 import { useHistory, Link } from "react-router-dom";
 import useToken from "../Token/useToken";
 import "./MyLocation.css";
-// import Link from "react-router";
+import { logoutUser } from "../components/Sidebar";
+import BeforeUnload from "../components/BeforeUnload";
 
 export default function MyLocation() {
   const history = useHistory();
@@ -19,6 +20,14 @@ export default function MyLocation() {
   // } else if(localStorageString !== null) {
   //     console.log("[MyLocation] username : ", JSON.parse(localStorageString).username);
   // }
+
+
+
+
+
+
+
+
 
   return (
     <div className="page">
@@ -44,7 +53,6 @@ export default function MyLocation() {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

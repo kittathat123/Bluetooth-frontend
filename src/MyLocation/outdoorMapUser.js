@@ -97,8 +97,8 @@ export default function OutdoorMapUser() {
       </GoogleMap>
     ));
 
-    const hostnameProduction = "http://127.0.0.1:8080/outDoorlocationService/";
-    const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/outDoorlocationService/";
+    const hostnameProduction = "http://127.0.0.1:8080/userOutdoor/";
+    const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userOutdoor/";
     
     useEffect(() => {
         fetch(hostnameHeroku, {
