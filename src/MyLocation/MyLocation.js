@@ -45,6 +45,7 @@ export default function MyLocation() {
             </div>
           </div>
         </div>
+      </div>
     </div>
   );
 }
