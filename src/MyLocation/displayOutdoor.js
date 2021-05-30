@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import Outdoor from "./outdoorMapUser";
+import { useHistory, Link } from "react-router-dom";
 import "./MyLocation.css";
 
 export default class outdoorMap extends Component {
@@ -15,13 +16,8 @@ export default class outdoorMap extends Component {
           <div className="col">
             <div className="pageContent">
               <div className="header ">
-                <Button
-                  className="backButton"
-                  color="secondary"
-                  href="./Mylocation"
-                >
-                  NEXT
-                </Button>
+                <Link to="/Outdoor">Outdoor </Link>
+                <Link to="/Mylocation"> Indoor</Link>
 
                 <h2 className="roomTitle">ECC 705</h2>
               </div>

@@ -354,14 +354,25 @@ class docVRoom extends Component {
                   scale="0.03 0.03  0.02 "
                   gltf-model="#male"
                   animation-mixer
+                  from="0.2 , 1, -1.3"
+                  to="0,0,0"
+                  dur="3000"
+                  repeat="indefinite"
                   // position="0.2,1,-1.3"
                   // position = 2 , 1 -3
-                  position={{
-                    x: this.state.spherePosition.x,
-                    y: this.state.spherePosition.y,
-                    z: this.state.spherePosition.z,
-                  }}
+                  // position={{
+                  //   x: this.state.spherePosition.x,
+                  //   y: this.state.spherePosition.y,
+                  //   z: this.state.spherePosition.z,
+                  // }}
                 ></Entity>
+                {/* <a-animation
+                  gltf-model="#male"
+                  from="0.2 , 1, -1.3"
+                  to="0,0,0"
+                  dur="3000"
+                  repeat="indefinite"
+                ></a-animation> */}
 
                 <Entity
                   id="wallPartition1"

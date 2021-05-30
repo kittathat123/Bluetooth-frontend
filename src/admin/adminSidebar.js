@@ -45,7 +45,7 @@ export default function Sidebar() {
     if (answer) {
       e.preventDefault();
       history.push("/");
-      
+
       // const response = await logoutUser({
       //   username: JSON.parse(localStorage.getItem("user_info")).username,
       // });

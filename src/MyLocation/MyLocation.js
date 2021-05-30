@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import VRScene from "./VRScene";
 import { Button } from "reactstrap";
 import Room from "./AFrame-SmartHome-master/docVRoom";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import useToken from "../Token/useToken";
 import "./MyLocation.css";
 import { logoutUser } from "../components/Sidebar";
@@ -23,23 +23,24 @@ export default function MyLocation() {
 
   return (
     <div className="page">
-        <div className="row" style={{ width: "100%" }}>
-          <div className="col-auto">
-            <Sidebar />
-          </div>
-          <div className="col">
-            <div className="pageContent">
-              <div className="header ">
-                <Button className="backButton" color="secondary" href="./Outdoor">
-                  Back
-                </Button>
+      <div className="row" style={{ width: "100%" }}>
+        <div className="col-auto">
+          <Sidebar />
+        </div>
+        <div className="col">
+          <div className="pageContent">
+            <div className="header ">
+              {/* <Button className="backButton" color="secondary" href="./Outdoor">
+                Back
+              </Button> */}
+              <Link to="/Outdoor">Outdoor </Link>
+              <Link to="/Mylocation"> Indoor</Link>
 
-                <h2 className="roomTitle">ECC 705</h2>
-              </div>
-              <div className="boxMap">
-                <div className="borderBox">
-                  <Room />
-                </div>
+              <h2 className="roomTitle">ECC 705</h2>
+            </div>
+            <div className="boxMap">
+              <div className="borderBox">
+                <Room />
               </div>
             </div>
           </div>
