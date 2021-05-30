@@ -21,14 +21,6 @@ export default function MyLocation() {
   //     console.log("[MyLocation] username : ", JSON.parse(localStorageString).username);
   // }
 
-
-
-
-
-
-
-
-
   return (
     <div className="page">
         <div className="row" style={{ width: "100%" }}>

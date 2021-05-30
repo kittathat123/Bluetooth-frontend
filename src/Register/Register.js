@@ -157,6 +157,7 @@ export default function Register() {
             <input
               type="text"
               className="input-box login_input"
+              maxLength="10"
               value={firstname}
               onKeyPress={onKeyPressOnlyAlphabet}
               onChange={(e) => setFirstname(e.target.value)}
@@ -165,6 +166,7 @@ export default function Register() {
             <input
               type="text"
               className="input-box login_input"
+              maxLength="15"
               name="lname"
               value={lastname}
               onKeyPress={onKeyPressOnlyAlphabet}
@@ -174,6 +176,7 @@ export default function Register() {
             <input
               type="text"
               className="input-box login_input"
+              maxLength="10"
               value={username}
               onChange={(e) => setUserName(e.target.value)}
             />
@@ -181,7 +184,7 @@ export default function Register() {
             <input
               type="password"
               className="input-box login_input"
-              // name="lname"
+              maxLength="15"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -189,6 +192,7 @@ export default function Register() {
             <input
               type="password"
               className="input-box login_input"
+              maxLength="15"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
