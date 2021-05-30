@@ -16,6 +16,7 @@ import { Link, useHistory } from "react-router-dom";
 // IMPORT DATEPICKER LIBRARY
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import { addDays, addYears, subDays, subYears } from "date-fns";
 
 async function RegisterUser(credentials) {
   const hostnameProduction = "http://127.0.0.1:8080/userRegistration/";
@@ -52,7 +53,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState(
-    new Date().toLocaleDateString("en-TH")
+    subYears(new Date(), 10).toLocaleDateString("en-TH")
   );
   const [gender, setGender] = useState("");
   const [homeAddr, setHomeAddr] = useState("");
@@ -64,9 +65,9 @@ export default function Register() {
   const handleSubmit = async (e) => {
     var handleSubmitStatus = true;
     e.preventDefault();
-    console.log("[DATE] : ", dateOfBirth);
-    console.log("[DATE TODAY] : ", new Date().toLocaleDateString("en-TH"));
-    console.log(dateOfBirth === new Date().toLocaleDateString("en-TH"));
+    // console.log("(Register.js) [DATE] : ", dateOfBirth);
+    // console.log("(Register.js) [DATE TODAY] : ", new Date().toLocaleDateString("en-TH"));
+    // console.log("(Register.js) " , dateOfBirth === new Date().toLocaleDateString("en-TH"));
 
     if (
       firstname === "" ||
@@ -81,6 +82,26 @@ export default function Register() {
       alert("--- Please fill in all section ---");
     }
 
+    // CHECK FIRSTNAME IS SAME AS LASTNAME OR NOT
+    if((firstname.length !== 0 || firstname !== "") && (lastname.length !== 0 || lastname !== "")) {
+      if(firstname.localeCompare(lastname) === 0) {
+        alert("Your lastname can't be same as firstname");
+        setLastname("");
+        handleSubmitStatus = false;
+      } else if(firstname.localeCompare(lastname) !== 0) {
+        handleSubmitStatus = true;
+      }
+    }
+
+    // CHECK FIRSTNAE IS SAME AS USERNAME OR NOT
+    if(firstname.localeCompare(username) === 0){
+      alert("Your username can't be same as firstname");
+      setUserName("");
+      handleSubmitStatus = false;
+    } else if(firstname.localeCompare(username) !== 0){
+      handleSubmitStatus = true;
+    }
+
     if (dateOfBirth === new Date().toLocaleDateString("en-TH")) {
       handleSubmitStatus = false;
       alert("--- Enter your real birthday ---");
@@ -90,6 +111,14 @@ export default function Register() {
     if (password !== confirmPassword) {
       handleSubmitStatus = false;
       alert("--- Password not match ---");
+    }
+
+    // CHECK USERNAME IS SAME AS PASSWORD OR NOT
+    if(username.localeCompare(password) === 0){
+      handleSubmitStatus = false;
+      alert("--- Username can't same as password ---")
+    } else if(username.localeCompare(password) !== 0) {
+      handleSubmitStatus = true;
     }
 
     // IF BOTH PASSWORD AND CONFIRM_PASSWORD ARE MATCH
@@ -114,7 +143,7 @@ export default function Register() {
         setUserName("");
         setPassword("");
         setConfirmPassword("");
-        setDateOfBirth(new Date().toLocaleDateString("en-TH"));
+        setDateOfBirth(subYears(new Date(), 10).toLocaleDateString("en-TH"));
         setGender("");
         setPassword("");
         setHomeAddr("");
@@ -133,10 +162,6 @@ export default function Register() {
       console.log("Redirecting to Login Page");
       history.push("/");
     }
-    // else
-    // {
-    //     console.log("Not Redirect to Login Page");
-    // }
   }, [history, registerStatus]);
 
   return (
@@ -203,6 +228,8 @@ export default function Register() {
                 format="dd/MM/yyyy"
                 value={dateOfBirth}
                 onChange={(e) => setDateOfBirth(e.toLocaleDateString("en-TH"))}
+                maxDate={subYears(new Date(), 10)}
+                
               />
             </MuiPickersUtilsProvider>
 

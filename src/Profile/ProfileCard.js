@@ -124,24 +124,27 @@ export default function ProfileCard() {
   const message_3 = "Your profile did not update.";
   const handleSubmit = async e => {
       e.preventDefault();
-      console.log("[ProfileCard.js] ProfileStage_1 : ", profileChangeState);
-      console.log("[ProfileCard.js] FN : " , firstname)
-      console.log("[ProfileCard.js] LN : " , lastname)
+      // console.log("[ProfileCard.js] ProfileStage_1 : ", profileChangeState);
+      // console.log("[ProfileCard.js] FN : " , firstname)
+      // console.log("[ProfileCard.js] LN : " , lastname)
 
+      // CHECK FIRSTNAME AND LASTNAE ARE EMPTY STRING
       if(firstname.length === 0 || firstname === "" || lastname.length === 0 || lastname === ""){
-        console.log("[ProfileCard.js]  KO CHECK NOI_1");
+        // console.log("[ProfileCard.js]  KO CHECK NOI_1");
         alert("Please fill your firstname and your lastname in the given field");
         profileChangeState = false;
       }
 
+      // CHECK FIRSTNAME AND LASTNAE ARE NOT EMPTY STRING
       if( (firstname.length !== 0 || firstname !== "") && (lastname.length !== 0 || lastname !== "") ) {
+        // CHECK FIRSTNAME IS SAME AS LASTNAME OR NOT
         if(firstname.localeCompare(lastname) === 0){
-          console.log("[ProfileCard.js]  KO CHECK NOI_2");
+          // console.log("[ProfileCard.js]  KO CHECK NOI_2");
           alert("Your lastname can't be same as firstname");
           setLastname("");
           profileChangeState = false;
         } else if(firstname.localeCompare(lastname) !== 0) {
-          console.log("[ProfileCard.js]  KO CHECK NOI_3");
+          // console.log("[ProfileCard.js]  KO CHECK NOI_3");
           profileChangeState = true;
         }
       }    
@@ -176,9 +179,10 @@ export default function ProfileCard() {
           } else {
               alert("Your profile did not update.");
           }
-      } else if(profileChangeState === false) {
-        console.log("[ProfileCard.js]  KO CHECK NOI_4");
-      }
+      } 
+      // else if(profileChangeState === false) {
+      //   console.log("[ProfileCard.js]  KO CHECK NOI_4");
+      // }
 
   }
 
