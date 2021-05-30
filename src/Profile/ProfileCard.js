@@ -19,6 +19,7 @@ import ProfileIconImage from "../assets/ProfileIcon.png";
 // IMPORT DATEPICKER LIBRARY
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { subYears } from "date-fns";
 
 
 async function updateUserInformation(credentials) {
@@ -128,7 +129,7 @@ export default function ProfileCard() {
       // console.log("[ProfileCard.js] FN : " , firstname)
       // console.log("[ProfileCard.js] LN : " , lastname)
 
-      // CHECK FIRSTNAME AND LASTNAE ARE EMPTY STRING
+      // CHECK FIRSTNAME AND LASTNAME ARE EMPTY STRING
       if(firstname.length === 0 || firstname === "" || lastname.length === 0 || lastname === ""){
         // console.log("[ProfileCard.js]  KO CHECK NOI_1");
         alert("Please fill your firstname and your lastname in the given field");
@@ -140,16 +141,23 @@ export default function ProfileCard() {
         // CHECK FIRSTNAME IS SAME AS LASTNAME OR NOT
         if(firstname.localeCompare(lastname) === 0){
           // console.log("[ProfileCard.js]  KO CHECK NOI_2");
-          alert("Your lastname can't be same as firstname");
+          alert("Your lastname can't be same as your firstname");
           setLastname("");
           profileChangeState = false;
         } else if(firstname.localeCompare(lastname) !== 0) {
           // console.log("[ProfileCard.js]  KO CHECK NOI_3");
           profileChangeState = true;
         }
-      }    
+      }
+      
+      // CHECK USERNAME CAN'T SAME AS PASSWORD
+      if(password.localeCompare(username) === 0){
+        alert("Your password can't be same as your username");
+        setPassword("");
+        profileChangeState = false;
+      }
 
-      console.log("[ProfileCard.js] ProfileStage_2 : ", profileChangeState);
+      // console.log("[ProfileCard.js] ProfileStage_2 : ", profileChangeState);
       if(profileChangeState === true){
           if(typeof(newImage) === "object"){
             await uploadImageToTheServer();
@@ -343,6 +351,7 @@ export default function ProfileCard() {
                   value={dateOfBirth}
                   style={{display: datePickerStatus ? 'block' : 'none'}}
                   onChange={e => setDateOfBirth(e.toLocaleDateString('fr-CA'))}
+                  maxDate={subYears(new Date(), 10)}
                 />
               </MuiPickersUtilsProvider>
               <CardText style={{display: cardTextDateOfBirth ? 'inline': 'none'}} >{dateOfBirth}</CardText>

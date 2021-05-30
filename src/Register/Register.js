@@ -93,7 +93,7 @@ export default function Register() {
       }
     }
 
-    // CHECK FIRSTNAE IS SAME AS USERNAME OR NOT
+    // CHECK FIRSTNAME IS SAME AS USERNAME OR NOT
     if(firstname.localeCompare(username) === 0){
       alert("Your username can't be same as firstname");
       setUserName("");
@@ -225,11 +225,10 @@ export default function Register() {
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
                 className="input-box"
-                format="dd/MM/yyyy"
+                format="yyyy-MM-dd"
                 value={dateOfBirth}
                 onChange={(e) => setDateOfBirth(e.toLocaleDateString("en-TH"))}
                 maxDate={subYears(new Date(), 10)}
-                
               />
             </MuiPickersUtilsProvider>
 
