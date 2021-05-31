@@ -351,7 +351,7 @@ export default function ProfileCard() {
                   value={dateOfBirth}
                   style={{display: datePickerStatus ? 'block' : 'none'}}
                   onChange={e => setDateOfBirth(e.toLocaleDateString('fr-CA'))}
-                  maxDate={subYears(new Date(), 10)}
+                  maxDate={new Date()}
                 />
               </MuiPickersUtilsProvider>
               <CardText style={{display: cardTextDateOfBirth ? 'inline': 'none'}} >{dateOfBirth}</CardText>

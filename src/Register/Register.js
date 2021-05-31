@@ -16,7 +16,6 @@ import { Link, useHistory } from "react-router-dom";
 // IMPORT DATEPICKER LIBRARY
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { addDays, addYears, subDays, subYears } from "date-fns";
 
 async function RegisterUser(credentials) {
   const hostnameProduction = "http://127.0.0.1:8080/userRegistration/";
@@ -53,7 +52,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState(
-    subYears(new Date(), 10).toLocaleDateString("en-TH")
+    new Date().toLocaleDateString("en-TH")
   );
   const [gender, setGender] = useState("");
   const [homeAddr, setHomeAddr] = useState("");
@@ -143,7 +142,7 @@ export default function Register() {
         setUserName("");
         setPassword("");
         setConfirmPassword("");
-        setDateOfBirth(subYears(new Date(), 10).toLocaleDateString("en-TH"));
+        setDateOfBirth(new Date().toLocaleDateString("en-TH"));
         setGender("");
         setPassword("");
         setHomeAddr("");
@@ -228,7 +227,7 @@ export default function Register() {
                 format="yyyy-MM-dd"
                 value={dateOfBirth}
                 onChange={(e) => setDateOfBirth(e.toLocaleDateString("en-TH"))}
-                maxDate={subYears(new Date(), 10)}
+                maxDate={new Date()}
               />
             </MuiPickersUtilsProvider>
 
