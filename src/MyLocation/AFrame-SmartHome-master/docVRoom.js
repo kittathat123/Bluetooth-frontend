@@ -12,6 +12,7 @@ class docVRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: "window_1234",
       message: "",
       spherePosition: {
         x: -2.8,
@@ -21,8 +22,11 @@ class docVRoom extends Component {
     };
 
     // this.setMessage = this.setMessage.bind(this);
+    // this.state.username = this.state.username.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    // this.setUsername = this.setUsername.bind(this);
     // this.handleX = this.handleX.bind(this);
+    // this.pay = this.pay.bind(this);
     // this.setXandY = this.setXandY.bind(this);
   }
 
@@ -45,7 +49,21 @@ class docVRoom extends Component {
 
   // }
   // }
+
   componentDidMount() {
+    // GET USERNAME FROM LOCALSTORAGE
+    // if (localStorage.getItem("user_info") === null) {
+    //   alert("!!! Please Log-in to the system first !!!");
+    //   // history.push("/");
+    // } else if (localStorage.getItem("user_info") !== null) {
+    //   this.state.username = JSON.parse(
+    //     localStorage.getItem("user_info")
+    //   ).username;
+    // }
+    // this.setState = {
+    //   username: JSON.parse(localStorage.getItem("user_info")).username,
+    // };
+
     const socket = new WebSocket(
       "wss://protected-brook-89084.herokuapp.com/ws/location/"
       // "wss://192.168.4.209/ws/tag/1/",
@@ -63,47 +81,66 @@ class docVRoom extends Component {
           // Y_COORD: "",
         }),
       });
-      socket.send(data);
+      // socket.send(data);
     };
 
-    socket.onmessage = function (e) {
+    socket.onmessage = (e) => {
       const datas = JSON.parse(e.data);
-      console.log(datas.payload.x_coord);
-      console.log(datas.payload.y_coord);
+      // console.log("USER : " + this.state.username);
+      console.log(datas.payload);
+
+      // if (datas.payload.length !== 0) {
+      //   // console.log("[docVRoom.js] DATA : ", (message.payload));
+      //   if (
+      //     datas.payload.bt_tag_owner.localeCompare(this.state.username) === 0
+      //   ) {
+      //   }
+      // }
+
+      // console.log(datas.payload.y_coord);
       // console.log("test set message" + this.setMessage(e.data));
       // this.setState({ x: datas.payload.x_coord });
       // console.log("show sphere position: " + this.spherePosition);
       // socket.onmessage = ({ data }) => this.setMessage(data);
     };
-    // socket.onmessage = ({ data }) => this.setPayload(data);
-
     socket.onclose = function (e) {
       console.error("Chat socket closed unexpectedly");
     };
   }
 
   // componentWillUnmount() {
-  //   clearInterval(this.interval);
+  //   this.socket.onclose = function (e) {
+  //     console.error("Chat socket closed unexpectedly");
+  //   };
+  // }
+
+  // setUsername() {
+  //   if (localStorage.getItem("user_info") !== null) {
+  //     this.setState({
+  //       username: JSON.parse(localStorage.getItem("user_info")).username,
+  //     });
+  //   }
   // }
 
   // handleX = () => {
-  //   this.setState({ x: this.state.spherePosition.x + 1 });
+  //   this.setState({ x: this.pay().datas.payload });
   // };
 
   render() {
     const datass = Object.values(this.state.spherePosition);
 
+    console.log("(docVRoom.js) show sphere position: " + datass);
     console.log(
-      "(docVRoom.js) show sphere position: " + Object.values(this.state.spherePosition)
+      "(docVRoom.js) show sphere position x: " + this.state.spherePosition.x
     );
-    console.log("(docVRoom.js) show sphere position x: " + this.state.spherePosition.x);
     // console.log("from websocket: " + this.value().datas.payload.x_coord);
     // console.log("show sphere position x: " + Object.values(this.state.x));
     // this.setMessage();
-
+    // this.setUsername();
     // var sceneEl = document.querySelector("a-scene");
 
     var entityEl = document.createElement("a-entity");
+
     // this.setState({ x: this.state.spherePosition.x + 1 });
 
     // console.log(sceneEl.querySelector("#redBox"));

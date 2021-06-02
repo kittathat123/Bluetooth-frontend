@@ -18,7 +18,6 @@ import SessionTimeout from "./components/SessionTimeout";
 import { logoutUser } from "../src/components/Sidebar";
 
 function App() {
-
   // const alertUser = async() => {
   //   if(localStorage.getItem("user_info") !== null) {
   //     var answer = window.confirm("Do you want to exit our application");

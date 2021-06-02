@@ -16,8 +16,13 @@ export default class outdoorMap extends Component {
           <div className="col">
             <div className="pageContent">
               <div className="header ">
-                <Link to="/Outdoor">Outdoor </Link>
-                <Link to="/Mylocation"> Indoor</Link>
+                <Link className="navButton" to="/Outdoor">
+                  Outdoor{" "}
+                </Link>
+                <Link className="navButton" to="/Mylocation">
+                  {" "}
+                  Indoor
+                </Link>
 
                 <h2 className="roomTitle">ECC 705</h2>
               </div>

@@ -220,3 +220,18 @@ a:link {
 .logout-box {
   cursor: pointer;
 }
+
+.side_info {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin-top: -60px;
+}
+
+.side_info_box {
+  /* display: flex; */
+  /* justify-items: center; */
+  /* align-items: center; */
+  margin-left: 30px;
+  margin-top: 60px;
+}
