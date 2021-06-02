@@ -3,6 +3,7 @@ import "aframe";
 import { Entity, Scene } from "aframe-react";
 // import "aframe-physics-system/dist/aframe-physics-system";    have error
 
+// TEST
 
 class docVRoom extends Component {
   constructor(props) {
