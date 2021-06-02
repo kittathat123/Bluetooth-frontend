@@ -2,6 +2,7 @@ import logo from "../assets/IPSlogo.png";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Sidebar.css";
+import { useState, useEffect } from "react";
 import {
   faMapMarkedAlt,
   faHistory,
@@ -12,9 +13,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useHistory } from "react-router-dom";
+import ProfileIconImage from "../assets/ProfileIcon.png";
+import {
+  Card,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button,
+  Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
-
-export let logoutUser = async(credentials) => {
+export let logoutUser = async (credentials) => {
   // console.log("CREDITIALS : ", credentials)
   const hostnameProduction = "http://127.0.0.1:8080/userLogout/";
   const hostnameHeroku =
@@ -27,11 +41,29 @@ export let logoutUser = async(credentials) => {
     },
     body: JSON.stringify(credentials),
   }).then((data) => data.json());
-}
+};
 
 export default function Sidebar() {
   const history = useHistory();
   const message_1 = "Logout Success";
+
+  var [inputStatus, setInputStatus] = useState(false);
+  var [cardTextStatus, setCardTextStatus] = useState(true);
+  var [token] = useState("");
+  var [firstname, setFirstname] = useState("");
+  var [lastname, setLastname] = useState("");
+  var localStorageString = localStorage.getItem("user_info");
+  var [url, setUrl] = useState(ProfileIconImage);
+
+  // GET USERNAME FROM LOCALSTORAGE
+  if (localStorage.getItem("user_info") === null) {
+    alert("!!! Please Log-in to the system first !!!");
+    history.push("/");
+  } else if (localStorage.getItem("user_info") !== null) {
+    // console.log("[Profile] token : ", JSON.parse(localStorageString).token);
+    // username = JSON.parse(localStorageString).username;
+    token = JSON.parse(localStorageString).token;
+  }
 
   const handleLogout = async (e) => {
     // CHECK LOCAL_STORAGE VALUE
@@ -47,7 +79,7 @@ export default function Sidebar() {
       e.preventDefault();
       const response = await logoutUser({
         // username: JSON.parse(localStorage.getItem("user_info")).username,
-        token: JSON.parse(localStorage.getItem("user_info")).token
+        token: JSON.parse(localStorage.getItem("user_info")).token,
       });
 
       // console.log("[LOGOUT] RESPONSE_FROM_BACKEND : ", response);
@@ -57,6 +89,53 @@ export default function Sidebar() {
       }
     }
   };
+
+  const hostnameGetUserInformationHeroku =
+    "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
+  const cloudinaryImageHostName =
+    "http://res.cloudinary.com/hiznwi5vk/image/upload/v1621272433/";
+  useEffect(() => {
+    fetch(hostnameGetUserInformationHeroku, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ token: token }),
+    })
+      .then((response) => response.json())
+      .then((dataFromServer) => {
+        console.log("DATA : ", dataFromServer.userInformation[0]);
+
+        try {
+          // SET ALL USED VARIBLE
+
+          setFirstname(dataFromServer.userInformation[0].FIRST_NAME);
+          setLastname(dataFromServer.userInformation[0].LAST_NAME);
+
+          var imageNameFromServer =
+            dataFromServer.userInformation[0].IMAGE_PROFILE;
+          if (
+            imageNameFromServer.localeCompare("defaultProfilePicture.jpg") ===
+              0 ||
+            imageNameFromServer.localeCompare(
+              "/profilePicture/defaultProfilePicture.jpg"
+            ) === 0 ||
+            imageNameFromServer.localeCompare("") === 0
+          ) {
+            console.log("(ProfileCard.js) : KO CHECK NOI_1");
+          } else {
+            // console.log("(ProfileCard.js) : KO CHECK NOI_2")
+            setUrl(
+              cloudinaryImageHostName +
+                dataFromServer.userInformation[0].IMAGE_PROFILE
+            );
+          }
+        } catch (err) {
+          history.push("/");
+        }
+      });
+  }, [history, token]);
 
   // console.log(logo);
   return (
@@ -128,8 +207,39 @@ export default function Sidebar() {
       </div>
 
       <div className="line"></div>
+
+      <div className="side_info_box">
+        <div className="infoSpace row">
+          <div className="imageProfile-div">
+            <img
+              src={url}
+              alt="profile-preview"
+              width="150px"
+              height="150px"
+              className="image-profile"
+            />
+            <div
+              style={{ display: inputStatus ? "inline" : "none" }}
+              className="profile-image-button-group"
+            ></div>
+          </div>
+        </div>
+        <CardSubtitle tag="h6">First Name :</CardSubtitle>
+        <CardText
+          classsName="side_info"
+          style={{ display: cardTextStatus ? "inline" : "none" }}
+        >
+          {firstname}
+        </CardText>
+
+        <CardSubtitle tag="h6">Last Name :</CardSubtitle>
+        <CardText
+          className="side_info"
+          style={{ display: cardTextStatus ? "inline" : "none" }}
+        >
+          {lastname}
+        </CardText>
+      </div>
     </div>
   );
 }
-
-

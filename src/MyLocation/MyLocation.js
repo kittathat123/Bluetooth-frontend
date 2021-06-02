@@ -6,8 +6,7 @@ import Room from "./AFrame-SmartHome-master/docVRoom_2";
 import { useHistory, Link } from "react-router-dom";
 import useToken from "../Token/useToken";
 import "./MyLocation.css";
-import { logoutUser } from "../components/Sidebar";
-import BeforeUnload from "../components/BeforeUnload";
+// import Link from "react-router";
 
 export default function MyLocation() {
   const history = useHistory();
@@ -33,8 +32,13 @@ export default function MyLocation() {
               {/* <Button className="backButton" color="secondary" href="./Outdoor">
                 Back
               </Button> */}
-              <Link to="/Outdoor">Outdoor </Link>
-              <Link to="/Mylocation"> Indoor</Link>
+              <Link className="navButton" to="/Outdoor">
+                Outdoor{" "}
+              </Link>
+              <Link className="navButton" to="/Mylocation">
+                {" "}
+                Indoor
+              </Link>
 
               <h2 className="roomTitle">ECC 705</h2>
             </div>

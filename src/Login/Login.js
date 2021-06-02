@@ -45,7 +45,6 @@ export default function Login() {
   const message_2 = "User already login in the system.";
   const message_3 = "You login as an admin.";
 
-
   const [redirect, setRedirect] = useState(false);
   const history = useHistory();
   const togglePasswordVisiblity = () => {
@@ -71,8 +70,8 @@ export default function Login() {
       setUserName("");
       setPassword("");
     } else if (message_3.localeCompare(response.message) === 0) {
-      alert("You login as admin")
-      history.push("/Admin")
+      alert("You login as admin");
+      history.push("/Admin");
     } else {
       // console.log(response.token, response.username);
       setToken(response);
