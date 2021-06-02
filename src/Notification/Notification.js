@@ -8,7 +8,7 @@ import ReactHtmlParser from 'react-html-parser';
 const contactInformation = [ 
   {"color": "<div style=\"width:100%; height:15px; border:1px solid green; background-color: green;\"></div>",   "distance": "> 15 meters"}, 
   {"color": "<div style=\"width:100%; height:15px; border:1.5px solid black; background-color: yellow;\"></div>", "distance": "10-15 meters"},
-  {"color": "<div style=\"width:100%; height:15px; border:1px solid DarkOrange; background-color: DarkOrange;\"></div>",  "distance": "3-10 meters"},
+  {"color": "<div style=\"width:100%; height:15px; border:1px solid DarkOrange; background-color: DarkOrange;\"></div>",  "distance": "3-9 meters"},
   {"color": "<div style=\"width:100%; height:15px; border:1px solid Crimson; background-color: Crimson;\"></div>", "distance": "< 3 meters"},
 ]
 

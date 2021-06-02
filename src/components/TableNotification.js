@@ -13,7 +13,8 @@ const WebSocketHostnameProduction = "ws://127.0.0.1:8080/ws/contact/";
 export default function TableNotification() {
   const history = useHistory();
   var [list, setList] = useState([]);
-  var [username, setUserName] = useState("");
+  var [username] = useState("");
+  
   // WebSocket
   const [isPaused, setPause] = useState(false);
   const ws = useRef(null);
@@ -29,8 +30,8 @@ export default function TableNotification() {
   // GET_CONTACT_DATA_FROM_SERVER
   useEffect(() => {
       ws.current = new WebSocket(WebSocketHostnameHeroku);
-      ws.current.onopen = () => console.log("ws opened");
-      ws.current.onclose = () => console.log("ws closed");
+      ws.current.onopen = () => console.log("[TableNotification.js] ws opened");
+      ws.current.onclose = () => console.log("[TableNotification.js] ws closed");
 
       return () => {
           ws.current.close();
@@ -86,7 +87,7 @@ export default function TableNotification() {
               {
                   list
                   .filter(item => item.user_1 === username)
-                  .slice(0, 25).reverse()
+                  .slice(0, 100).reverse()
                   .map((item, index) => (
                       <tr key={index}>
                           <td>{item.timestamp}</td>

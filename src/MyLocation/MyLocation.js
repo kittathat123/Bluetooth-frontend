@@ -2,7 +2,7 @@ import Sidebar from "../components/Sidebar";
 import React, { useState, useEffect } from "react";
 import VRScene from "./VRScene";
 import { Button } from "reactstrap";
-import Room from "./AFrame-SmartHome-master/docVRoom";
+import Room from "./AFrame-SmartHome-master/docVRoom_2";
 import { useHistory, Link } from "react-router-dom";
 import useToken from "../Token/useToken";
 import "./MyLocation.css";
@@ -12,13 +12,13 @@ import BeforeUnload from "../components/BeforeUnload";
 export default function MyLocation() {
   const history = useHistory();
 
-  // CHECK STATUS USER IS LOGIN OR NOT
+  // // CHECK STATUS USER IS LOGIN OR NOT
   // const localStorageString = localStorage.getItem('user_info');
   // if(localStorageString === null){
   //     alert("!!! Please Log-in to the system first !!!");
   //     history.push("/");
   // } else if(localStorageString !== null) {
-  //     console.log("[MyLocation] username : ", JSON.parse(localStorageString).username);
+  //     console.log("[MyLocation.js] username : ", JSON.parse(localStorageString).username);
   // }
 
   return (

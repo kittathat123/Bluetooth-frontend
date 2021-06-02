@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import "aframe";
 import { Entity, Scene } from "aframe-react";
-// import Device from "./Device.js";
-// import TV from "./TV";
-
 // import "aframe-physics-system/dist/aframe-physics-system";    have error
-// import DynamicObject from "./DynamicObject";
-// import 'https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@1.3/fanToggle.js';
+
 
 class docVRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: "window_1234",
       message: "",
       spherePosition: {
         x: -2.8,
@@ -20,98 +17,72 @@ class docVRoom extends Component {
       },
     };
 
-    // this.setMessage = this.setMessage.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    // this.handleX = this.handleX.bind(this);
-    // this.setXandY = this.setXandY.bind(this);
+    this.setUsername = this.setUsername.bind(this);
+    this.getUsername = this.getUsername.bind(this);
+    this.setXandY = this.setXandY.bind(this);
   }
 
-  // setMessage(message) {
-  //   console.log(
-  //     "using message from websocket: " + JSON.parse(message).payload.x_coord
-  //   );
-  //   // console.log(this.value().datas.payload.x_coord);
-  //   // console.log(this.value().datas.payload.y_coord);
-  // }
+  setXandY(x_coord, y_coord) {
+    this.setState({
+      spherePosition: {
+        x: x_coord,
+        y: y_coord,
+        z: 1,
+      },
+    });
+  }
 
-  // setXandY(x_coord, y_coord) {
-  //   this.setState({
-  //     spherePosition: {
-  //       x: x_coord,
-  //       y: y_coord,
-  //       z: 1,
-  //     },
-  //   });
+  setUsername() {
+    if (localStorage.getItem("user_info") !== null) {
+      this.setState({
+        username: JSON.parse(localStorage.getItem("user_info")).username,
+      });
+    }
+  }
 
-  // }
-  // }
+  getUsername() {
+    console.log("[docVRoom.js] USER : ", this.state.username);
+    return this.state.username;
+  }
+
   componentDidMount() {
+    this.setUsername();
+    this.getUsername();
     const socket = new WebSocket(
       "wss://protected-brook-89084.herokuapp.com/ws/location/"
       // "wss://192.168.4.209/ws/tag/1/",
       // "f3c9c59ea1cfb5eeabae3b3bb6be72ba2d1b67c7"
     );
 
-    socket.onopen = function (e) {
-      console.log("Hello websocket");
-
-      const data = JSON.stringify({
-        message: JSON.stringify({
-          // BT_TAG_DEVICE_NAME: "BT_TAG_1",
-          bt_tag_owner: "1234",
-          // X_COORD: "",
-          // Y_COORD: "",
-        }),
-      });
-      socket.send(data);
+    socket.onopen = (e) => {
+      e.preventDefault();
+      console.log("[docVRoom_2.js] socket.onopen");      
     };
 
-    socket.onmessage = function (e) {
+    socket.onmessage = (e) => {
+      console.log("[docVRoom_2.js] socket.onmessage");
       const datas = JSON.parse(e.data);
-      console.log(datas.payload.x_coord);
-      console.log(datas.payload.y_coord);
-      // console.log("test set message" + this.setMessage(e.data));
-      // this.setState({ x: datas.payload.x_coord });
-      // console.log("show sphere position: " + this.spherePosition);
-      // socket.onmessage = ({ data }) => this.setMessage(data);
+      if (datas.payload.length !== 0) {
+        if((datas.payload.bt_tag_owner).localeCompare(this.getUsername()) === 0 ){
+          console.log("[docVRoom.js] DATA : ", (datas.payload));
+          this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
+        } 
+      }
     };
-    // socket.onmessage = ({ data }) => this.setPayload(data);
 
     socket.onclose = function (e) {
-      console.error("Chat socket closed unexpectedly");
+      console.log("[docVRoom_2.js] socket.onclose");
     };
   }
 
-  // componentWillUnmount() {
-  //   clearInterval(this.interval);
-  // }
-
-  // handleX = () => {
-  //   this.setState({ x: this.state.spherePosition.x + 1 });
-  // };
-
   render() {
     const datass = Object.values(this.state.spherePosition);
-
-    console.log(
-      "(docVRoom.js) show sphere position: " + Object.values(this.state.spherePosition)
-    );
-    console.log("(docVRoom.js) show sphere position x: " + this.state.spherePosition.x);
-    // console.log("from websocket: " + this.value().datas.payload.x_coord);
-    // console.log("show sphere position x: " + Object.values(this.state.x));
-    // this.setMessage();
-
-    // var sceneEl = document.querySelector("a-scene");
-
+    console.log( "(docVRoom.js) show sphere position: " + datass );
     var entityEl = document.createElement("a-entity");
-    // this.setState({ x: this.state.spherePosition.x + 1 });
-
-    // console.log(sceneEl.querySelector("#redBox"));
-
     entityEl.object3D.position.set(1, 2, 3);
+    
     return (
       <div>
-        {/* <button onClick={this.handleX}>Increment by 1</button> */}
         <div style={{ height: "70vh", width: "70vw" }}>
           <Scene
             physics="gravity: -1.6"
@@ -128,7 +99,6 @@ class docVRoom extends Component {
                 look-controls={{ enabled: "true" }}
                 position={{ x: 0, y: 1.65, z: 0 }}
               >
-                {/* <a-cursor></a-cursor> */}
               </Entity>
 
               <Entity
@@ -136,10 +106,6 @@ class docVRoom extends Component {
                 oculus-touch-controls="hand: right"
                 teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
                 thumbstick-rotate
-
-                // static-body="shape: sphere; sphereRadius: 0.02;"
-                // sphere-collider="objects: .throwable"
-                // grab ={{}}
               ></Entity>
 
               <Entity
@@ -152,20 +118,8 @@ class docVRoom extends Component {
             <a-assets>
               <a-asset-item
                 id="male"
-                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/assets/pim/Pim.gltf"
-                // src="https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/tree/master/2.0/CesiumMan/glTF"
                 src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
-                // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend@v1.0/blob/main/src/MyLocation/AFrame-SmartHome-master/TV_01.gltf"
-                // src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
               ></a-asset-item>
-              {/* <a-asset-item
-                id="human_male_obj"
-                src="human_male.obj"
-              ></a-asset-item>
-              <a-asset-item
-                id="human_male_mtl"
-                src="human_male.mtl"
-              ></a-asset-item> */}
               <a-asset-item
                 id="tv"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
@@ -268,14 +222,6 @@ class docVRoom extends Component {
               ></a-asset-item>
             </a-assets>
 
-            {/* <a-light
-          type="ambient"
-          position="0.214 3.281 -2.02969"
-          intensity="0.2"
-          color="white"
-          visible="true"
-        ></a-light> */}
-
             <a-light
               type="point"
               position="0.214 2.615 -2.02969"
@@ -286,36 +232,6 @@ class docVRoom extends Component {
             ></a-light>
 
             <Entity id="labAll" position="-0.8 0 2.353">
-              {/* <Entity obj-model="obj: #human_male_obj;  mtl: #human_male_mtl"></Entity> */}
-
-              <a-entity
-                geometry="primitive: sphere; radius: 0.25;"
-                // Y Z X center: 0.2,, 1, -1.3
-                // position={datass}
-                position=" 2, 1, -1.3"
-                // position={{ x: 2, y: 1, z: -1.3 }}
-                // position={
-                //   ({ x: this.state.spherePostion.x },
-                //   { y: this.state.spherePostion.y },
-                //   { z: this.state.spherePostion.z })
-                // }
-                material="color: #EF2D5E"
-              >
-                {" "}
-                <a-animation
-                  attribute="position"
-                  dur="3000"
-                  from={{
-                    x: this.state.spherePosition.x,
-                    y: this.state.spherePosition.y,
-                    z: this.state.spherePosition.z,
-                  }}
-                  to="2 ,1.2, 2"
-                  repeat="indefinite "
-                ></a-animation>
-              </a-entity>
-              {/* {entityEl.object3D.position.set(1, 2, 3)} */}
-              {/* {sceneEl.appendChild(entityEl)} */}
               <Entity
                 static-body={{}}
                 id="labWall"
@@ -328,44 +244,19 @@ class docVRoom extends Component {
                 geometry-merger="preserveOriginal: false"
                 id="furnitureList"
               >
-                {/* <Entity
-                  id="redSphere"
-                  primitive="a-sphere"
-                  detail={2}
-                  radius={0.25}
-                  position={this.state.spherePosition}
-                  color="#EF2D5E"
-                  animation__oscillate={{
-                    property: "position",
-                    dur: 2000,
-                    dir: "alternate",
-                    easing: "linear",
-                    loop: true,
-                    from: this.state.spherePosition,
-                    to: {
-                      x: this.state.spherePosition.x,
-                      y: this.state.spherePosition.y,
-                      z: this.state.spherePosition.z,
-                    },
-                  }}
-                /> */}
 
+                {/* HUMAN AVATAR */}
                 <Entity
                   scale="0.03 0.03  0.02 "
                   gltf-model="#male"
-                  animation-mixer
-                  from="0.2 , 1, -1.3"
-                  to="0,0,0"
-                  dur="3000"
-                  repeat="indefinite"
                   // position="0.2,1,-1.3"
-                  // position = 2 , 1 -3
-                  // position={{
-                  //   x: this.state.spherePosition.x,
-                  //   y: this.state.spherePosition.y,
-                  //   z: this.state.spherePosition.z,
-                  // }}
+                  position={{
+                    x: this.state.spherePosition.x,
+                    y: this.state.spherePosition.y,
+                    z: this.state.spherePosition.z,
+                  }}
                 ></Entity>
+
                 {/* <a-animation
                   gltf-model="#male"
                   from="0.2 , 1, -1.3"

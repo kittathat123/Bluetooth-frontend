@@ -77,8 +77,9 @@ export default function OutdoorMapUser() {
     )((props) => (
       <GoogleMap defaultZoom={8} defaultCenter={{ lat: 13.7299, lng: 100.7782 }}>
         {props.isMarkerShown &&          
-          locationList.map((marker, index) => {
-            // const onClick = props.onClick.bind(this, marker)
+          locationList
+          .slice(0, 50).reverse()
+          .map((marker, index) => {
             return (
               <Marker
                 key={index}
@@ -90,7 +91,7 @@ export default function OutdoorMapUser() {
               </Marker>
             );
             // console.log(marker.location);
-            // // console.log(JSON.parse(marker.latitude_longtitude));
+            // console.log(JSON.parse(marker.latitude_longtitude));
             // console.log("latitude : " ,JSON.parse(marker.latitude_longtitude).coordinates[1]);
             // console.log("longtitude : " ,JSON.parse(marker.latitude_longtitude).coordinates[0]);
           })}
