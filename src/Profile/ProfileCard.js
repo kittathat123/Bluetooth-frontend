@@ -19,6 +19,7 @@ import ProfileIconImage from "../assets/ProfileIcon.png";
 // IMPORT DATEPICKER LIBRARY
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { subYears } from "date-fns";
 
 
 async function updateUserInformation(credentials) {
@@ -86,6 +87,7 @@ export default function ProfileCard() {
   var [newImage, setNewImage] = useState('');
   var [covid19Status, setCovid19Status] = useState('');
   var [url, setUrl] = useState(ProfileIconImage);
+  var [profileChangeState, setProfileChangeState] = useState(false);
   var localStorageString = localStorage.getItem('user_info');
 
   // GET USERNAME FROM LOCALSTORAGE
@@ -123,35 +125,72 @@ export default function ProfileCard() {
   const message_3 = "Your profile did not update.";
   const handleSubmit = async e => {
       e.preventDefault();
+      // console.log("[ProfileCard.js] ProfileStage_1 : ", profileChangeState);
+      // console.log("[ProfileCard.js] FN : " , firstname)
+      // console.log("[ProfileCard.js] LN : " , lastname)
 
-      if(typeof(newImage) === "object"){
-        await uploadImageToTheServer();
+      // CHECK FIRSTNAME AND LASTNAME ARE EMPTY STRING
+      if(firstname.length === 0 || firstname === "" || lastname.length === 0 || lastname === ""){
+        // console.log("[ProfileCard.js]  KO CHECK NOI_1");
+        alert("Please fill your firstname and your lastname in the given field");
+        profileChangeState = false;
+      }
+
+      // CHECK FIRSTNAME AND LASTNAE ARE NOT EMPTY STRING
+      if( (firstname.length !== 0 || firstname !== "") && (lastname.length !== 0 || lastname !== "") ) {
+        // CHECK FIRSTNAME IS SAME AS LASTNAME OR NOT
+        if(firstname.localeCompare(lastname) === 0){
+          // console.log("[ProfileCard.js]  KO CHECK NOI_2");
+          alert("Your lastname can't be same as your firstname");
+          setLastname("");
+          profileChangeState = false;
+        } else if(firstname.localeCompare(lastname) !== 0) {
+          // console.log("[ProfileCard.js]  KO CHECK NOI_3");
+          profileChangeState = true;
+        }
       }
       
-      console.log("[ProfileCard] Submit button");
-      const response = await updateUserInformation({
-          token,
-          userID,
-          firstname,
-          lastname,
-          username,
-          password,
-          dateOfBirth,
-          gender,
-          covid19Status,
-          homeAddr, 
-          newImage,
-      });
-
-      console.log("[ProfileCard] RESPONSE_FROM_BACKEND : ", response);
-
-      // CHECK THE RESPONSE WHICH GET FROM BACKEND
-      if(message_2.localeCompare(response.message) === 0) {
-          alert("Your profile were update.");
-          window.location.reload();
-      } else {
-          alert("Your profile did not update.");
+      // CHECK USERNAME CAN'T SAME AS PASSWORD
+      if(password.localeCompare(username) === 0){
+        alert("Your password can't be same as your username");
+        setPassword("");
+        profileChangeState = false;
       }
+
+      // console.log("[ProfileCard.js] ProfileStage_2 : ", profileChangeState);
+      if(profileChangeState === true){
+          if(typeof(newImage) === "object"){
+            await uploadImageToTheServer();
+          }
+          
+          console.log("[ProfileCard] Submit button");
+          const response = await updateUserInformation({
+              token,
+              userID,
+              firstname,
+              lastname,
+              username,
+              password,
+              dateOfBirth,
+              gender,
+              covid19Status,
+              homeAddr, 
+              newImage,
+          });
+    
+          console.log("[ProfileCard] RESPONSE_FROM_BACKEND : ", response);
+    
+          // CHECK THE RESPONSE WHICH GET FROM BACKEND
+          if(message_2.localeCompare(response.message) === 0) {
+              alert("Your profile were update.");
+              window.location.reload();
+          } else {
+              alert("Your profile did not update.");
+          }
+      } 
+      // else if(profileChangeState === false) {
+      //   console.log("[ProfileCard.js]  KO CHECK NOI_4");
+      // }
 
   }
 
@@ -256,6 +295,7 @@ export default function ProfileCard() {
                   type="text"
                   value={firstname} 
                   // disabled={disabled}
+                  maxLength="10"
                   style={{borderColor: borderColor, borderStyle: 'solid', display: inputStatus ? 'inline' : 'none', marginTop: '10px', width: '75%' }} 
                   onKeyPress={onKeyPressOnlyAlphabet}
                   onChange={e => setFirstname(e.target.value)} 
@@ -267,6 +307,7 @@ export default function ProfileCard() {
               <input 
                   type="text"
                   value={lastname} 
+                  maxLength="15"
                   style={{borderColor: borderColor, borderStyle: 'solid', display: inputStatus ? 'inline' : 'none', marginTop: '10px', width: '75%' }} 
                   onKeyPress={onKeyPressOnlyAlphabet}
                   onChange={e => setLastname(e.target.value)} 
@@ -291,7 +332,8 @@ export default function ProfileCard() {
               <CardText typeof="password" style={{display: cardTextStatus ? 'inline': 'none'}}>{password} </CardText>
               <input 
                   type="password"
-                  value={password} 
+                  value={password}
+                  maxLength="15" 
                   style={{borderColor: borderColor, borderStyle: 'solid', display: inputStatus ? 'inline' : 'none', marginTop: '10px', width: '75%' }} 
                   onChange={e => setPassword(e.target.value)} 
               />
@@ -309,6 +351,7 @@ export default function ProfileCard() {
                   value={dateOfBirth}
                   style={{display: datePickerStatus ? 'block' : 'none'}}
                   onChange={e => setDateOfBirth(e.toLocaleDateString('fr-CA'))}
+                  maxDate={new Date()}
                 />
               </MuiPickersUtilsProvider>
               <CardText style={{display: cardTextDateOfBirth ? 'inline': 'none'}} >{dateOfBirth}</CardText>

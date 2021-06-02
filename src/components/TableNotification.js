@@ -58,7 +58,7 @@ export default function TableNotification() {
       if(item.contact_tracing_level === 0) {
         item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid green; background-color: green;\"></div>"
       } else if (item.contact_tracing_level === 1) {
-        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid yellow; background-color: yellow;\"></div>"
+        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1.5px solid black; background-color: yellow;\"></div>"
       } else if (item.contact_tracing_level === 2) {
         item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid DarkOrange; background-color: DarkOrange;\"></div>"
       } else if (item.contact_tracing_level === 3){

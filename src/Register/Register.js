@@ -64,9 +64,9 @@ export default function Register() {
   const handleSubmit = async (e) => {
     var handleSubmitStatus = true;
     e.preventDefault();
-    console.log("[DATE] : ", dateOfBirth);
-    console.log("[DATE TODAY] : ", new Date().toLocaleDateString("en-TH"));
-    console.log(dateOfBirth === new Date().toLocaleDateString("en-TH"));
+    // console.log("(Register.js) [DATE] : ", dateOfBirth);
+    // console.log("(Register.js) [DATE TODAY] : ", new Date().toLocaleDateString("en-TH"));
+    // console.log("(Register.js) " , dateOfBirth === new Date().toLocaleDateString("en-TH"));
 
     if (
       firstname === "" ||
@@ -81,6 +81,26 @@ export default function Register() {
       alert("--- Please fill in all section ---");
     }
 
+    // CHECK FIRSTNAME IS SAME AS LASTNAME OR NOT
+    if((firstname.length !== 0 || firstname !== "") && (lastname.length !== 0 || lastname !== "")) {
+      if(firstname.localeCompare(lastname) === 0) {
+        alert("Your lastname can't be same as firstname");
+        setLastname("");
+        handleSubmitStatus = false;
+      } else if(firstname.localeCompare(lastname) !== 0) {
+        handleSubmitStatus = true;
+      }
+    }
+
+    // CHECK FIRSTNAME IS SAME AS USERNAME OR NOT
+    if(firstname.localeCompare(username) === 0){
+      alert("Your username can't be same as firstname");
+      setUserName("");
+      handleSubmitStatus = false;
+    } else if(firstname.localeCompare(username) !== 0){
+      handleSubmitStatus = true;
+    }
+
     if (dateOfBirth === new Date().toLocaleDateString("en-TH")) {
       handleSubmitStatus = false;
       alert("--- Enter your real birthday ---");
@@ -90,6 +110,14 @@ export default function Register() {
     if (password !== confirmPassword) {
       handleSubmitStatus = false;
       alert("--- Password not match ---");
+    }
+
+    // CHECK USERNAME IS SAME AS PASSWORD OR NOT
+    if(username.localeCompare(password) === 0){
+      handleSubmitStatus = false;
+      alert("--- Username can't same as password ---")
+    } else if(username.localeCompare(password) !== 0) {
+      handleSubmitStatus = true;
     }
 
     // IF BOTH PASSWORD AND CONFIRM_PASSWORD ARE MATCH
@@ -133,10 +161,6 @@ export default function Register() {
       console.log("Redirecting to Login Page");
       history.push("/");
     }
-    // else
-    // {
-    //     console.log("Not Redirect to Login Page");
-    // }
   }, [history, registerStatus]);
 
   return (
@@ -157,6 +181,7 @@ export default function Register() {
             <input
               type="text"
               className="input-box login_input"
+              maxLength="10"
               value={firstname}
               onKeyPress={onKeyPressOnlyAlphabet}
               onChange={(e) => setFirstname(e.target.value)}
@@ -165,6 +190,7 @@ export default function Register() {
             <input
               type="text"
               className="input-box login_input"
+              maxLength="15"
               name="lname"
               value={lastname}
               onKeyPress={onKeyPressOnlyAlphabet}
@@ -174,6 +200,7 @@ export default function Register() {
             <input
               type="text"
               className="input-box login_input"
+              maxLength="10"
               value={username}
               onChange={(e) => setUserName(e.target.value)}
             />
@@ -181,7 +208,7 @@ export default function Register() {
             <input
               type="password"
               className="input-box login_input"
-              // name="lname"
+              maxLength="15"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -189,6 +216,7 @@ export default function Register() {
             <input
               type="password"
               className="input-box login_input"
+              maxLength="15"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
@@ -196,9 +224,10 @@ export default function Register() {
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
                 className="input-box"
-                format="dd/MM/yyyy"
+                format="yyyy-MM-dd"
                 value={dateOfBirth}
                 onChange={(e) => setDateOfBirth(e.toLocaleDateString("en-TH"))}
+                maxDate={new Date()}
               />
             </MuiPickersUtilsProvider>
 
