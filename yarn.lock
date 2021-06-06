@@ -9834,10 +9834,10 @@ react-bootstrap@^1.4.0:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
-react-burger-menu@2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-2.7.1.tgz#b390dae225e032f6f709230171c292de5584de70"
-  integrity sha512-WJiypBIsX6WNF31CabHhPqvsYygXxdWLPhK+ue84MNuWWL/x5c6M/1UfiIHpX5ZuuQ4MghzzpmYKiY6PEdsr8Q==
+react-burger-menu@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-3.0.6.tgz#9003cc1d65dc9e70d1460e5d8d8982f6b1a79d1d"
+  integrity sha512-Xikyl8VRkQBOyFVoMKpbScTLG6LlW64rajiquyCGwtpPswrDxaifusKckzTWAOH0At40Boguhj5lXq451NO0LA==
   dependencies:
     browserify-optional "^1.0.0"
     classnames "^2.2.6"
