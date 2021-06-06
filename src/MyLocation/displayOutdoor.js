@@ -20,16 +20,26 @@ export default function Mylocation() {
     <div className="page">
       <div className="row" style={{ width: "100%" }}>
         <div className="col-auto">
-          <Sidebar />
+          <Sidebar pageWrapId={"page-wrap"} />
         </div>
-        <div className="col">
+        <div className="col" id="page-wrap">
           <div className="pageContent">
             <div className="header ">
               <div className="topBar">
-                <Button className="navButton" color="warning" onClick={outdoor}>
+                <Button
+                  className="navButton"
+                  color="warning"
+                  style={{ "margin-left": "100px" }}
+                  onClick={outdoor}
+                >
                   Outdoor
                 </Button>{" "}
-                <Button className="navButton" color="warning" onClick={indoor}>
+                <Button
+                  className="navButton"
+                  color="warning"
+                  style={{ "margin-left": "-4px" }}
+                  onClick={indoor}
+                >
                   Indoor
                 </Button>{" "}
               </div>
