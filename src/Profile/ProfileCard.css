@@ -1,5 +1,8 @@
 .profileContainer {
   display: flex;
+  margin-top: 15rem;
+  width: 80vw;
+  height: 90vh;
 }
 .infoSpace {
   margin-top: 35px;
@@ -49,4 +52,3 @@
 .radiobuttonGender:not(:first-child) {
   margin: 15px 5px 0 8px;
 }
-

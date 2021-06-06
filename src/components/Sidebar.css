@@ -241,11 +241,16 @@ a:link {
 }
 
 .side_info_box {
-  /* display: flex; */
-  /* justify-items: center; */
-  /* align-items: center; */
+  display: flex;
+  flex-direction: column;
   margin-left: 30px;
-  margin-top: 60px;
+  /* margin-top: 30px; */
+  width: 30 vw;
+  height: 60 vh;
+}
+
+.sideName {
+  color: #000000;
 }
 
 /* Burger Menu */

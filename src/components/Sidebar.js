@@ -91,7 +91,8 @@ export default function Sidebar() {
     }
   };
 
-  const hostnameGetUserInformationProduction = "http://127.0.0.1:8080/userAndAdminInformation/";
+  const hostnameGetUserInformationProduction =
+    "http://127.0.0.1:8080/userAndAdminInformation/";
   const hostnameGetUserInformationHeroku =
     "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
   const cloudinaryImageHostName =
@@ -211,8 +212,8 @@ export default function Sidebar() {
       <div className="line"></div>
 
       <div className="side_info_box">
-        <div className="infoSpace row">
-          <div className="imageProfile-div">
+        <div className="infoSpace">
+          <div>
             <img
               src={url}
               alt="profile-preview"
@@ -226,17 +227,21 @@ export default function Sidebar() {
             ></div>
           </div>
         </div>
-        <CardSubtitle tag="h6">First Name :</CardSubtitle>
+        <CardSubtitle className="sideName" tag="h6">
+          First Name :
+        </CardSubtitle>
         <CardText
-          className="side_info"
+          className="sideName"
           style={{ display: cardTextStatus ? "inline" : "none" }}
         >
           {firstname}
         </CardText>
 
-        <CardSubtitle tag="h6">Last Name :</CardSubtitle>
+        <CardSubtitle className="sideName" tag="h6">
+          Last Name :
+        </CardSubtitle>
         <CardText
-          className="side_info"
+          className="sideName"
           style={{ display: cardTextStatus ? "inline" : "none" }}
         >
           {lastname}
