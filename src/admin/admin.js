@@ -4,7 +4,7 @@ import Sidebar from "./adminSidebar";
 import AdminMap from "./adminMap";
 import "../MyLocation/MyLocation.css";
 
-export default function OutdoorMapAdmin() {  
+export default function OutdoorMapAdmin() {
   return (
     <div className="page">
       <div className="row" style={{ width: "100%" }}>
@@ -14,13 +14,13 @@ export default function OutdoorMapAdmin() {
         <div className="col">
           <div className="pageContent">
             <div className="header ">
-              <Button
+              {/* <Button
                 className="backButton"
                 color="secondary"
                 href="./Mylocation"
               >
                 NEXT
-              </Button>
+              </Button> */}
 
               <h2 className="roomTitle">ECC 705</h2>
             </div>

@@ -31,8 +31,8 @@
 }
 
 .header {
-  /* display: flex; */
-  /* flex-direction: column; */
+  display: flex;
+  flex-direction: column;
 }
 .roomTitle {
   display: flex;
@@ -41,5 +41,10 @@
   color: rgba(42, 157, 244);
 }
 
+.topBar {
+  margin-top: 10px;
+}
+
 .navButton {
+  width: 100px;
 }

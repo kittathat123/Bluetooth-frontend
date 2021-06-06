@@ -23,7 +23,7 @@
 //   apiKey: "AIzaSyDq0QmikhnR5WnGaijIX5Km-ABXyMyPrGs",
 // })(outdoorMap);
 
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { compose, withProps } from "recompose";
 import {
   withScriptjs,
@@ -35,55 +35,58 @@ import {
 import { useHistory } from "react-router";
 
 export default function OutdoorMapUser() {
+  // DECLARE ALL USED VARIABLE
+  const history = useHistory();
+  var [token] = useState("");
+  var [isMarkerShown, setIsMarkerShown] = useState(false);
+  var [locationList, setLocationList] = useState([]);
+  var localStorageString = localStorage.getItem("user_info");
 
-    // DECLARE ALL USED VARIABLE
-    const history = useHistory();
-    var [token] = useState('');
-    var [isMarkerShown, setIsMarkerShown] = useState(false);
-    var [locationList, setLocationList] = useState([]);
-    var localStorageString = localStorage.getItem('user_info');
+  // GET USERNAME FROM LOCALSTORAGE
+  if (localStorage.getItem("user_info") === null) {
+    alert("!!! Please Log-in to the system first !!!");
+    history.push("/");
+  } else if (localStorage.getItem("user_info") !== null) {
+    token = JSON.parse(localStorageString).token;
+  }
 
-    // GET USERNAME FROM LOCALSTORAGE
-    if(localStorage.getItem('user_info') === null){
-        alert("!!! Please Log-in to the system first !!!");
-        history.push("/"); 
-    } else if(localStorage.getItem('user_info') !== null) {
-        token = JSON.parse(localStorageString).token;
-    }  
+  function delayedShowMarker() {
+    setTimeout(() => {
+      setIsMarkerShown(true);
+    }, 3000);
+  }
 
-    function delayedShowMarker(){
-      setTimeout(() => {
-        setIsMarkerShown(true);
-      }, 3000);
-    };
-  
-    function handleMarkerClick() {
-      setIsMarkerShown(false);
-      delayedShowMarker();
-    };
+  function handleMarkerClick() {
+    setIsMarkerShown(false);
+    delayedShowMarker();
+  }
 
-    const MyMapComponent = compose(
-      withProps({
-        googleMapURL:
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyDq0QmikhnR5WnGaijIX5Km-ABXyMyPrGs",
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: (
-          <div style={{ "marginTop": "-100px", height: `70vh`, width: "70vw" }} />
-        ),
-        mapElement: <div style={{ height: `100%` }} />,
-      }),
-      withScriptjs,
-      withGoogleMap
-    )((props) => (
-      <GoogleMap defaultZoom={8} defaultCenter={{ lat: 13.7299, lng: 100.7782 }}>
-        {props.isMarkerShown &&          
-          locationList
-          .slice(0, 50).reverse()
+  const MyMapComponent = compose(
+    withProps({
+      googleMapURL:
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyDq0QmikhnR5WnGaijIX5Km-ABXyMyPrGs",
+      loadingElement: <div style={{ height: `100%` }} />,
+      containerElement: (
+        <div style={{ marginTop: "-100px", height: `70vh`, width: "70vw" }} />
+      ),
+      mapElement: <div style={{ height: `100%` }} />,
+    }),
+    withScriptjs,
+    withGoogleMap
+  )((props) => (
+    <GoogleMap defaultZoom={8} defaultCenter={{ lat: 13.7299, lng: 100.7782 }}>
+      {props.isMarkerShown &&
+        locationList
+          .slice(0, 50)
+          .reverse()
           .map((marker, index) => {
             return (
               <Marker
                 key={index}
-                position={{ lat: JSON.parse(marker.latitude_longtitude).coordinates[1], lng: JSON.parse(marker.latitude_longtitude).coordinates[0] }}
+                position={{
+                  lat: JSON.parse(marker.latitude_longtitude).coordinates[1],
+                  lng: JSON.parse(marker.latitude_longtitude).coordinates[0],
+                }}
               >
                 <InfoWindow>
                   <div>{marker.location}</div>
@@ -95,35 +98,34 @@ export default function OutdoorMapUser() {
             // console.log("latitude : " ,JSON.parse(marker.latitude_longtitude).coordinates[1]);
             // console.log("longtitude : " ,JSON.parse(marker.latitude_longtitude).coordinates[0]);
           })}
-      </GoogleMap>
-    ));
+    </GoogleMap>
+  ));
 
-    const hostnameProduction = "http://127.0.0.1:8080/userOutdoor/";
-    const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userOutdoor/";
-    
-    useEffect(() => {
-        fetch(hostnameHeroku, {
-            method: 'POST',
-            headers : {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            }, 
-            body: JSON.stringify({'token': token})
-        })
-            .then(response => response.json())
-            .then(dataFromServer => {
-              console.log("[outdoorMapUser] DATA : " , (dataFromServer.message));
-              setLocationList(dataFromServer.message);
-            })
-        delayedShowMarker();
-    }, [token]);
+  const hostnameProduction = "http://127.0.0.1:8080/userOutdoor/";
+  const hostnameHeroku =
+    "https://protected-brook-89084.herokuapp.com/userOutdoor/";
 
+  useEffect(() => {
+    fetch(hostnameHeroku, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ token: token }),
+    })
+      .then((response) => response.json())
+      .then((dataFromServer) => {
+        console.log("[outdoorMapUser] DATA : ", dataFromServer.message);
+        setLocationList(dataFromServer.message);
+      });
+    delayedShowMarker();
+  }, [token]);
 
-    return(
-        <MyMapComponent 
-          isMarkerShown={isMarkerShown}
-          onMarkerClick={handleMarkerClick}
-        />
-    );
+  return (
+    <MyMapComponent
+      isMarkerShown={isMarkerShown}
+      onMarkerClick={handleMarkerClick}
+    />
+  );
 }
-

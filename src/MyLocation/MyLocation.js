@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import VRScene from "./VRScene";
 import { Button } from "reactstrap";
 import Room from "./AFrame-SmartHome-master/docVRoom_2";
+import Room1 from "./AFrame-SmartHome-master/docVRoom_1";
 import { useHistory, Link } from "react-router-dom";
 import useToken from "../Token/useToken";
 import "./MyLocation.css";
@@ -11,6 +12,14 @@ import "./MyLocation.css";
 export default function MyLocation() {
   const history = useHistory();
 
+  const outdoor = () => {
+    let path = "/Outdoor";
+    history.push(path);
+  };
+  const indoor = () => {
+    let path = "/Mylocation";
+    history.push(path);
+  };
   // // CHECK STATUS USER IS LOGIN OR NOT
   // const localStorageString = localStorage.getItem('user_info');
   // if(localStorageString === null){
@@ -24,21 +33,22 @@ export default function MyLocation() {
     <div className="page">
       <div className="row" style={{ width: "100%" }}>
         <div className="col-auto">
-          <Sidebar />
+          <Sidebar
+            pageWrapId={"page-wrap"}
+            outerContainerId={"outer-container"}
+          />
         </div>
-        <div className="col">
+        <div className="col" id="page-wrap">
           <div className="pageContent">
             <div className="header ">
-              {/* <Button className="backButton" color="secondary" href="./Outdoor">
-                Back
-              </Button> */}
-              <Link className="navButton" to="/Outdoor">
-                Outdoor{" "}
-              </Link>
-              <Link className="navButton" to="/Mylocation">
-                {" "}
-                Indoor
-              </Link>
+              <div className="topBar">
+                <Button className="navButton" color="warning" onClick={outdoor}>
+                  Outdoor
+                </Button>
+                <Button className="navButton" color="warning" onClick={indoor}>
+                  Indoor
+                </Button>
+              </div>
 
               <h2 className="roomTitle">ECC 705</h2>
             </div>
