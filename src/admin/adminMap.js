@@ -68,7 +68,7 @@ export default function OutdoorMapAdmin() {
   ));
   
   useEffect(() => {
-    console.log("[adminMap.js] GET_USERNAME : ", selectedUsername);
+    // console.log("[adminMap.js] GET_USERNAME : ", selectedUsername);
     
     async function getLocationList() {
       try {

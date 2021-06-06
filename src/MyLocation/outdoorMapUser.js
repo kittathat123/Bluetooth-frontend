@@ -115,7 +115,7 @@ export default function OutdoorMapUser() {
     useEffect(() => {
         async function getLocation() {
           try {
-            const response = await fetch(hostnameProduction, {
+            const response = await fetch(hostnameHeroku, {
               method: 'POST',
               headers : {
                 'Content-Type': 'application/json',
