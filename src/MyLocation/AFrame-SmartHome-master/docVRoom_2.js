@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "aframe";
 import { Entity, Scene } from "aframe-react";
+import { Button } from "reactstrap";
 // import "aframe-physics-system/dist/aframe-physics-system";    have error
 
 
@@ -19,17 +20,27 @@ class docVRoom extends Component {
 
     this.setUsername = this.setUsername.bind(this);
     this.getUsername = this.getUsername.bind(this);
+    this.setX = this.setX.bind(this);
+    this.setY = this.setY.bind(this);
     this.setXandY = this.setXandY.bind(this);
     
   }
 
   setXandY(x_coord, y_coord) {
     this.setState({
-      spherePosition: {
-        x: x_coord,
-        y: 1.2,
-        z: y_coord,
-      },
+      spherePosition: { x: x_coord, y: y_coord, z: 1 },
+    });
+  }
+
+  setX(x_coord) {
+    this.setState({
+      x: x_coord,
+    });
+  }
+
+  setY(y_coord) {
+    this.setState({
+      y: y_coord,
     });
 
     
@@ -79,21 +90,25 @@ class docVRoom extends Component {
 
     socket.onopen = (e) => {
       e.preventDefault();
-      // console.log("[docVRoom_2.js] socket.onopen");      
+      console.log("[docVRoom_2.js] socket.onopen");
     };
 
     socket.onmessage = (e) => {
       // console.log("[docVRoom_2.js] socket.onmessage");
       const datas = JSON.parse(e.data);
       if (datas.payload.length !== 0) {
-        if((datas.payload.bt_tag_owner).localeCompare(this.getUsername()) === 0 ){
-          // console.log("[docVRoom.js] DATA : ", (datas.payload));
-          this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
-        } 
+        if (
+          datas.payload.bt_tag_owner.localeCompare(this.getUsername()) === 0
+        ) {
+          console.log("[docVRoom.js] DATA : ", datas.payload);
+          // this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
+          // this.setXandY(2.3, 2);
+        }
       }
     };
 
-    socket.onclose = function (e) {
+    socket.onclose = () => {
+      socket.close();
       console.log("[docVRoom_2.js] socket.onclose");
     };
   }
@@ -104,17 +119,26 @@ class docVRoom extends Component {
 
 
   render() {
-    // const datass = Object.values(this.state.spherePosition);
-    // console.log( "(docVRoom.js) show sphere position: " + datass );
-    // var entityEl = document.createElement("a-entity");
-    // entityEl.object3D.position.set(1, 2, 3);
+    const datass = Object.values(this.state.spherePosition);
+    console.log("(docVRoom.js) show sphere position: " + datass);
+    // var entity = document.createElement("#");
+    // var sceneEl = document.querySelector("a-scene");
+    // var entity = document.querySelector("#maleModel").getAttribute("position");
+    // document
+    //   .getElementById("ball")
+    //   .setAttribute("position", { x: -3, y: 0.59, z: -3 });
+    // var male = document.getElementById("male");
+    // var el = document.querySelector("a-entity");
 
-    var el = document.querySelector('#maleModel');
-    console.log("HUMAN POSITION : ", typeof(el));
-    
+    // console.log("get avatar position", entity);
+    // entityEl.object3D.position.set(1, 2, 3);
+    // this.setX(2.3);
+    // this.setY(2);
+
     return (
       <div>
         <div style={{ height: "70vh", width: "70vw" }}>
+          <Button onClick={(e) => this.setXandY(2.5, 2, e)}></Button>
           <Scene
             physics="gravity: -1.6"
             environment="preset: default; lighting: none; ground: none"
@@ -129,8 +153,7 @@ class docVRoom extends Component {
                 wasd-controls={{ enabled: "true" }}
                 look-controls={{ enabled: "true" }}
                 position={{ x: 0, y: 1.65, z: 0 }}
-              >
-              </Entity>
+              ></Entity>
 
               <Entity
                 id="rightHand"
@@ -148,10 +171,12 @@ class docVRoom extends Component {
 
             <a-assets>
               <a-asset-item
+                response-type="arraybuffer"
                 id="male"
                 src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
               ></a-asset-item>
               <a-asset-item
+                response-type="arraybuffer"
                 id="tv"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
               ></a-asset-item>
@@ -275,20 +300,17 @@ class docVRoom extends Component {
                 geometry-merger="preserveOriginal: false"
                 id="furnitureList"
               >
-
                 {/* HUMAN AVATAR */}
                 <Entity
-                  scale="0.03 0.03 0.02"
                   id="maleModel"
+                  scale="0.03 0.03  0.02 "
                   gltf-model="#male"
-                  position="0.2, 1, -1.3"
-                  // from={{ x:this.state.spherePosition.x, y:this.state.spherePosition.y, z:this.state.spherePosition.z}}
-                  // to={{ x:this.state.spherePosition.x, y:this.state.spherePosition.y, z:this.state.spherePosition.z}}
-                  position={{
-                    x: this.state.spherePosition.x,
-                    y: this.state.spherePosition.y,
-                    z: this.state.spherePosition.z,
-                  }}
+                  position="0.2,1,-1.3"
+                  // position={{
+                  //   x: this.state.spherePosition.x,
+                  //   y: this.state.spherePosition.y,
+                  //   z: this.state.spherePosition.z,
+                  // }}
                 ></Entity>
 
 
@@ -609,7 +631,7 @@ class docVRoom extends Component {
                   position="1.599 0.06978 -9.97823"
                   rotation="0 -90 0"
                 />
-                <Entity
+                {/* <Entity
                   id="aircon"
                   gltf-model="#airconModel"
                   scale="0.0025 0.0025 0.0025"
@@ -622,7 +644,7 @@ class docVRoom extends Component {
                   scale="0.0025 0.0025 0.0025"
                   position={{ x: -3.77, y: 2.5, z: -3.3 }}
                   rotation={{ x: 0, y: 90, z: 0 }}
-                />
+                /> */}
               </Entity>
 
               {/* <Entity>

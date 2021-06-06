@@ -42,13 +42,13 @@ export default function OutdoorMapAdmin() {
         <div className="col">
           <div className="pageContent">
             <div className="header ">
-              <Button
+              {/* <Button
                 className="backButton"
                 color="secondary"
                 href="./Mylocation"
               >
                 NEXT
-              </Button>
+              </Button> */}
 
               {/* <h2 className="roomTitle">ECC 705</h2>
               <div>

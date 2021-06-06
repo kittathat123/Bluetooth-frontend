@@ -27,6 +27,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import { slide as Menu } from "react-burger-menu";
 
 export let logoutUser = async (credentials) => {
   // console.log("CREDITIALS : ", credentials)
@@ -140,7 +141,7 @@ export default function Sidebar() {
 
   // console.log(logo);
   return (
-    <div className="sidebar-container">
+    <Menu className="sidebar-container">
       <div className="logo-box">
         <img
           src={logo}
@@ -241,6 +242,6 @@ export default function Sidebar() {
           {lastname}
         </CardText>
       </div>
-    </div>
+    </Menu>
   );
 }

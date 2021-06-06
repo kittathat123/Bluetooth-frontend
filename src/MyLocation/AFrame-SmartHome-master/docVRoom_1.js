@@ -9,7 +9,7 @@ import { Entity, Scene } from "aframe-react";
 // import DynamicObject from "./DynamicObject";
 // import 'https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@1.3/fanToggle.js';
 
-const WebSocketHostnameHeroku = 
+const WebSocketHostnameHeroku =
   "wss://protected-brook-89084.herokuapp.com/ws/location/";
 const WebSocketHostnameProduction = "ws://127.0.0.1:8080/ws/location/";
 
@@ -25,6 +25,8 @@ export default function DocVRoom() {
   const [isPaused, setPause] = useState(false);
   const ws = useRef(null);
 
+  const setXandY = () => {};
+
   // GET USERNAME FROM LOCALSTORAGE
   if (localStorage.getItem("user_info") === null) {
     alert("!!! Please Log-in to the system first !!!");
@@ -35,36 +37,40 @@ export default function DocVRoom() {
 
   // GET_LOCATION_DATA_FROM_SERVER
   useEffect(() => {
-      ws.current = new WebSocket(WebSocketHostnameHeroku);
-      ws.current.onopen = () => console.log("[docVRoom.js] Open websocket");
-      ws.current.onclose = () => console.log("[docVRoom.js] Close websocket");
+    ws.current = new WebSocket(WebSocketHostnameHeroku);
+    ws.current.onopen = () => console.log("[docVRoom.js] Open websocket");
+    ws.current.onclose = () => console.log("[docVRoom.js] Close websocket");
 
-      return () => {
-          ws.current.close();
-      };
-
+    return () => {
+      ws.current.close();
+    };
   }, []);
 
   // SET_CURRENT_LOCATION
   useEffect(() => {
-    if(!ws.current) return;
+    if (!ws.current) return;
 
-    ws.current.onmessage = e => {
-        if (isPaused) return;
-        const message = JSON.parse(e.data);
-        
-        if(message.payload.length !== 0) {
-          // console.log("[docVRoom.js] DATA : ", (message.payload));
-          if((message.payload.bt_tag_owner).localeCompare(username) === 0){
-            setX_coord(message.payload.x_coord);
-            setZ_coord(message.payload.y_coord);
-          }
+    ws.current.onmessage = (e) => {
+      if (isPaused) return;
+      const message = JSON.parse(e.data);
+
+      if (message.payload.length !== 0) {
+        // console.log("[docVRoom.js] DATA : ", (message.payload));
+        if (message.payload.bt_tag_owner.localeCompare(username) === 0) {
+          setX_coord(message.payload.x_coord);
+          setZ_coord(message.payload.y_coord);
         }
-        console.log("[docVRoom.js] show shere position : " + x_coord + ", " + y_coord + ", " + z_coord);
       }
+      console.log(
+        "[docVRoom.js] show shere position : " +
+          x_coord +
+          ", " +
+          y_coord +
+          ", " +
+          z_coord
+      );
+    };
   }, [isPaused, ws, username, x_coord, y_coord, z_coord]);
-
-  
 
   return (
     <div>
@@ -687,5 +693,3 @@ export default function DocVRoom() {
     </div>
   );
 }
-
-
