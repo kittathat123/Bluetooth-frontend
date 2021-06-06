@@ -13,10 +13,12 @@ class Quarantine extends Component {
           </div>
           <div className="col">
             <div className="pageContent">
-              <h1 style={{ color: "rgba(42, 157, 244)" }}>Quarantine</h1>
+              <h1 className="roomTitle">Quarantine</h1>
 
               <div className="timerClock">
-                <h3>Choose where you want to stay for quarantine</h3>
+                <h3 className="description">
+                  Choose where you want to stay for quarantine
+                </h3>
               </div>
               <div className="boxMap">
                 <div className="geoBox">

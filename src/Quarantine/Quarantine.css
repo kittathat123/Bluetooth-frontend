@@ -1,3 +1,8 @@
 .geoBox {
   margin-top: -20vh;
 }
+
+.description {
+  display: flex;
+  justify-content: center;
+}

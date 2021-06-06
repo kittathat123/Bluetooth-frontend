@@ -12,7 +12,7 @@ export default function LogHistory() {
         </div>
         <div className="col">
           <div className="pageContent">
-            <h1 style={{ color: "rgba(42, 157, 244)" }}>Log History</h1>
+            <h1 className="roomTitle">Log History</h1>
             <div className="boxMap">
               <div className="tableBox">
                 <Tables />

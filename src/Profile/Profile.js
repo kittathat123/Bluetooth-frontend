@@ -12,7 +12,7 @@ export default function Profile() {
         </div>
         <div className="col">
           <div className="pageContent">
-            <h1 style={{ color: "rgba(42, 157, 244)" }}>Profile</h1>
+            <h1 className="roomTitle">Profile</h1>
             <div className="boxMap">
               <div className="profileBox">
                 <ProfileCard />
@@ -24,4 +24,3 @@ export default function Profile() {
     </div>
   );
 }
-
