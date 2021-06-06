@@ -42,7 +42,12 @@ export default function MyLocation() {
           <div className="pageContent">
             <div className="header ">
               <div className="topBar">
-                <Button className="navButton" color="warning" onClick={outdoor}>
+                <Button
+                  className="navButton"
+                  color="warning"
+                  style={{ "margin-left": "100px" }}
+                  onClick={outdoor}
+                >
                   Outdoor
                 </Button>
                 <Button className="navButton" color="warning" onClick={indoor}>
