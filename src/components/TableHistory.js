@@ -5,7 +5,7 @@ import { Table } from "reactstrap";
 
 const hostnameHeroku =
   "https://protected-brook-89084.herokuapp.com/API/location/";
-const hostnameProduction = "http://127.0.0.1:8080/API/location";
+const hostnameProduction = "http://127.0.0.1:8080/API/location/";
 
 async function getList() {
   return await fetch(hostnameHeroku).then((data) => data.json());
@@ -41,8 +41,8 @@ const TableHistory = (props) => {
     let mounted = true;
     getList().then((items) => {
       if (mounted) {
-        console.log("[TableHistory] send data part" + getList());
-         setList(items);
+        // console.log("[TableHistory] send data part" + JSON.stringify(items));
+        setList(items);
       }
     });
     return () => (mounted = false);
@@ -64,7 +64,7 @@ const TableHistory = (props) => {
       <tbody>
         {list
           .filter((item) => item.bt_tag_owner === username)
-          .slice(0, 50)
+          .slice(-25)
           .reverse()
           .map((item, index) => (
             <tr key={index}>

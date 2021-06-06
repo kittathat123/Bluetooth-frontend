@@ -37,7 +37,7 @@ import { useHistory } from "react-router";
 export default function OutdoorMapUser() {
 
     // DECLARE ALL USED VARIABLE
-    const history = useHistory();
+    var history = useHistory();
     var [token] = useState('');
     var [isMarkerShown, setIsMarkerShown] = useState(false);
     var [locationList, setLocationList] = useState([]);
@@ -80,13 +80,20 @@ export default function OutdoorMapUser() {
           locationList
           .slice(0, 50).reverse()
           .map((marker, index) => {
+            const informationWindow = 
+              <div>
+                <b>{marker.timestamp}</b>
+                  <br></br>
+                <b>{marker.location}</b>
+              </div>;
             return (
               <Marker
                 key={index}
                 position={{ lat: JSON.parse(marker.latitude_longtitude).coordinates[1], lng: JSON.parse(marker.latitude_longtitude).coordinates[0] }}
               >
                 <InfoWindow>
-                  <div>{marker.location}</div>
+                  {informationWindow}
+                  {/* <div>{marker.location}</div> */}
                 </InfoWindow>
               </Marker>
             );
@@ -102,19 +109,26 @@ export default function OutdoorMapUser() {
     const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userOutdoor/";
     
     useEffect(() => {
-        fetch(hostnameHeroku, {
-            method: 'POST',
-            headers : {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            }, 
-            body: JSON.stringify({'token': token})
-        })
-            .then(response => response.json())
-            .then(dataFromServer => {
-              console.log("[outdoorMapUser] DATA : " , (dataFromServer.message));
-              setLocationList(dataFromServer.message);
-            })
+        async function getLocation() {
+          try {
+            const response = await fetch(hostnameProduction, {
+              method: 'POST',
+              headers : {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }, 
+              body: JSON.stringify({'token': token})
+            });
+            const dataFromServer = await response.json();
+            console.log("[outdoorMapUser.js] JSON : ", dataFromServer);
+            setLocationList(dataFromServer.message)
+          } catch (err) {
+            console.log(err);
+          }
+        }
+        
+          
+        getLocation();
         delayedShowMarker();
     }, [token]);
 

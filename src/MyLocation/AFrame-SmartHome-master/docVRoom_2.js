@@ -3,7 +3,6 @@ import "aframe";
 import { Entity, Scene } from "aframe-react";
 // import "aframe-physics-system/dist/aframe-physics-system";    have error
 
-// TESTTTTTTTTT
 
 class docVRoom extends Component {
   constructor(props) {
@@ -21,16 +20,25 @@ class docVRoom extends Component {
     this.setUsername = this.setUsername.bind(this);
     this.getUsername = this.getUsername.bind(this);
     this.setXandY = this.setXandY.bind(this);
+    
   }
 
   setXandY(x_coord, y_coord) {
     this.setState({
       spherePosition: {
         x: x_coord,
-        y: y_coord,
-        z: 1,
+        y: 1.2,
+        z: y_coord,
       },
     });
+
+    
+    // document.getElementById("male").object3D.position.set(1,2,3);
+    // document.querySelector("#male").object3D.position.set(x_coord, this.state.y, y_coord);
+    // document.querySelector("#male").setAttribute('position', {x:x_coord, y:this.state.y, z:y_coord});
+    // document.querySelector("#male").setAttribute('position', {x:x_coord, y:this.state.y, z:y_coord});
+    console.log("UPDATE POSITION LEAW");
+
   }
 
   setUsername() {
@@ -42,13 +50,27 @@ class docVRoom extends Component {
   }
 
   getUsername() {
-    console.log("[docVRoom.js] USER : ", this.state.username);
+    // console.log("[docVRoom.js] USER : ", this.state.username);
     return this.state.username;
   }
+
+
+
+  aframePath = "node_modules/aframe/dist/aframe-master.js";
 
   componentDidMount() {
     this.setUsername();
     this.getUsername();
+
+    // ADD_A-FRAME_SCRIPT
+    // const script = document.createElement("script");
+    // script.src = this.aframePath;
+    // script.async = true;
+    // // script.onload = () => this.scriptLoaded();
+    // document.head.appendChild(script);
+
+
+
     const socket = new WebSocket(
       "wss://protected-brook-89084.herokuapp.com/ws/location/"
       // "wss://192.168.4.209/ws/tag/1/",
@@ -57,15 +79,15 @@ class docVRoom extends Component {
 
     socket.onopen = (e) => {
       e.preventDefault();
-      console.log("[docVRoom_2.js] socket.onopen");      
+      // console.log("[docVRoom_2.js] socket.onopen");      
     };
 
     socket.onmessage = (e) => {
-      console.log("[docVRoom_2.js] socket.onmessage");
+      // console.log("[docVRoom_2.js] socket.onmessage");
       const datas = JSON.parse(e.data);
       if (datas.payload.length !== 0) {
         if((datas.payload.bt_tag_owner).localeCompare(this.getUsername()) === 0 ){
-          console.log("[docVRoom.js] DATA : ", (datas.payload));
+          // console.log("[docVRoom.js] DATA : ", (datas.payload));
           this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
         } 
       }
@@ -76,11 +98,19 @@ class docVRoom extends Component {
     };
   }
 
+  componentWillUnmount() {
+    // document.head.removeChild(this.aframePath);
+  }
+
+
   render() {
-    const datass = Object.values(this.state.spherePosition);
-    console.log( "(docVRoom.js) show sphere position: " + datass );
-    var entityEl = document.createElement("a-entity");
-    entityEl.object3D.position.set(1, 2, 3);
+    // const datass = Object.values(this.state.spherePosition);
+    // console.log( "(docVRoom.js) show sphere position: " + datass );
+    // var entityEl = document.createElement("a-entity");
+    // entityEl.object3D.position.set(1, 2, 3);
+
+    var el = document.querySelector('#maleModel');
+    console.log("HUMAN POSITION : ", typeof(el));
     
     return (
       <div>
@@ -248,15 +278,19 @@ class docVRoom extends Component {
 
                 {/* HUMAN AVATAR */}
                 <Entity
-                  scale="0.03 0.03  0.02 "
+                  scale="0.03 0.03 0.02"
+                  id="maleModel"
                   gltf-model="#male"
-                  // position="0.2,1,-1.3"
+                  position="0.2, 1, -1.3"
+                  // from={{ x:this.state.spherePosition.x, y:this.state.spherePosition.y, z:this.state.spherePosition.z}}
+                  // to={{ x:this.state.spherePosition.x, y:this.state.spherePosition.y, z:this.state.spherePosition.z}}
                   position={{
                     x: this.state.spherePosition.x,
                     y: this.state.spherePosition.y,
                     z: this.state.spherePosition.z,
                   }}
                 ></Entity>
+
 
                 {/* <a-animation
                   gltf-model="#male"

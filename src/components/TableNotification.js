@@ -87,7 +87,7 @@ export default function TableNotification() {
               {
                   list
                   .filter(item => item.user_1 === username)
-                  .slice(0, 100).reverse()
+                  .reverse()
                   .map((item, index) => (
                       <tr key={index}>
                           <td>{item.timestamp}</td>

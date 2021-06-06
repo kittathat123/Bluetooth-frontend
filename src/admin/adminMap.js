@@ -14,6 +14,7 @@ export default function OutdoorMapAdmin() {
   const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
   var [isMarkerShown, setIsMarkerShown] = useState(false);
   var [locationList, setLocationList] = useState([]);
+  var [selectedUsername, setSelectedUsername] = useState('');
 
   function delayedShowMarker(){
     setTimeout(() => {
@@ -43,14 +44,21 @@ export default function OutdoorMapAdmin() {
       {props.isMarkerShown &&
         locationList.map((marker, index) => {
           // const onClick = props.onClick.bind(this, marker)
+          const informationWindow = 
+            <div>
+              <b>{marker.timestamp}</b>
+                <br></br> 
+              <b>{marker.location} </b>
+                <br></br> 
+              <b>{marker.user_name}</b>
+            </div>;
           return (
             <Marker
               key={index}
               position={{ lat: JSON.parse(marker.latitude_longtitude).coordinates[1], lng: JSON.parse(marker.latitude_longtitude).coordinates[0] }}
             >
               <InfoWindow>
-                <div>{marker.first_name}</div>
-                {/* <div>{marker.location}</div> */}
+                {informationWindow}
               </InfoWindow>
             </Marker>
           );
@@ -60,20 +68,28 @@ export default function OutdoorMapAdmin() {
   ));
   
   useEffect(() => {
-    fetch(hostnameHeroku, {
+    console.log("[adminMap.js] GET_USERNAME : ", selectedUsername);
+    
+    async function getLocationList() {
+      try {
+        const response = await fetch(hostnameHeroku, {
           method: 'GET',
           headers : {
             'Content-Type' : 'application/json',
             'Accept': 'application/json'
           }
-      })
-          .then(response => response.json())
-          .then(dataFromServer => {
-              console.log("[adminMap] DATA : ", dataFromServer.message);
-              setLocationList(dataFromServer.message);
-          })
-      delayedShowMarker();
-  }, [setLocationList]);
+        });
+        const dataFromServer = await response.json();
+        console.log("[adminMap.js] DATA : ", dataFromServer);
+        setLocationList(dataFromServer.message);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getLocationList();
+    delayedShowMarker();
+  }, [selectedUsername]);
 
   return(
     <MyMapComponent 

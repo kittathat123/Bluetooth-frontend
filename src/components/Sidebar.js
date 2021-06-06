@@ -90,6 +90,7 @@ export default function Sidebar() {
     }
   };
 
+  const hostnameGetUserInformationProduction = "http://127.0.0.1:8080/userAndAdminInformation/";
   const hostnameGetUserInformationHeroku =
     "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
   const cloudinaryImageHostName =
@@ -105,7 +106,7 @@ export default function Sidebar() {
     })
       .then((response) => response.json())
       .then((dataFromServer) => {
-        console.log("DATA : ", dataFromServer.userInformation[0]);
+        // console.log("DATA : ", dataFromServer.userInformation[0]);
 
         try {
           // SET ALL USED VARIBLE
@@ -226,7 +227,7 @@ export default function Sidebar() {
         </div>
         <CardSubtitle tag="h6">First Name :</CardSubtitle>
         <CardText
-          classsName="side_info"
+          className="side_info"
           style={{ display: cardTextStatus ? "inline" : "none" }}
         >
           {firstname}

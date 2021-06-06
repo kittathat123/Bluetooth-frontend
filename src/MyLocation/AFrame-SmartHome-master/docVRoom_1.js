@@ -323,6 +323,7 @@ export default function DocVRoom() {
                 //   z: this.state.spherePosition.z,
                 // }}
               ></Entity>
+              
               {/* <a-animation
                 gltf-model="#male"
                 from="0.2 , 1, -1.3"
