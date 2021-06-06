@@ -1,0 +1,7 @@
+.adminTitle {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  color: rgba(42, 157, 244);
+  margin-top: 30px;
+}

@@ -69,7 +69,7 @@ export default function Sidebar() {
         ></img>
       </div>
 
-      <Link to="/Outdoor">
+      <Link to="/Admin">
         <div className="content-box">
           {/* <h1 className="content-title">Menu</h1> */}
           <div className="my-location-box">

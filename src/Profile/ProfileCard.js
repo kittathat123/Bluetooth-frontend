@@ -503,6 +503,7 @@ export default function ProfileCard() {
           <div className="infoSpace row">
             <Col className="btn-group-customize">
               <Button
+                outline
                 color="warning"
                 onClick={handleEdit}
                 style={{ display: showButton ? "none" : "block" }}

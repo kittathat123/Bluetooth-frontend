@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import Sidebar from "./adminSidebar";
 import AdminMap from "./adminMap";
 import "../MyLocation/MyLocation.css";
+import "./admin.css";
 
 export default function OutdoorMapAdmin() {
-  
-  const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
+  const hostnameHeroku =
+    "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
   const hostnameProduction = "http://127.0.0.1:8080/userAndAdminInformation/";
   var [usernameList, setUsernameList] = useState([]);
   var [selectedUsername, setSelectedUsername] = useState("");
@@ -15,14 +16,20 @@ export default function OutdoorMapAdmin() {
   async function getUsernameList() {
     try {
       const response = await fetch(hostnameHeroku, {
-        method: 'GET',
-        headers : {
-          'Content-Type': 'application/json',
-        }
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const dataFromServer = await response.json();
-      console.log("[admin.js] usernameList : ", dataFromServer.message.username);
-      console.log("[admin.js] usernameList : ", typeof(dataFromServer.message.username));
+      console.log(
+        "[admin.js] usernameList : ",
+        dataFromServer.message.username
+      );
+      console.log(
+        "[admin.js] usernameList : ",
+        typeof dataFromServer.message.username
+      );
       setUsernameList(dataFromServer.message.username);
     } catch (err) {
       console.log(err);
@@ -31,7 +38,7 @@ export default function OutdoorMapAdmin() {
 
   useEffect(() => {
     getUsernameList();
-  }, [])
+  }, []);
 
   return (
     <div className="page">
@@ -42,6 +49,7 @@ export default function OutdoorMapAdmin() {
         <div className="col">
           <div className="pageContent">
             <div className="header ">
+              <h2 className="adminTitle">Admin Map</h2>
               {/* <Button
                 className="backButton"
                 color="secondary"
@@ -65,13 +73,12 @@ export default function OutdoorMapAdmin() {
                 }
               </div> */}
             </div>
-            
+
             <div className="boxMap">
               <div className="borderBox">
                 <AdminMap />
               </div>
             </div>
-
           </div>
         </div>
       </div>
