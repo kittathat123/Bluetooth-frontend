@@ -144,7 +144,7 @@ export default function Login() {
                 type="submit"
                 style={{ marginTop: "20px" }}
               >
-                Submit
+                Sign In
               </Button>
             </div>
           </Form>

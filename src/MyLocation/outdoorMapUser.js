@@ -1,28 +1,3 @@
-// import React, { Component } from "react";
-// import { Map, GoogleApiWrapper, Marker, InfoWindow } from "react-google-maps";
-
-// class outdoorMap extends Component {
-//   render() {
-//     return (
-//       <Map>
-//         google={this.props.google}
-//         zoom={11}
-//         {/* style={mapStyles} */}
-//         initialCenter={{ lat: 40.7128, lng: -74.006 }}
-//       </Map>
-
-//       //   <div
-//       //     styye={{ height: "200px", width: "100%", margin: "0", padding: "0" }}
-//       //     id="map"
-//       //   ></div>
-//     );
-//   }
-// }
-
-// export default GoogleApiWrapper({
-//   apiKey: "AIzaSyDq0QmikhnR5WnGaijIX5Km-ABXyMyPrGs",
-// })(outdoorMap);
-
 import React, { useState, useEffect } from "react";
 import { compose, withProps } from "recompose";
 import {
@@ -31,15 +6,18 @@ import {
   GoogleMap,
   Marker,
   InfoWindow,
+  Polyline,
 } from "react-google-maps";
 import { useHistory } from "react-router";
 
 export default function OutdoorMapUser() {
   // DECLARE ALL USED VARIABLE
   const history = useHistory();
+
   var [token] = useState("");
   var [isMarkerShown, setIsMarkerShown] = useState(false);
   var [locationList, setLocationList] = useState([]);
+  var [pathList, setPathList] = useState([]);
   var localStorageString = localStorage.getItem("user_info");
 
   // GET USERNAME FROM LOCALSTORAGE
@@ -52,14 +30,34 @@ export default function OutdoorMapUser() {
 
   
   function delayedShowMarker() {
-    setTimeout(() => {
-      setIsMarkerShown(true);
-    }, 3000);
+    setIsMarkerShown(true);
   }
 
   function handleMarkerClick() {
     setIsMarkerShown(false);
     delayedShowMarker();
+  }
+
+  function createPathList(dataLocation) {
+    // SORT DATA LIST BY USING DATE_TIME
+    dataLocation.sort(function(a, b) {
+      return new Date(a.timestamp) - new Date(b.timestamp);
+    });
+
+    // console.log("NEW DATA LOCATION : ", dataLocation);
+
+    var pathListInFunction = [];
+    var i;
+    for(i=0; i<dataLocation.length; i++)
+    {
+      // console.log(JSON.parse(dataLocation[i]));
+      pathListInFunction.push({
+        lat: JSON.parse(dataLocation[i].latitude_longtitude).coordinates[1],
+        lng: JSON.parse(dataLocation[i].latitude_longtitude).coordinates[0]
+      })
+    }
+    // console.log(pathListInFunction);
+    setPathList(pathListInFunction);
   }
 
   const MyMapComponent = compose(
@@ -75,8 +73,8 @@ export default function OutdoorMapUser() {
     withScriptjs,
     withGoogleMap
   )((props) => (
-    <GoogleMap defaultZoom={8} defaultCenter={{ lat: 13.7299, lng: 100.7782 }}>
-      {props.isMarkerShown &&
+    <GoogleMap defaultZoom={10} defaultCenter={{ lat: 13.7299, lng: 100.7782 }}>
+        {props.isMarkerShown &&
         locationList
           .slice(0, 50)
           .reverse()
@@ -97,15 +95,25 @@ export default function OutdoorMapUser() {
               >
                 <InfoWindow>
                   {informationWindow}
-                  {/* <div>{marker.location}</div> */}
+                  
                 </InfoWindow>
               </Marker>
-            );
-            // console.log(marker.location);
-            // console.log(JSON.parse(marker.latitude_longtitude));
-            // console.log("latitude : " ,JSON.parse(marker.latitude_longtitude).coordinates[1]);
-            // console.log("longtitude : " ,JSON.parse(marker.latitude_longtitude).coordinates[0]);
-          })}
+            );         
+        })}
+
+        <Polyline 
+          path={pathList}
+          options={{ 
+          strokeColor: '#120204',
+          strokeOpacity: '1.0',
+          strokeWeight: 3,
+          icons: [{ 
+            icon: { path: window.google.maps.SymbolPath.FORWARD_OPEN_ARROW },
+            offset: '20%',
+            repeat: '500px'
+          }],
+          }}
+        />
     </GoogleMap>
   ));
 
@@ -126,6 +134,8 @@ export default function OutdoorMapUser() {
             const dataFromServer = await response.json();
             console.log("[outdoorMapUser.js] JSON : ", dataFromServer);
             setLocationList(dataFromServer.message)
+            createPathList(dataFromServer.message);
+
           } catch (err) {
             console.log(err);
           }

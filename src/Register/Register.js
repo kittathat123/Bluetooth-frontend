@@ -56,10 +56,12 @@ export default function Register() {
   );
   const [gender, setGender] = useState("");
   const [homeAddr, setHomeAddr] = useState("");
+  const [btMacAddr, setBTMacAddr] = useState("");
   const [registerStatus, setRegisterStatus] = useState(false);
   const message_1 = "User already exist in the system.";
   const message_2 = "New User and Got some data!";
   const message_3 = "Please fill in all section";
+  const message_4 = "This bluetooth mac address already exist in the system.";
 
   const handleSubmit = async (e) => {
     var handleSubmitStatus = true;
@@ -75,7 +77,8 @@ export default function Register() {
       password === "" ||
       confirmPassword === "" ||
       gender === "" ||
-      homeAddr === ""
+      homeAddr === "" ||
+      btMacAddr === ""
     ) {
       handleSubmitStatus = false;
       alert("--- Please fill in all section ---");
@@ -130,6 +133,7 @@ export default function Register() {
         dateOfBirth,
         gender,
         homeAddr,
+        btMacAddr,
       });
 
       console.log("[REGISTER] RESPONSE_FROM_BACKEND : ", response);
@@ -152,6 +156,12 @@ export default function Register() {
       else if (message_2.localeCompare(response.message) === 0) {
         alert("Register successful");
         setRegisterStatus(true);
+      }
+
+      // CHECK THE RESPONSE FROM BACKEND (MESSAGE_4)
+      else if (message_4.localeCompare(response.message) === 0) {
+        alert("This bluetooth mac address already exist in the system.");
+        setBTMacAddr("");
       }
     }
   };
@@ -249,6 +259,15 @@ export default function Register() {
               Female
               {/* <input className="radiobutton" type="radio" value="Other" name="gender" /> Other */}
             </div>
+            
+            <CardText>Bluetooth Mac Address : </CardText>
+            <input
+              type="text"
+              className="input-box login_input"
+              maxLength="30"
+              value={btMacAddr}
+              onChange={(e) => setBTMacAddr(e.target.value)}
+            />
             <CardText>Home Address :</CardText>
             <input
               type="text"
@@ -257,6 +276,7 @@ export default function Register() {
               value={homeAddr}
               onChange={(e) => setHomeAddr(e.target.value)}
             />
+
             <br></br>
 
             <div>

@@ -45,7 +45,7 @@ export default function MyLocation() {
                 <Button
                   className="navButton"
                   color="warning"
-                  style={{ "margin-left": "100px" }}
+                  style={{ "marginLeft": "100px" }}
                   onClick={outdoor}
                 >
                   Outdoor
