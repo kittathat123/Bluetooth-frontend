@@ -18,14 +18,14 @@ export default function DocVRoom() {
   var [username, setUsername] = useState("");
   var [message, setMessage] = useState("");
   var [x_coord, setX_coord] = useState(-2.8);
-  var [y_coord, setY_coord] = useState(1.2);
-  var [z_coord, setZ_coord] = useState(-2.45);
+  var [y_coord, setY_coord] = useState(2);
+  var [z_coord, setZ_coord] = useState(2.45);
 
   // WebSocket
   const [isPaused, setPause] = useState(false);
   const ws = useRef(null);
 
-  const setXandY = () => {};
+  // const setXandY = () => {};
 
   // GET USERNAME FROM LOCALSTORAGE
   if (localStorage.getItem("user_info") === null) {
@@ -54,13 +54,13 @@ export default function DocVRoom() {
       if (isPaused) return;
       const message = JSON.parse(e.data);
 
-      if (message.payload.length !== 0) {
-        // console.log("[docVRoom.js] DATA : ", (message.payload));
-        if (message.payload.bt_tag_owner.localeCompare(username) === 0) {
-          setX_coord(message.payload.x_coord);
-          setZ_coord(message.payload.y_coord);
-        }
-      }
+      // if (message.payload.length !== 0) {
+      //   // console.log("[docVRoom.js] DATA : ", (message.payload));
+      //   if (message.payload.bt_tag_owner.localeCompare(username) === 0) {
+      //     setX_coord(message.payload.x_coord);
+      //     setZ_coord(message.payload.y_coord);
+      //   }
+      // }
       console.log(
         "[docVRoom.js] show shere position : " +
           x_coord +
@@ -264,8 +264,8 @@ export default function DocVRoom() {
               // }
               material="color: #EF2D5E"
             >
-              {" "}
-              <a-animation
+              {/* {" "} */}
+              {/* <a-animation
                 attribute="position"
                 dur="3000"
                 from={{
@@ -273,9 +273,9 @@ export default function DocVRoom() {
                   y: y_coord,
                   z: z_coord,
                 }}
-                to="2 ,1.2, 2"
+                to="2 ,2, 2"
                 repeat="indefinite "
-              ></a-animation>
+              ></a-animation> */}
             </a-entity>
             {/* {entityEl.object3D.position.set(1, 2, 3)} */}
             {/* {sceneEl.appendChild(entityEl)} */}
@@ -316,12 +316,12 @@ export default function DocVRoom() {
               <Entity
                 scale="0.03 0.03  0.02 "
                 gltf-model="#male"
-                animation-mixer
-                from="0.2 , 1, -1.3"
-                to="0,0,0"
-                dur="3000"
-                repeat="indefinite"
-                // position="0.2,1,-1.3"
+                // animation-mixer
+                // from="0.2 , 1, -1.3"
+                // to="0,0,0"
+                // dur="3000"
+                // repeat="indefinite"
+                position="0.2,4,-1.3"
                 // position = 2 , 1 -3
                 // position={{
                 //   x: this.state.spherePosition.x,
@@ -329,7 +329,7 @@ export default function DocVRoom() {
                 //   z: this.state.spherePosition.z,
                 // }}
               ></Entity>
-              
+
               {/* <a-animation
                 gltf-model="#male"
                 from="0.2 , 1, -1.3"

@@ -516,7 +516,7 @@ export default function ProfileCard() {
               </Button>
               <Button
                 outline
-                color="primary"
+                color="success"
                 style={{ display: submitButtonStatus ? "block" : "none" }}
                 onClick={handleSubmit}
               >

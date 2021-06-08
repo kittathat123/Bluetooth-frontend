@@ -49,7 +49,7 @@ const TableHistory = (props) => {
   }, []);
 
   return (
-    <Table style={{ width: "60vw" }}>
+    <Table style={{ width: "70vw", height: "70vh" }}>
       <thead>
         <tr>
           <th>Bt_tag_owner</th>
@@ -78,42 +78,6 @@ const TableHistory = (props) => {
             </tr>
           ))}
       </tbody>
-
-      {/* <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <TableBody>
-        <TableRow>
-          {list.slice(0, 5).map((item) => (
-            <tarow key={item.x_coord}>
-              <td>{item.bt_tag_owner}</td>
-              <td>{item.timestamp}</td>
-              <td>{item.x_coord}</td>
-              <td>{item.y_coord}</td>
-              <td>{item.location}</td>
-              <td>{item.floor}</td>
-              <td>{item.room}</td>
-            </tarow>
-          ))}
-        </TableRow> */}
-      {/* <tr>
-          <th scope="col">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="col">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr> */}
-      {/* </TableBody> */}
     </Table>
   );
 };

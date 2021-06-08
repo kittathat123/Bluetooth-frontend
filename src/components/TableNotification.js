@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Table } from "reactstrap";
 import { useHistory } from "react-router";
-import ReactHtmlParser from 'react-html-parser'; 
+import ReactHtmlParser from "react-html-parser";
 
 // const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/API/contact/";
 // const hostnameProduction = "http://127.0.0.1:8080/API/contact/";
@@ -14,7 +14,7 @@ export default function TableNotification() {
   const history = useHistory();
   var [list, setList] = useState([]);
   var [username] = useState("");
-  
+
   // WebSocket
   const [isPaused, setPause] = useState(false);
   const ws = useRef(null);
@@ -29,81 +29,77 @@ export default function TableNotification() {
 
   // GET_CONTACT_DATA_FROM_SERVER
   useEffect(() => {
-      ws.current = new WebSocket(WebSocketHostnameHeroku);
-      ws.current.onopen = () => console.log("[TableNotification.js] ws opened");
-      ws.current.onclose = () => console.log("[TableNotification.js] ws closed");
+    ws.current = new WebSocket(WebSocketHostnameHeroku);
+    ws.current.onopen = () => console.log("[TableNotification.js] ws opened");
+    ws.current.onclose = () => console.log("[TableNotification.js] ws closed");
 
-      return () => {
-          ws.current.close();
-      };
-
+    return () => {
+      ws.current.close();
+    };
   }, []);
 
   // SET_CONTACT_DATA_LIST
   useEffect(() => {
-      if(!ws.current) return;
+    if (!ws.current) return;
 
-      ws.current.onmessage = e => {
-          if (isPaused) return;
-          const message = JSON.parse(e.data);
-          
-          if(message.contact_payload.length !== 0) {
-            console.log("WS [CONTACT_DATA] : ", message.contact_payload);
-            setList(convertLevelToColor(message.contact_payload));
-          }
+    ws.current.onmessage = (e) => {
+      if (isPaused) return;
+      const message = JSON.parse(e.data);
+
+      if (message.contact_payload.length !== 0) {
+        console.log("WS [CONTACT_DATA] : ", message.contact_payload);
+        setList(convertLevelToColor(message.contact_payload));
       }
+    };
   }, [isPaused, ws]);
 
   function convertLevelToColor(contactList) {
-    for(var item of contactList){
-      if(item.contact_tracing_level === 0) {
-        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid green; background-color: green;\"></div>"
+    for (var item of contactList) {
+      if (item.contact_tracing_level === 0) {
+        item.contact_tracing_level =
+          '<div style="width:100%; height:15px; border:1px solid green; background-color: green;"></div>';
       } else if (item.contact_tracing_level === 1) {
-        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1.5px solid black; background-color: yellow;\"></div>"
+        item.contact_tracing_level =
+          '<div style="width:100%; height:15px; border:1.5px solid black; background-color: yellow;"></div>';
       } else if (item.contact_tracing_level === 2) {
-        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid DarkOrange; background-color: DarkOrange;\"></div>"
-      } else if (item.contact_tracing_level === 3){
-        item.contact_tracing_level = "<div style=\"width:100%; height:15px; border:1px solid Crimson; background-color: Crimson;\"></div>"
+        item.contact_tracing_level =
+          '<div style="width:100%; height:15px; border:1px solid DarkOrange; background-color: DarkOrange;"></div>';
+      } else if (item.contact_tracing_level === 3) {
+        item.contact_tracing_level =
+          '<div style="width:100%; height:15px; border:1px solid Crimson; background-color: Crimson;"></div>';
       }
     }
-    
+
     return contactList;
   }
-    
-  
-  return (
-      <Table style={{ width: "60vw" }}>
-          <thead>
-              <tr>
-              <th>Timestamp</th>
-              <th>User_1</th>
-              <th>Covid-19 Status (User_1)</th>
-              <th>User_2</th>
-              <th>Covid-19 Status (User_2)</th>
-              <th>Contact Level</th>
-              </tr>
-          </thead>
-          <tbody>
-              {
-                  list
-                  .filter(item => item.user_1 === username)
-                  .reverse()
-                  .map((item, index) => (
-                      <tr key={index}>
-                          <td>{item.timestamp}</td>
-                          <td>{item.user_1}</td>
-                          <td>{item.covid_19_status_user_1}</td>
-                          <td>{item.user_2}</td>
-                          <td>{item.covid_19_status_user_2}</td>
-                          <td>
-                            {ReactHtmlParser(item.contact_tracing_level)}
-                          </td>
-                      </tr>
-                  ))
-              }
-          </tbody>
-      </Table>
-  );
-};
 
-  
+  return (
+    <Table style={{ width: "70vw", height: "70vh" }}>
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>User_1</th>
+          <th>Covid-19 Status (User_1)</th>
+          <th>User_2</th>
+          <th>Covid-19 Status (User_2)</th>
+          <th>Contact Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        {list
+          .filter((item) => item.user_1 === username)
+          .reverse()
+          .map((item, index) => (
+            <tr key={index}>
+              <td>{item.timestamp}</td>
+              <td>{item.user_1}</td>
+              <td>{item.covid_19_status_user_1}</td>
+              <td>{item.user_2}</td>
+              <td>{item.covid_19_status_user_2}</td>
+              <td>{ReactHtmlParser(item.contact_tracing_level)}</td>
+            </tr>
+          ))}
+      </tbody>
+    </Table>
+  );
+}

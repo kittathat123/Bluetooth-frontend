@@ -45,7 +45,11 @@ export default function MyLocation() {
                 <Button
                   className="navButton"
                   color="warning"
+<<<<<<< HEAD
+                  style={{ marginLeft: "100px" }}
+=======
                   style={{ "marginLeft": "100px" }}
+>>>>>>> 71dc7722e27cb0ac13ccd7851e38ce6948c9c73a
                   onClick={outdoor}
                 >
                   Outdoor
@@ -57,7 +61,7 @@ export default function MyLocation() {
 
               <h2 className="roomTitle">ECC 705</h2>
             </div>
-            <div className="boxMap">
+            <div className="boxMapMylocation">
               <div className="borderBox">
                 <Room />
               </div>

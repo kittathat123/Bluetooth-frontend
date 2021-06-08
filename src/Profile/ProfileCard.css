@@ -1,7 +1,8 @@
 .profileContainer {
   display: flex;
-  margin-top: 15rem;
-  width: 80vw;
+  justify-content: center;
+  margin-top: 20rem;
+  /* width: 80vw; */
   height: max-content;
 }
 .infoSpace {
@@ -51,4 +52,8 @@
 
 .radiobuttonGender:not(:first-child) {
   margin: 15px 5px 0 8px;
+}
+
+.card-body {
+  padding: 5%;
 }

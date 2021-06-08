@@ -4,7 +4,6 @@ import { Entity, Scene } from "aframe-react";
 import { Button } from "reactstrap";
 // import "aframe-physics-system/dist/aframe-physics-system";    have error
 
-
 class docVRoom extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +22,6 @@ class docVRoom extends Component {
     this.setX = this.setX.bind(this);
     this.setY = this.setY.bind(this);
     this.setXandY = this.setXandY.bind(this);
-    
   }
 
   setXandY(x_coord, y_coord) {
@@ -43,13 +41,11 @@ class docVRoom extends Component {
       y: y_coord,
     });
 
-    
     // document.getElementById("male").object3D.position.set(1,2,3);
     // document.querySelector("#male").object3D.position.set(x_coord, this.state.y, y_coord);
     // document.querySelector("#male").setAttribute('position', {x:x_coord, y:this.state.y, z:y_coord});
     // document.querySelector("#male").setAttribute('position', {x:x_coord, y:this.state.y, z:y_coord});
-    console.log("UPDATE POSITION LEAW");
-
+    // console.log("UPDATE POSITION LEAW");
   }
 
   setUsername() {
@@ -65,8 +61,6 @@ class docVRoom extends Component {
     return this.state.username;
   }
 
-
-
   aframePath = "node_modules/aframe/dist/aframe-master.js";
 
   componentDidMount() {
@@ -80,8 +74,6 @@ class docVRoom extends Component {
     // // script.onload = () => this.scriptLoaded();
     // document.head.appendChild(script);
 
-
-
     const socket = new WebSocket(
       "wss://protected-brook-89084.herokuapp.com/ws/location/"
       // "wss://192.168.4.209/ws/tag/1/",
@@ -94,7 +86,7 @@ class docVRoom extends Component {
     };
 
     socket.onmessage = (e) => {
-      // console.log("[docVRoom_2.js] socket.onmessage");
+      console.log("[docVRoom_2.js] socket.onmessage");
       const datas = JSON.parse(e.data);
       if (datas.payload.length !== 0) {
         if (
@@ -108,29 +100,24 @@ class docVRoom extends Component {
     };
 
     socket.onclose = () => {
-      socket.close();
-      console.log("[docVRoom_2.js] socket.onclose");
+      console.log("[docVRoom_2.js] socket.onclose", socket.onclose());
     };
+    // socket.close();
+    // console.log("[docVRoom_2.js] socket.onclose2");
   }
-
-  componentWillUnmount() {
-    // document.head.removeChild(this.aframePath);
-  }
-
 
   render() {
     const datass = Object.values(this.state.spherePosition);
     console.log("(docVRoom.js) show sphere position: " + datass);
-    // var entity = document.createElement("#");
     // var sceneEl = document.querySelector("a-scene");
     // var entity = document.querySelector("#maleModel").getAttribute("position");
     // document
     //   .getElementById("ball")
     //   .setAttribute("position", { x: -3, y: 0.59, z: -3 });
     // var male = document.getElementById("male");
-    // var el = document.querySelector("a-entity");
+    var el = document.getElementById("maleModel");
 
-    // console.log("get avatar position", entity);
+    // console.log("get avatar position 2t", el.setAttribute("position"));
     // entityEl.object3D.position.set(1, 2, 3);
     // this.setX(2.3);
     // this.setY(2);
@@ -305,14 +292,13 @@ class docVRoom extends Component {
                   id="maleModel"
                   scale="0.03 0.03  0.02 "
                   gltf-model="#male"
-                  position="0.2,1,-1.3"
-                  // position={{
-                  //   x: this.state.spherePosition.x,
-                  //   y: this.state.spherePosition.y,
-                  //   z: this.state.spherePosition.z,
-                  // }}
+                  // position="0.2,1,-1.3"
+                  position={{
+                    x: this.state.spherePosition.x,
+                    y: this.state.spherePosition.y,
+                    z: this.state.spherePosition.z,
+                  }}
                 ></Entity>
-
 
                 {/* <a-animation
                   gltf-model="#male"

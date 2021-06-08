@@ -85,22 +85,25 @@ export default function Register() {
     }
 
     // CHECK FIRSTNAME IS SAME AS LASTNAME OR NOT
-    if((firstname.length !== 0 || firstname !== "") && (lastname.length !== 0 || lastname !== "")) {
-      if(firstname.localeCompare(lastname) === 0) {
+    if (
+      (firstname.length !== 0 || firstname !== "") &&
+      (lastname.length !== 0 || lastname !== "")
+    ) {
+      if (firstname.localeCompare(lastname) === 0) {
         alert("Your lastname can't be same as firstname");
         setLastname("");
         handleSubmitStatus = false;
-      } else if(firstname.localeCompare(lastname) !== 0) {
+      } else if (firstname.localeCompare(lastname) !== 0) {
         handleSubmitStatus = true;
       }
     }
 
     // CHECK FIRSTNAME IS SAME AS USERNAME OR NOT
-    if(firstname.localeCompare(username) === 0){
+    if (firstname.localeCompare(username) === 0) {
       alert("Your username can't be same as firstname");
       setUserName("");
       handleSubmitStatus = false;
-    } else if(firstname.localeCompare(username) !== 0){
+    } else if (firstname.localeCompare(username) !== 0) {
       handleSubmitStatus = true;
     }
 
@@ -116,10 +119,10 @@ export default function Register() {
     }
 
     // CHECK USERNAME IS SAME AS PASSWORD OR NOT
-    if(username.localeCompare(password) === 0){
+    if (username.localeCompare(password) === 0) {
       handleSubmitStatus = false;
-      alert("--- Username can't same as password ---")
-    } else if(username.localeCompare(password) !== 0) {
+      alert("--- Username can't same as password ---");
+    } else if (username.localeCompare(password) !== 0) {
       handleSubmitStatus = true;
     }
 
@@ -273,21 +276,25 @@ export default function Register() {
             <br></br>
 
             <div>
-              <button
+              <Button
                 className="login_button"
+                outline
+                color="success"
                 type="submit"
                 style={{ marginTop: "20px" }}
               >
                 Submit
-              </button>
+              </Button>
               <Link to={"/"}>
-                <button
+                <Button
                   className="back_register_to_login login_button"
+                  outline
+                  color="danger"
                   type="back"
                   style={{ marginTop: "20px" }}
                 >
                   Back
-                </button>
+                </Button>
               </Link>
             </div>
           </Form>
