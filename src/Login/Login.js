@@ -76,8 +76,8 @@ export default function Login() {
       // console.log(response.token, response.username);
       setToken(response);
       setRedirect(true);
-      console.log("SET USER_INFO LEAW");
-      alert("Login successful");
+      // console.log("SET USER_INFO LEAW");
+      // alert("Login successful");
     }
   };
 
@@ -144,7 +144,7 @@ export default function Login() {
                 type="submit"
                 style={{ marginTop: "20px" }}
               >
-                Submit
+                Sign In
               </Button>
             </div>
           </Form>

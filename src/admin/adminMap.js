@@ -6,20 +6,22 @@ import {
   GoogleMap,
   Marker,
   InfoWindow,
+  Polyline
 } from "react-google-maps";
 
-export default function OutdoorMapAdmin() {
+import {createNewPathList} from "../MyLocation/outdoorMapUser";
+
+const AdminMap = ({selectedUsername}) => {
   // DECLARE ALL USED VARIABLE
-  const hostnameProduction = "http://127.0.0.1:8080/userAndAdminInformation/";
-  const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
+  const hostnameProduction = "http://127.0.0.1:8080/userOutdoor/";
+  const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userOutdoor/";
   var [isMarkerShown, setIsMarkerShown] = useState(false);
   var [locationList, setLocationList] = useState([]);
-  var [selectedUsername, setSelectedUsername] = useState('');
+  var [pathList, setPathList] = useState([]);
+  // var [username, setUsername] = useState(selectedUsername);
 
   function delayedShowMarker(){
-    setTimeout(() => {
-      setIsMarkerShown(true);
-    }, 3000);
+    setIsMarkerShown(true);
   };
 
   function handleMarkerClick() {
@@ -40,54 +42,73 @@ export default function OutdoorMapAdmin() {
     withScriptjs,
     withGoogleMap
   )((props) => (
-    <GoogleMap defaultZoom={8} defaultCenter={{ lat: 13.7299, lng: 100.7782 }}>
+    <GoogleMap defaultZoom={10} defaultCenter={{ lat: 13.7299, lng: 100.7782 }}>
       {props.isMarkerShown &&
-        locationList.map((marker, index) => {
-          // const onClick = props.onClick.bind(this, marker)
+        locationList
+        .slice(0, 50)
+        .reverse()
+        .map((marker, index) => {
           const informationWindow = 
             <div>
               <b>{marker.timestamp}</b>
                 <br></br> 
               <b>{marker.location} </b>
                 <br></br> 
-              <b>{marker.user_name}</b>
+              {/* <b>{marker.user_name}</b> */}
             </div>;
           return (
             <Marker
               key={index}
-              position={{ lat: JSON.parse(marker.latitude_longtitude).coordinates[1], lng: JSON.parse(marker.latitude_longtitude).coordinates[0] }}
+              position={{ lat: JSON.parse(marker.latitude_longtitude).coordinates[1], 
+                lng: JSON.parse(marker.latitude_longtitude).coordinates[0] }}
             >
               <InfoWindow>
                 {informationWindow}
               </InfoWindow>
             </Marker>
-          );
-          
-        })}
+          );    
+      })}
+
+      <Polyline 
+        path={pathList}
+        options={{ 
+        strokeColor: '#120204',
+        strokeOpacity: '1.0',
+        strokeWeight: 3,
+        icons: [{ 
+          icon: { path: window.google.maps.SymbolPath.FORWARD_OPEN_ARROW },
+          offset: '20%',
+          repeat: '500px'
+        }],
+        }}
+      />
+
     </GoogleMap>
   ));
   
   useEffect(() => {
-    // console.log("[adminMap.js] GET_USERNAME : ", selectedUsername);
-    
-    async function getLocationList() {
+    async function getLocationAdminMap() {
       try {
         const response = await fetch(hostnameHeroku, {
-          method: 'GET',
+          method: 'POST',
           headers : {
             'Content-Type' : 'application/json',
             'Accept': 'application/json'
-          }
+          },
+          body: JSON.stringify({"username": selectedUsername})
         });
         const dataFromServer = await response.json();
-        console.log("[adminMap.js] DATA : ", dataFromServer);
+        console.log("[adminMap.js] JSON : ", dataFromServer);
         setLocationList(dataFromServer.message);
+        setPathList(createNewPathList(dataFromServer.message));
+
       } catch (err) {
         console.log(err);
       }
     }
 
-    getLocationList();
+    console.log("(adminMap.js) SELECTED_USERNAME : ", selectedUsername);
+    getLocationAdminMap();
     delayedShowMarker();
   }, [selectedUsername]);
 
@@ -98,3 +119,5 @@ export default function OutdoorMapAdmin() {
     />
   );
 }
+
+export default AdminMap;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import Sidebar from "./adminSidebar";
 import AdminMap from "./adminMap";
 import "../MyLocation/MyLocation.css";
@@ -11,7 +11,11 @@ export default function OutdoorMapAdmin() {
     "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
   const hostnameProduction = "http://127.0.0.1:8080/userAndAdminInformation/";
   var [usernameList, setUsernameList] = useState([]);
-  var [selectedUsername, setSelectedUsername] = useState("");
+  var [selectedUsername, setSelectedUsername] = useState("-- Please select username --");
+  
+  // dropdownComponent
+  var [dropdownOpen, setDropdownOpen] = useState(false);
+  var toggle = () => setDropdownOpen((prevState) => !prevState);
 
   async function getUsernameList() {
     try {
@@ -22,21 +26,16 @@ export default function OutdoorMapAdmin() {
         },
       });
       const dataFromServer = await response.json();
-      console.log(
-        "[admin.js] usernameList : ",
-        dataFromServer.message.username
-      );
-      console.log(
-        "[admin.js] usernameList : ",
-        typeof dataFromServer.message.username
-      );
+      console.log("[admin.js] usernameList : ", dataFromServer.message.username);
       setUsernameList(dataFromServer.message.username);
+
     } catch (err) {
       console.log(err);
     }
   }
 
   useEffect(() => {
+    // console.log(usernameList);
     getUsernameList();
   }, []);
 
@@ -50,33 +49,35 @@ export default function OutdoorMapAdmin() {
           <div className="pageContent">
             <div className="header ">
               <h2 className="adminTitle">Admin Map</h2>
-              {/* <Button
-                className="backButton"
-                color="secondary"
-                href="./Mylocation"
-              >
-                NEXT
-              </Button> */}
+              
+              <div className="usernameGroup">
+                <div className="usernameGroupTitle">All Username :</div>
+                <Dropdown
+                  isOpen={dropdownOpen}
+                  toggle={toggle}
+                >
+                  <DropdownToggle caret style={{ marginTop: "15px"}}>
+                    {selectedUsername}
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    {
+                      usernameList
+                      .map((data, index) => (
+                        <DropdownItem key={index} onClick={() => setSelectedUsername(data)}>
+                          {data}
+                        </DropdownItem>
+                      ))
+                    }
+                  </DropdownMenu>
 
-              {/* <h2 className="roomTitle">ECC 705</h2>
-              <div>
-                USERNAME 
+                </Dropdown>
               </div>
-              <div>
-                {
-                  usernameList
-                  .map((data, index) => (
-                    <div key={index}>
-                      <button onClick={() => setSelectedUsername(data)}>{data}</button>
-                    </div>
-                  ))
-                }
-              </div> */}
+
             </div>
 
             <div className="boxMap">
               <div className="borderBox">
-                <AdminMap />
+                <AdminMap  selectedUsername={selectedUsername} />
               </div>
             </div>
           </div>
