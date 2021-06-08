@@ -158,18 +158,10 @@ export default function OutdoorMapUser() {
     </GoogleMap>
   ));
 
-<<<<<<< HEAD
-  const hostnameProduction = "http://127.0.0.1:8080/userOutdoor/";
-  const hostnameHeroku =
-    "https://protected-brook-89084.herokuapp.com/userOutdoor/";
-
-=======
->>>>>>> 71dc7722e27cb0ac13ccd7851e38ce6948c9c73a
   useEffect(() => {
     async function getLocation() {
       try {
         const response = await fetch(hostnameHeroku, {
-<<<<<<< HEAD
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -180,29 +172,10 @@ export default function OutdoorMapUser() {
         const dataFromServer = await response.json();
         console.log("[outdoorMapUser.js] JSON : ", dataFromServer);
         setLocationList(dataFromServer.message);
-=======
-          method: 'POST',
-          headers : {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }, 
-          body: JSON.stringify({'token': token})
-        });
-        const dataFromServer = await response.json();
-        console.log("[outdoorMapUser.js] JSON : ", dataFromServer);
-        setLocationList(dataFromServer.message)
-        setPathList(createNewPathList(dataFromServer.message));
-
->>>>>>> 71dc7722e27cb0ac13ccd7851e38ce6948c9c73a
       } catch (err) {
         console.log(err);
       }
     }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 71dc7722e27cb0ac13ccd7851e38ce6948c9c73a
     getLocation();
     delayedShowMarker();
   }, [token]);
