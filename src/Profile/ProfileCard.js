@@ -19,7 +19,7 @@ import ProfileIconImage from "../assets/ProfileIcon.png";
 // IMPORT DATEPICKER LIBRARY
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { subYears } from "date-fns";
+
 
 async function updateUserInformation(credentials) {
   const hostnameUpdateUserInformationProduction =

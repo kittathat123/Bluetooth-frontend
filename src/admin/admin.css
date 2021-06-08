@@ -5,3 +5,12 @@
   color: rgba(42, 157, 244);
   margin-top: 30px;
 }
+
+.usernameGroup {
+  display: flex;
+  flex-direction: row;
+}
+
+.usernameGroupTitle {
+  margin: 22px 10px 0 0;
+}

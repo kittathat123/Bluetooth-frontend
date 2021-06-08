@@ -10,10 +10,33 @@ import {
 } from "react-google-maps";
 import { useHistory } from "react-router";
 
+
+export const createNewPathList = (dataLocation) => {
+  // SORT DATA LIST BY USING DATE_TIME
+  dataLocation.sort(function(a, b) {
+    return new Date(a.timestamp) - new Date(b.timestamp);
+  });
+  // console.log("NEW DATA LOCATION : ", dataLocation);
+  var pathListInFunction = [];
+  var i;
+  for(i=0; i<dataLocation.length; i++)
+  {
+    // console.log(JSON.parse(dataLocation[i]));
+    pathListInFunction.push({
+      lat: JSON.parse(dataLocation[i].latitude_longtitude).coordinates[1],
+      lng: JSON.parse(dataLocation[i].latitude_longtitude).coordinates[0]
+    })
+  }
+  // console.log(pathListInFunction);
+  return pathListInFunction;
+  // setPathList(pathListInFunction);
+}
+
 export default function OutdoorMapUser() {
   // DECLARE ALL USED VARIABLE
+  const hostnameProduction = "http://127.0.0.1:8080/userOutdoor/";
+  const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userOutdoor/";
   const history = useHistory();
-
   var [token] = useState("");
   var [isMarkerShown, setIsMarkerShown] = useState(false);
   var [locationList, setLocationList] = useState([]);
@@ -28,7 +51,6 @@ export default function OutdoorMapUser() {
     token = JSON.parse(localStorageString).token;
   }
 
-  
   function delayedShowMarker() {
     setIsMarkerShown(true);
   }
@@ -36,28 +58,6 @@ export default function OutdoorMapUser() {
   function handleMarkerClick() {
     setIsMarkerShown(false);
     delayedShowMarker();
-  }
-
-  function createPathList(dataLocation) {
-    // SORT DATA LIST BY USING DATE_TIME
-    dataLocation.sort(function(a, b) {
-      return new Date(a.timestamp) - new Date(b.timestamp);
-    });
-
-    // console.log("NEW DATA LOCATION : ", dataLocation);
-
-    var pathListInFunction = [];
-    var i;
-    for(i=0; i<dataLocation.length; i++)
-    {
-      // console.log(JSON.parse(dataLocation[i]));
-      pathListInFunction.push({
-        lat: JSON.parse(dataLocation[i].latitude_longtitude).coordinates[1],
-        lng: JSON.parse(dataLocation[i].latitude_longtitude).coordinates[0]
-      })
-    }
-    // console.log(pathListInFunction);
-    setPathList(pathListInFunction);
   }
 
   const MyMapComponent = compose(
@@ -117,33 +117,30 @@ export default function OutdoorMapUser() {
     </GoogleMap>
   ));
 
-    const hostnameProduction = "http://127.0.0.1:8080/userOutdoor/";
-    const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userOutdoor/";
-    
-    useEffect(() => {
-        async function getLocation() {
-          try {
-            const response = await fetch(hostnameHeroku, {
-              method: 'POST',
-              headers : {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-              }, 
-              body: JSON.stringify({'token': token})
-            });
-            const dataFromServer = await response.json();
-            console.log("[outdoorMapUser.js] JSON : ", dataFromServer);
-            setLocationList(dataFromServer.message)
-            createPathList(dataFromServer.message);
+  useEffect(() => {
+    async function getLocation() {
+      try {
+        const response = await fetch(hostnameHeroku, {
+          method: 'POST',
+          headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }, 
+          body: JSON.stringify({'token': token})
+        });
+        const dataFromServer = await response.json();
+        console.log("[outdoorMapUser.js] JSON : ", dataFromServer);
+        setLocationList(dataFromServer.message)
+        setPathList(createNewPathList(dataFromServer.message));
 
-          } catch (err) {
-            console.log(err);
-          }
-        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
         
-        getLocation();
-        delayedShowMarker();
-    }, [token]);
+    getLocation();
+    delayedShowMarker();
+  }, [token]);
 
   return (
     <MyMapComponent
@@ -152,3 +149,5 @@ export default function OutdoorMapUser() {
     />
   );
 }
+
+
