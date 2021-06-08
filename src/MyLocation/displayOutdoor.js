@@ -29,7 +29,7 @@ export default function Mylocation() {
                 <Button
                   className="navButton"
                   color="warning"
-                  style={{ "margin-left": "100px" }}
+                  style={{ marginLeft: "100px" }}
                   onClick={outdoor}
                 >
                   Outdoor
@@ -37,7 +37,7 @@ export default function Mylocation() {
                 <Button
                   className="navButton"
                   color="warning"
-                  style={{ "margin-left": "-4px" }}
+                  style={{ marginLeft: "-6px" }}
                   onClick={indoor}
                 >
                   Indoor
@@ -46,10 +46,10 @@ export default function Mylocation() {
 
               <h2 className="roomTitle">Outdoor Map</h2>
             </div>
-            <div className="boxMap">
-              {/* <div className="borderBox"> */}
-              <Outdoor />
-              {/* </div> */}
+            <div className="boxMapOutdoor">
+              <div className="borderBox">
+                <Outdoor />
+              </div>
             </div>
           </div>
         </div>

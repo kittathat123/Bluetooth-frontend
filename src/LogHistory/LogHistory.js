@@ -13,7 +13,7 @@ export default function LogHistory() {
         <div className="col">
           <div className="pageContent">
             <h1 className="roomTitle">Log History</h1>
-            <div className="boxMap">
+            <div className="boxMapLog">
               <div className="tableBox">
                 <Tables />
               </div>

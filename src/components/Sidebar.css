@@ -4,6 +4,8 @@
   width: 240px;
   height: 100vh;
   border: 1px solid #000000;
+  /* position: absolute; */
+  /* marigin: left; */
 }
 
 .logo-box {
@@ -269,11 +271,11 @@ a:link {
 }
 
 .bm-burger-button {
-  position: fixed;
+  position: absolute;
   width: 36px;
   height: 30px;
-  left: 36px;
-  top: 36px;
+  left: 40px;
+  top: 25px;
 }
 
 /* Color/shape of burger icon bars */

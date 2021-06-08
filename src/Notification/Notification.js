@@ -38,32 +38,34 @@ export default function Notification() {
         <div className="col">
           <div className="pageContent">
             <h1 className="roomTitle">Notification</h1>
-            <div className="boxMap">
-              <div className="tableBox">
-                <Tables />
-              </div>
-              <div className="contact-level-information-group">
+            <div className="contact-level-information-group">
+              <div className="contact-level-infomation-content">
                 <div className="contact-level-infomation-heading">
                   Contact Level Description
                 </div>
-                <div className="contact-level-infomation-content">
-                  <Table style={{ width: "15vw" }}>
+                <Table style={{ width: "15vw" }}>
+                  <tbody>
                     <thead>
-                      <tr>
-                        <th>Color</th>
-                        <th>Disatance</th>
-                      </tr>
+                      <th>
+                        {" "}
+                        <tr>Color</tr>
+                        <tr> </tr>
+                        <tr>Disatance</tr>
+                      </th>
                     </thead>
-                    <tbody>
-                      {contactInformation.map((item, index) => (
-                        <tr key={index}>
-                          <td>{ReactHtmlParser(item.color)}</td>
-                          <td>{item.distance}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                </div>
+                    {contactInformation.map((item, index) => (
+                      <th key={index}>
+                        <tr>{ReactHtmlParser(item.color)}</tr>
+                        <tr>{item.distance}</tr>
+                      </th>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+            <div className="boxMapNotification">
+              <div className="tableBox">
+                <Tables />
               </div>
             </div>
           </div>

@@ -1,28 +1,3 @@
-// import React, { Component } from "react";
-// import { Map, GoogleApiWrapper, Marker, InfoWindow } from "react-google-maps";
-
-// class outdoorMap extends Component {
-//   render() {
-//     return (
-//       <Map>
-//         google={this.props.google}
-//         zoom={11}
-//         {/* style={mapStyles} */}
-//         initialCenter={{ lat: 40.7128, lng: -74.006 }}
-//       </Map>
-
-//       //   <div
-//       //     styye={{ height: "200px", width: "100%", margin: "0", padding: "0" }}
-//       //     id="map"
-//       //   ></div>
-//     );
-//   }
-// }
-
-// export default GoogleApiWrapper({
-//   apiKey: "AIzaSyDq0QmikhnR5WnGaijIX5Km-ABXyMyPrGs",
-// })(outdoorMap);
-
 import React, { useState, useEffect } from "react";
 import { compose, withProps } from "recompose";
 import {
@@ -50,7 +25,6 @@ export default function OutdoorMapUser() {
     token = JSON.parse(localStorageString).token;
   }
 
-  
   function delayedShowMarker() {
     setTimeout(() => {
       setIsMarkerShown(true);
@@ -62,14 +36,54 @@ export default function OutdoorMapUser() {
     delayedShowMarker();
   }
 
+  function initMap() {
+    var map = new GoogleMap.maps.Map(document.getElementById("map"), {
+      zoom: 4,
+      center: {
+        lat: -8.0433112,
+        lng: -34.934217,
+      },
+      mapTypeId: GoogleMap.maps.MapTypeId.TERRAIN,
+    });
+
+    //  desenha a linha
+    var lineSymbol = {
+      path: "M 0,-1 0,1",
+      strokeOpacity: 1,
+      strokeColor: "red",
+      scale: 4,
+    };
+
+    var line = new GoogleMap.maps.Polyline({
+      path: [
+        {
+          lat: 12.2686734,
+          lng: -75.6664327,
+        }, // ponto inicial
+        {
+          lat: -6.0464433,
+          lng: -35.0025289,
+        }, // ponto final
+      ],
+      geodesic: true, // segue a curvatura da terra
+      strokeOpacity: 0, // opacidade da linha
+      icons: [
+        {
+          icon: lineSymbol,
+          offset: "0",
+          repeat: "20px",
+        },
+      ], // cria o efeito dashed
+      map: map, // aplica ao mapa
+    });
+  }
+
   const MyMapComponent = compose(
     withProps({
       googleMapURL:
         "https://maps.googleapis.com/maps/api/js?key=AIzaSyDq0QmikhnR5WnGaijIX5Km-ABXyMyPrGs",
       loadingElement: <div style={{ height: `100%` }} />,
-      containerElement: (
-        <div style={{ marginTop: "-100px", height: `70vh`, width: "70vw" }} />
-      ),
+      containerElement: <div style={{ height: `70vh`, width: "70vw" }} />,
       mapElement: <div style={{ height: `100%` }} />,
     }),
     withScriptjs,
@@ -81,12 +95,13 @@ export default function OutdoorMapUser() {
           .slice(0, 50)
           .reverse()
           .map((marker, index) => {
-            const informationWindow = 
+            const informationWindow = (
               <div>
                 <b>{marker.timestamp}</b>
-                  <br></br>
+                <br></br>
                 <b>{marker.location}</b>
-              </div>;
+              </div>
+            );
             return (
               <Marker
                 key={index}
@@ -109,31 +124,32 @@ export default function OutdoorMapUser() {
     </GoogleMap>
   ));
 
-    const hostnameProduction = "http://127.0.0.1:8080/userOutdoor/";
-    const hostnameHeroku = "https://protected-brook-89084.herokuapp.com/userOutdoor/";
-    
-    useEffect(() => {
-        async function getLocation() {
-          try {
-            const response = await fetch(hostnameHeroku, {
-              method: 'POST',
-              headers : {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-              }, 
-              body: JSON.stringify({'token': token})
-            });
-            const dataFromServer = await response.json();
-            console.log("[outdoorMapUser.js] JSON : ", dataFromServer);
-            setLocationList(dataFromServer.message)
-          } catch (err) {
-            console.log(err);
-          }
-        }
-        
-        getLocation();
-        delayedShowMarker();
-    }, [token]);
+  const hostnameProduction = "http://127.0.0.1:8080/userOutdoor/";
+  const hostnameHeroku =
+    "https://protected-brook-89084.herokuapp.com/userOutdoor/";
+
+  useEffect(() => {
+    async function getLocation() {
+      try {
+        const response = await fetch(hostnameHeroku, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ token: token }),
+        });
+        const dataFromServer = await response.json();
+        console.log("[outdoorMapUser.js] JSON : ", dataFromServer);
+        setLocationList(dataFromServer.message);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getLocation();
+    delayedShowMarker();
+  }, [token]);
 
   return (
     <MyMapComponent
