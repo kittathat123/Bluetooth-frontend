@@ -54,13 +54,13 @@ export default function DocVRoom() {
       if (isPaused) return;
       const message = JSON.parse(e.data);
 
-      // if (message.payload.length !== 0) {
-      //   // console.log("[docVRoom.js] DATA : ", (message.payload));
-      //   if (message.payload.bt_tag_owner.localeCompare(username) === 0) {
-      //     setX_coord(message.payload.x_coord);
-      //     setZ_coord(message.payload.y_coord);
-      //   }
-      // }
+      if (message.payload.length !== 0) {
+        // console.log("[docVRoom.js] DATA : ", (message.payload));
+        if (message.payload.bt_tag_owner.localeCompare(username) === 0) {
+          setX_coord(message.payload.x_coord);
+          setZ_coord(message.payload.y_coord);
+        }
+      }
       console.log(
         "[docVRoom.js] show shere position : " +
           x_coord +
@@ -120,6 +120,10 @@ export default function DocVRoom() {
               src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
               // src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend@v1.0/blob/main/src/MyLocation/AFrame-SmartHome-master/TV_01.gltf"
               // src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
+            ></a-asset-item>
+            <a-asset-item
+              id="docVRoom"
+              src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
             ></a-asset-item>
             {/* <a-asset-item
               id="human_male_obj"
@@ -321,7 +325,8 @@ export default function DocVRoom() {
                 // to="0,0,0"
                 // dur="3000"
                 // repeat="indefinite"
-                position="0.2,4,-1.3"
+                // position="0.2,4,-1.3"
+                position={`${x_coord} ${y_coord} ${z_coord}`}
                 // position = 2 , 1 -3
                 // position={{
                 //   x: this.state.spherePosition.x,

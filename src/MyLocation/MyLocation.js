@@ -59,7 +59,7 @@ export default function MyLocation() {
             </div>
             <div className="boxMapMylocation">
               <div className="borderBox">
-                <Room />
+                <Room1 />
               </div>
             </div>
           </div>
