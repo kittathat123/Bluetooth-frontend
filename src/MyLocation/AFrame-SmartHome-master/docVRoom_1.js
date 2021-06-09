@@ -123,7 +123,7 @@ export default function DocVRoom() {
             ></a-asset-item>
             <a-asset-item
               id="docVRoom"
-              src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
+              src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/empty_white_room/scene.gltf"
             ></a-asset-item>
             {/* <a-asset-item
               id="human_male_obj"
@@ -286,7 +286,7 @@ export default function DocVRoom() {
             <Entity
               static-body={{}}
               id="labWall"
-              gltf-model="#labWall"
+              gltf-model="#docVRoom"
               position={{ x: -4, y: 0.05, z: 0 }}
               shadow={{ cast: true }}
             />
