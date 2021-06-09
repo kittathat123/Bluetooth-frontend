@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 import Sidebar from "./adminSidebar";
 import AdminMap from "./adminMap";
 import "../MyLocation/MyLocation.css";
@@ -10,8 +15,10 @@ export default function OutdoorMapAdmin() {
     "https://protected-brook-89084.herokuapp.com/userAndAdminInformation/";
   const hostnameProduction = "http://127.0.0.1:8080/userAndAdminInformation/";
   var [usernameList, setUsernameList] = useState([]);
-  var [selectedUsername, setSelectedUsername] = useState("-- Please select username --");
-  
+  var [selectedUsername, setSelectedUsername] = useState(
+    "-- Please select username --"
+  );
+
   // dropdownComponent
   var [dropdownOpen, setDropdownOpen] = useState(false);
   var toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -25,9 +32,11 @@ export default function OutdoorMapAdmin() {
         },
       });
       const dataFromServer = await response.json();
-      console.log("[admin.js] usernameList : ", dataFromServer.message.username);
+      console.log(
+        "[admin.js] usernameList : ",
+        dataFromServer.message.username
+      );
       setUsernameList(dataFromServer.message.username);
-
     } catch (err) {
       console.log(err);
     }
@@ -48,35 +57,30 @@ export default function OutdoorMapAdmin() {
           <div className="pageContent">
             <div className="header ">
               <h2 className="adminTitle">Admin Map</h2>
-              
+
               <div className="usernameGroup">
                 <div className="usernameGroupTitle">All Username :</div>
-                <Dropdown
-                  isOpen={dropdownOpen}
-                  toggle={toggle}
-                >
-                  <DropdownToggle caret style={{ marginTop: "15px"}}>
+                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                  <DropdownToggle caret style={{ marginTop: "15px" }}>
                     {selectedUsername}
                   </DropdownToggle>
                   <DropdownMenu>
-                    {
-                      usernameList
-                      .map((data, index) => (
-                        <DropdownItem key={index} onClick={() => setSelectedUsername(data)}>
-                          {data}
-                        </DropdownItem>
-                      ))
-                    }
+                    {usernameList.map((data, index) => (
+                      <DropdownItem
+                        key={index}
+                        onClick={() => setSelectedUsername(data)}
+                      >
+                        {data}
+                      </DropdownItem>
+                    ))}
                   </DropdownMenu>
-
                 </Dropdown>
               </div>
-
             </div>
 
-            <div className="boxMap">
-              <div className="borderBox">
-                <AdminMap  selectedUsername={selectedUsername} />
+            <div className="boxMapAdmin">
+              <div className="borderBoxAdmin">
+                <AdminMap selectedUsername={selectedUsername} />
               </div>
             </div>
           </div>

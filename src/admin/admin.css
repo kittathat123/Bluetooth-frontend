@@ -14,3 +14,13 @@
 .usernameGroupTitle {
   margin: 22px 10px 0 0;
 }
+
+.borderBoxAdmin {
+  /* margin-top: 10vh; */
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+  /* width: 70vw; */
+}
+
+.boxMapAdmin {
+  margin-top: 5vh;
+}
