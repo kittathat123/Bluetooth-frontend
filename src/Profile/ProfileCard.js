@@ -87,7 +87,7 @@ export default function ProfileCard() {
   var [age, setAge] = useState("");
   var [gender, setGender] = useState("");
   var [homeAddr, setHomeAddr] = useState("");
-  var [btMacAddr, setBTMacAddr] = useState("");
+  // var [btMacAddr, setBTMacAddr] = useState("");
   var [newImage, setNewImage] = useState("");
   var [covid19Status, setCovid19Status] = useState("");
   var [url, setUrl] = useState(ProfileIconImage);
@@ -192,7 +192,7 @@ export default function ProfileCard() {
         covid19Status,
         homeAddr,
         newImage,
-        btMacAddr,
+        // btMacAddr,
       });
 
       console.log("[ProfileCard] RESPONSE_FROM_BACKEND : ", response);
@@ -263,7 +263,7 @@ export default function ProfileCard() {
           setAge(calculateAge(dataFromServer.userInformation[0].DATE_OF_BIRTH));
           setGender(dataFromServer.userInformation[0].GENDER);
           setHomeAddr(dataFromServer.userInformation[0].HOME_ADDR);
-          setBTMacAddr(dataFromServer.userInformation[0].BT_MAC_ADDR);
+          // setBTMacAddr(dataFromServer.userInformation[0].BT_MAC_ADDR);
           setCovid19Status(dataFromServer.userInformation[0].COVID_19_STATUS);
 
           var imageNameFromServer =
@@ -480,28 +480,6 @@ export default function ProfileCard() {
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-            </div>
-          </div>
-
-          <div className="infoSpace row">
-            <div className="col">
-              <CardSubtitle tag="h6">Bluetooth Mac Address :</CardSubtitle>
-              <CardText style={{ display: cardTextStatus ? "inline" : "none" }}>
-                {btMacAddr}
-              </CardText>
-              <input
-                type="text"
-                value={btMacAddr}
-                maxLength="30"
-                style={{
-                  borderColor: borderColor,
-                  borderStyle: "solid",
-                  display: inputStatus ? "inline" : "none",
-                  marginTop: "10px",
-                  width: "75%",
-                }}
-                onChange={(e) => setBTMacAddr(e.target.value)}
-              />
             </div>
           </div>
 
