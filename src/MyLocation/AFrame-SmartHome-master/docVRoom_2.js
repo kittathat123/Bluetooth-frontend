@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "aframe";
+// import "aframe";
 import { Entity, Scene } from "aframe-react";
 import { Button } from "reactstrap";
 // import "aframe-physics-system/dist/aframe-physics-system";    have error
@@ -25,6 +25,7 @@ class docVRoom extends Component {
   }
 
   setXandY(x_coord, y_coord) {
+    console.log("x and y" + x_coord + "and " + y_coord);
     this.setState({
       spherePosition: { x: x_coord, y: y_coord, z: 1 },
     });
@@ -83,6 +84,7 @@ class docVRoom extends Component {
     socket.onopen = (e) => {
       e.preventDefault();
       console.log("[docVRoom_2.js] socket.onopen");
+      // con;
     };
 
     socket.onmessage = (e) => {
@@ -93,7 +95,7 @@ class docVRoom extends Component {
           datas.payload.bt_tag_owner.localeCompare(this.getUsername()) === 0
         ) {
           console.log("[docVRoom.js] DATA : ", datas.payload);
-          // this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
+          this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
           // this.setXandY(2.3, 2);
         }
       }
@@ -122,39 +124,53 @@ class docVRoom extends Component {
     // this.setX(2.3);
     // this.setY(2);
 
+    // return JSON.stringify(this.state.spherePosition);
+    const { spherePosition } = this.state;
+    // return (
+    //   <a-scene>
+    //     {/* <a-entity gltf-model="#monster" animation-mixer></a-entity> */}
+    //     <a-entity
+    //       gltf-model="url(https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf)"
+    //       position={`${spherePosition.x} ${spherePosition.y} ${spherePosition.z}`}
+    //       scale="0.03 0.03  0.02 "
+    //     ></a-entity>
+    //     <a-sky color="#ECECEC"></a-sky>
+    //   </a-scene>
+    // );
+
     return (
       <div>
         <div style={{ height: "70vh", width: "70vw" }}>
           <Button onClick={(e) => this.setXandY(2.5, 2, e)}></Button>
-          <Scene
+          <a-scene
             physics="gravity: -1.6"
             environment="preset: default; lighting: none; ground: none"
             // style="position: absolute; height: 100%; width: 100%;"
             // vr-mode-ui="enabled: false"
             embedded
           >
-            <Entity id="cameraRig" rotation={{ x: 0, y: 0, z: 0 }}>
-              <Entity
+            <a-entity id="cameraRig" rotation={{ x: 0, y: 0, z: 0 }}>
+              <a-entity
                 id="head"
                 camera={{ active: "true" }}
                 wasd-controls={{ enabled: "true" }}
                 look-controls={{ enabled: "true" }}
                 position={{ x: 0, y: 1.65, z: 0 }}
-              ></Entity>
+              ></a-entity>
 
-              <Entity
+              <a-entity
                 id="rightHand"
                 oculus-touch-controls="hand: right"
                 teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
                 thumbstick-rotate
-              ></Entity>
+              ></a-entity>
 
-              <Entity
+              <a-entity
                 id="leftHand"
                 oculus-touch-controls="hand: left"
                 controller-cursor={{}}
-              ></Entity>
-            </Entity>
+              ></a-entity>
+            </a-entity>
 
             <a-assets>
               <a-asset-item
@@ -265,40 +281,45 @@ class docVRoom extends Component {
               ></a-asset-item>
             </a-assets>
 
-            <a-light
-              type="point"
-              position="0.214 2.615 -2.02969"
-              intensity="0.4"
-              distance="10"
-              color="white"
-              light="castShadow: true"
-            ></a-light>
+            <a-entity id="labAll" position="-0.8 0 2.353">
+              <a-light
+                type="point"
+                position="0.214 2.615 -2.02969"
+                intensity="0.4"
+                distance="10"
+                color="white"
+                light="castShadow: true"
+              ></a-light>
 
-            <Entity id="labAll" position="-0.8 0 2.353">
-              <Entity
+              <a-entity
                 static-body={{}}
                 id="labWall"
-                gltf-model="#labWall"
+                gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf)"
                 position={{ x: -4, y: 0.05, z: 0 }}
                 shadow={{ cast: true }}
               />
-
-              <Entity
+              <a-entity
                 geometry-merger="preserveOriginal: false"
                 id="furnitureList"
               >
                 {/* HUMAN AVATAR */}
-                <Entity
-                  id="maleModel"
+                {/* <a-entity
+                id="maleModel"
+                scale="0.03 0.03  0.02 "
+                gltf-model="#male"
+                // position="0.2,1,-1.3"
+                position={`${spherePosition.x},${spherePosition.y},${spherePosition.z}`}
+                // position={{
+                //   x: this.state.spherePosition.x,
+                //   y: this.state.spherePosition.y,
+                //   z: this.state.spherePosition.z,
+                // }}
+              ></a-entity> */}
+                <a-entity
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf)"
+                  position={`${spherePosition.x} ${spherePosition.y} ${spherePosition.z}`}
                   scale="0.03 0.03  0.02 "
-                  gltf-model="#male"
-                  // position="0.2,1,-1.3"
-                  position={{
-                    x: this.state.spherePosition.x,
-                    y: this.state.spherePosition.y,
-                    z: this.state.spherePosition.z,
-                  }}
-                ></Entity>
+                ></a-entity>
 
                 {/* <a-animation
                   gltf-model="#male"
@@ -308,332 +329,332 @@ class docVRoom extends Component {
                   repeat="indefinite"
                 ></a-animation> */}
 
-                <Entity
+                {/* <a-entity
                   id="wallPartition1"
-                  gltf-model="#wallPartition"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
+                  // gltf-model="url(wallPartition)"
                   position="-0.452 0.06 -4.73917"
                 />
-                <Entity
+                <a-entity
                   id="wallPartition2"
-                  gltf-model="#wallPartition"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
                   position="-1.70 0.06 -4.73917"
                 />
-                <Entity
+                <a-entity
                   id="wallPartition3"
-                  gltf-model="#wallPartition"
+                  gltf-model="#url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
                   position="-2.96 0.06 -4.73917"
                 />
 
-                <Entity
+                <a-entity
                   id="wallPartition4"
-                  gltf-model="#wallPartition"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
                   rotation="0 90 0"
                   position="0.85898 0.06 -4.57664"
                 />
 
-                <Entity
+                <a-entity
                   id="wallPartition4_2"
-                  gltf-model="#wallPartition"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
                   rotation="0 90 0"
                   position="-1.57857 0.06 -4.78077"
-                />
+                /> */}
 
-                <Entity
+                {/* <a-entity
                   static-body={{}}
                   id="deskLecture1"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-0.562 0.06 -4.035"
                 />
-                <Entity
+                <a-entity
                   static-body={{}}
                   id="deskLecture2"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-1.762 0.06 -4.035"
                 />
-                <Entity
+                <a-entity
                   static-body={{}}
                   id="deskLecture3"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-2.96 0.06 -4.035"
-                />
-                <Entity
+                /> */}
+                {/* <a-entity
                   static-body={{}}
                   id="deskLectureSec1"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-0.504 0.06 -2.204"
                   rotation="0 180 0"
                 />
-                <Entity
+                <a-entity
                   static-body={{}}
                   id="deskLectureSec2"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-1.700 0.06 -2.204"
                   rotation="0 180 0"
                 />
-                <Entity
+                <a-entity
                   static-body={{}}
                   id="deskLectureSec3"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-3.27678 0.06 -2.5328"
                   rotation="0 90 0"
-                />
+                /> */}
 
-                <Entity
+                <a-entity
                   id="desk1"
-                  gltf-model="#deskModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="-3.96997 0.06 -3.89812"
                 />
 
-                <Entity
+                {/* <a-entity
                   id="shelfDouble"
-                  gltf-model="#shelfDoubleModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfDouble.gltf)"
                   position="0.69884 0.06 -2.26737"
                   rotation="0 180 0"
                 />
-                <Entity
+                <a-entity
                   id="shelfDouble2"
-                  gltf-model="#shelfDoubleModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfDouble.gltf)"
                   position="-0.50817 0.06 -1.47256"
                   scale="1 0.767 1"
-                />
-                <Entity
+                /> */}
+                <a-entity
                   id="deskDrawer"
-                  gltf-model="#deskDrawerModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskDrawer.gltf)"
                   position="2.87312 0.06 -1.55422"
                   rotation="0 -90 0"
                 />
 
-                <Entity
+                <a-entity
                   id="desk2"
-                  gltf-model="#deskModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="1.95878 0.06 -2.59495"
                 />
-                <Entity
+                <a-entity
                   id="desk3"
-                  gltf-model="#deskModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="1.95878 0.06 -1.5982"
                 />
-                <Entity
+                <a-entity
                   id="desk4"
-                  gltf-model="#deskModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="2.95459 0.06 -1.5982"
                 />
-                <Entity
+                <a-entity
                   id="desk5"
-                  gltf-model="#deskModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="2.95459 0.06 -2.597"
                 />
 
-                <Entity
+                {/* <a-entity
                   id="wallPartition5"
-                  gltf-model="#wallPartition"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
                   position="-1.76589 0.06 -1.52473"
                 />
-                <Entity
+                <a-entity
                   id="wallPartition6"
-                  gltf-model="#wallPartition"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
                   position="-3.026 0.06 -1.52473"
-                />
+                /> */}
 
-                <Entity
+                <a-entity
                   id="locker"
-                  gltf-model="#lockerModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/locker.gltf)"
                   position="-3.033 0.06 -1.97029"
                   rotation="0 180 0"
                 />
-                <Entity
+                <a-entity
                   id="table1"
-                  gltf-model="#tableModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/table.gltf)"
                   position="-3.46181 0.06 -0.01224"
                 />
 
-                <Entity
+                <a-entity
                   id="glassShelf1"
-                  gltf-model="#shelfGlassModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfGlass.gltf)"
                   position="2.52301 0.06 -0.39101"
                   rotation="0 180 0"
                 />
-                <Entity
+                <a-entity
                   id="glassShelf2"
-                  gltf-model="#shelfGlassModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfGlass.gltf)"
                   position="2.52301 0.93963 -0.39101"
                   rotation="0 180 0"
                 />
 
-                <Entity
+                <a-entity
                   id="shelf"
-                  gltf-model="#shelfModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelf.gltf)"
                   position="2.44045 0.0572 -4.73446"
                   rotation="0 90 0"
                 />
 
-                <Entity
+                <a-entity
                   id="deskLecture4"
-                  gltf-model="#deskLectureModel"
-                  position="2.85751 0.0572 -5.193"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
+                  position="2.85751 0.0572   -5.193"
                   rotation="0 90 0"
                 />
-                <Entity
+                <a-entity
                   id="deskLecture5"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="2.85751 0.0572 -6.392"
                   rotation="0 90 0"
                 />
-                <Entity
+                <a-entity
                   id="shelfDouble2"
-                  gltf-model="#shelfDoubleModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfDouble.gltf)"
                   position="1.74477 0.0572 -6.73072"
                   rotation="0 -90 0"
                 />
-                <Entity
+                <a-entity
                   id="deskLecture6"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="4.302 0.0572 -5.937"
                   rotation="0 -90 0"
                 />
-                <Entity
+                <a-entity
                   id="deskLecture7"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="4.302 0.0572 -7.13709"
                   rotation="0 -90 0"
                 />
-                <Entity
+                <a-entity
                   id="deskLecture8"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="4.302 0.0572 -8.334"
                   rotation="0 -90 0"
                 />
 
-                <Entity
+                <a-entity
                   id="deskLecture9"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-0.38489 0.06 -5.48266"
                   rotation="0 180 0"
                 />
-                <Entity
+                <a-entity
                   id="deskLecture10"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="0.816 0.06 -5.48266"
                   rotation="0 180 0"
                 />
-                <Entity
+                <a-entity
                   id="desk6"
-                  gltf-model="#deskModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="-2.62015 0.06 -4.83058"
                 />
-                <Entity
+                <a-entity
                   id="desk7"
-                  gltf-model="#deskModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="-3.62075 0.06 -4.89817"
                 />
 
-                <Entity
+                <a-entity
                   id="table2"
-                  gltf-model="#tableModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/table.gltf)"
                   position="0.23287 0.06 -6.72517"
                   rotation="0 90 0"
                 />
-                <Entity
+                <a-entity
                   id="deskDrawer2"
-                  gltf-model="#deskDrawerModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskDrawer.gltf)"
                   position="0.23287 0.06 -7.07459"
                 />
-                <Entity
+                <a-entity
                   id="deskLecture11"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="0.93335 0.06 -8.03954"
                   rotation="0 90 0"
                 />
-                <Entity
+                <a-entity
                   id="desk8"
-                  gltf-model="#deskModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="0.23876 0.06 -9.27313"
                 />
-                <Entity
+                <a-entity
                   id="deskLecture12"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-0.4647 0.06 -9.42722"
                   rotation="0 -90 0"
                 />
-                <Entity
+                <a-entity
                   id="table3"
-                  gltf-model="#tableModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/table.gltf)"
                   position="0.24367 0.06 -10.22469"
                   rotation="0 180 0"
                 />
-                <Entity
+                <a-entity
                   id="tableCurved"
-                  gltf-model="#tableCurvedModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/tableCurved.gltf)"
                   position="-2.34255 0.06978 -9.15187"
                   rotation="0 -90 0"
                 />
-                <Entity
+                <a-entity
                   id="deskDrawer3"
-                  gltf-model="#deskDrawerModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskDrawer.gltf)"
                   position="-2.76449 0.06978 -5.86523"
                   rotation="0 90 0"
                 />
 
-                <Entity
+                <a-entity
                   id="deskLecture13"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-3.03498 0.06978 -6.86704"
                   rotation="0 90 0"
                 />
 
-                <Entity
+                <a-entity
                   id="deskLecture14"
-                  gltf-model="#deskLectureModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-3.03498 0.06978 -8.076"
                   rotation="0 90 0"
                 />
-                <Entity
+                {/* <a-entity
                   id="cabinet1"
-                  gltf-model="#cabinetModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/cabinet_double.gltf)"
                   position="2.1533 0.06978 -7.64441"
                   rotation="0 180 0"
                 />
 
-                <Entity
+                <a-entity
                   id="cabinet2"
-                  gltf-model="#cabinetModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/cabinet_double.gltf)"
                   position="1.599 0.06978 -9.19161"
                   rotation="0 -90 0"
-                />
-                <Entity
+                /> */}
+                <a-entity
                   id="locker2"
-                  gltf-model="#lockerModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/locker.gltf)"
                   position="3.4194 0.06978 -9.19161"
                   rotation="0 180 0"
                 />
-                <Entity
+                <a-entity
                   id="wallPartition7"
-                  gltf-model="#wallPartition"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
                   position="3.42816 0.06978 -8.93613"
                 />
-                <Entity
+                {/* <a-entity
                   id="cabinet3"
-                  gltf-model="#cabinetModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/cabinet_double.gltf)"
                   position="1.599 0.06978 -9.97823"
                   rotation="0 -90 0"
-                />
-                {/* <Entity
+                /> */}
+                <a-entity
                   id="aircon"
-                  gltf-model="#airconModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf)"
                   scale="0.0025 0.0025 0.0025"
                   position={{ x: -3.77, y: 2.5, z: -8.3 }}
                   rotation={{ x: 0, y: 90, z: 0 }}
                 />
-                <Entity
+                <a-entity
                   id="aircon"
-                  gltf-model="#airconModel"
+                  gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf)"
                   scale="0.0025 0.0025 0.0025"
                   position={{ x: -3.77, y: 2.5, z: -3.3 }}
                   rotation={{ x: 0, y: 90, z: 0 }}
-                /> */}
-              </Entity>
-
-              {/* <Entity>
+                />
+              </a-entity>
+              {/* <a-entity>
             <Entity 
               id="fan"
               gltf-model="#dysonModel"
@@ -653,12 +674,10 @@ class docVRoom extends Component {
               margin="0 0 0.05 0">
             </a-gui-button>
           </Entity> */}
-
               {/* <Device></Device> */}
-
               {/* <DynamicObject></DynamicObject> */}
-            </Entity>
-          </Scene>
+            </a-entity>
+          </a-scene>
         </div>
       </div>
     );
