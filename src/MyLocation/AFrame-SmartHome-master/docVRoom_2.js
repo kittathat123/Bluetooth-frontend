@@ -329,6 +329,7 @@ class docVRoom extends Component {
                   gltf-model="url(https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf)"
                   position={`${spherePosition.x} ${spherePosition.z} ${spherePosition.y}`}
                   scale="0.03 0.03  0.02 "
+                  light="castShadow: true"
                 ></a-entity>
 
                 {/* <a-animation
