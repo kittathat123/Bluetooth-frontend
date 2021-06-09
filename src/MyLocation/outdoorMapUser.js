@@ -170,6 +170,7 @@ export default function OutdoorMapUser() {
         const dataFromServer = await response.json();
         console.log("[outdoorMapUser.js] JSON : ", dataFromServer);
         setLocationList(dataFromServer.message);
+        setPathList(createNewPathList(dataFromServer.message));
       } catch (err) {
         console.log(err);
       }

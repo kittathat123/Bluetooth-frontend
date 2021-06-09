@@ -43,7 +43,7 @@ export default function Notification() {
                 <div className="contact-level-infomation-heading">
                   Contact Level Description
                 </div>
-                <Table style={{ width: "15vw" }}>
+                <Table style={{ width: "5vw" }}>
                   <tbody>
                     <thead>
                       <th>
@@ -62,10 +62,11 @@ export default function Notification() {
                   </tbody>
                 </Table>
               </div>
-            </div>
-            <div className="boxMapNotification">
-              <div className="tableBox">
-                <Tables />
+
+              <div className="boxMapNotification">
+                <div className="tableBox">
+                  <Tables />
+                </div>
               </div>
             </div>
           </div>
