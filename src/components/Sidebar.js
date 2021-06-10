@@ -184,7 +184,7 @@ export default function Sidebar() {
         </div>
       </Link>
 
-      <Link to="/Quarantine">
+      {/* <Link to="/Quarantine">
         <div className="other-box">
           <FontAwesomeIcon
             icon={faHouseUser}
@@ -193,7 +193,7 @@ export default function Sidebar() {
           />
           <h4 className="quarantine-text">Quarantine</h4>
         </div>
-      </Link>
+      </Link> */}
 
       <Link to="/Profile">
         <div className="other-box">

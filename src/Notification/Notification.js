@@ -37,13 +37,13 @@ export default function Notification() {
         </div>
         <div className="col">
           <div className="pageContent">
-            <h1 className="roomTitle">Notification</h1>
+            <h1 className="roomTitleNotification">Notification</h1>
             <div className="contact-level-information-group">
               <div className="contact-level-infomation-content">
                 <div className="contact-level-infomation-heading">
                   Contact Level Description
                 </div>
-                <Table style={{ width: "15vw" }}>
+                <Table style={{ width: "5vw" }}>
                   <tbody>
                     <thead>
                       <th>
@@ -62,10 +62,11 @@ export default function Notification() {
                   </tbody>
                 </Table>
               </div>
-            </div>
-            <div className="boxMapNotification">
-              <div className="tableBox">
-                <Tables />
+
+              <div className="boxMapNotification">
+                <div className="tableBox">
+                  <Tables />
+                </div>
               </div>
             </div>
           </div>

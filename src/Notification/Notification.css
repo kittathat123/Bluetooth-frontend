@@ -6,6 +6,9 @@
 .pageContent {
   position: relative;
   display: flex;
+  /* justify-content: center; */
+  /* justify-items: center; */
+  /* align-content: center; */
   width: 100%;
   height: 100%;
 }
@@ -20,13 +23,26 @@
   /* height: 100vh; */
   /* margin-top: 20%; */
 }
-
 .contact-level-information-group {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
   /* margin: 0 0 0 15vw; */
-  margin-left: 5vw;
+  /* margin-left: 2rem; */
   /* width: auto; */
+  /* background-color: purple; */
+}
+
+@media screen and (max-width: 600px) {
+  .contact-level-information-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* margin: 0 0 0 15vw; */
+    margin-left: -1vw;
+    /* width: auto; */
+    /* background-color: purple; */
+  }
 }
 
 .contact-level-infomation-heading {
@@ -39,4 +55,34 @@
 
 .contact-level-infomation-content {
   margin: 10px 0 0 0;
+  margin-left: 13vw;
+}
+
+@media screen and (max-width: 600px) {
+  .contact-level-infomation-content {
+    margin: 10px 0 0 0;
+    margin-left: 3vw;
+  }
+}
+
+.roomTitleNotification {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  color: rgba(42, 157, 244);
+  margin-top: 2%;
+  margin-left: 4%;
+}
+
+@media screen and (max-width: 600px) {
+  .roomTitleNotification {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    color: rgba(42, 157, 244);
+    margin-top: 2%;
+    margin-left: 14%;
+  }
 }

@@ -271,13 +271,19 @@ class docVRoom extends Component {
               <a-asset-item
                 response-type="arraybuffer"
                 id="labWall"
-                src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
+                // src="/Lab.gltf"
+                src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/Lab.gltf"
               ></a-asset-item>
 
               <a-asset-item
                 response-type="arraybuffer"
                 id="book"
                 src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/CHAHIN_NOTEBOOK.gltf"
+              ></a-asset-item>
+
+              <a-asset-item
+                id="docVRoom"
+                src="https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/empty_white_room/scene.gltf"
               ></a-asset-item>
             </a-assets>
 
@@ -294,8 +300,12 @@ class docVRoom extends Component {
               <a-entity
                 static-body={{}}
                 id="labWall"
-                gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf)"
-                position={{ x: -4, y: 0.05, z: 0 }}
+                // gltf-model="#labWall"
+                // "https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf"
+                // gltf-model="url(https://cdn.jsdelivr.net/gh/kitwatathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/empty_white_room/scene.gltf)"
+                gltf-model="url(https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/Lab.gltf)"
+                // position={{ x: -4, y: 0.05, z: 0 }}
+                position="-4 0.05 0"
                 shadow={{ cast: true }}
               />
               <a-entity
@@ -305,7 +315,7 @@ class docVRoom extends Component {
                 {/* HUMAN AVATAR */}
                 {/* <a-entity
                 id="maleModel"
-                scale="0.03 0.03  0.02 "
+                scale="0.03 0.03  0.02 "s
                 gltf-model="#male"
                 // position="0.2,1,-1.3"
                 position={`${spherePosition.x},${spherePosition.y},${spherePosition.z}`}
@@ -317,8 +327,9 @@ class docVRoom extends Component {
               ></a-entity> */}
                 <a-entity
                   gltf-model="url(https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf)"
-                  position={`${spherePosition.x} ${spherePosition.y} ${spherePosition.z}`}
+                  position={`${spherePosition.x} ${spherePosition.z} ${spherePosition.y}`}
                   scale="0.03 0.03  0.02 "
+                  light="castShadow: true"
                 ></a-entity>
 
                 {/* <a-animation
@@ -351,7 +362,7 @@ class docVRoom extends Component {
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
                   rotation="0 90 0"
                   position="0.85898 0.06 -4.57664"
-                />
+                />2w
 
                 <a-entity
                   id="wallPartition4_2"
@@ -400,11 +411,11 @@ class docVRoom extends Component {
                   rotation="0 90 0"
                 /> */}
 
-                <a-entity
+                {/* <a-entity
                   id="desk1"
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="-3.96997 0.06 -3.89812"
-                />
+                /> */}
 
                 {/* <a-entity
                   id="shelfDouble"
@@ -418,7 +429,7 @@ class docVRoom extends Component {
                   position="-0.50817 0.06 -1.47256"
                   scale="1 0.767 1"
                 /> */}
-                <a-entity
+                {/* <a-entity
                   id="deskDrawer"
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskDrawer.gltf)"
                   position="2.87312 0.06 -1.55422"
@@ -444,7 +455,7 @@ class docVRoom extends Component {
                   id="desk5"
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf)"
                   position="2.95459 0.06 -2.597"
-                />
+                /> */}
 
                 {/* <a-entity
                   id="wallPartition5"
@@ -457,7 +468,7 @@ class docVRoom extends Component {
                   position="-3.026 0.06 -1.52473"
                 /> */}
 
-                <a-entity
+                {/* <a-entity
                   id="locker"
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/locker.gltf)"
                   position="-3.033 0.06 -1.97029"
@@ -608,7 +619,7 @@ class docVRoom extends Component {
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf)"
                   position="-3.03498 0.06978 -8.076"
                   rotation="0 90 0"
-                />
+                /> */}
                 {/* <a-entity
                   id="cabinet1"
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/cabinet_double.gltf)"
@@ -622,7 +633,7 @@ class docVRoom extends Component {
                   position="1.599 0.06978 -9.19161"
                   rotation="0 -90 0"
                 /> */}
-                <a-entity
+                {/* <a-entity
                   id="locker2"
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/locker.gltf)"
                   position="3.4194 0.06978 -9.19161"
@@ -632,14 +643,14 @@ class docVRoom extends Component {
                   id="wallPartition7"
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf)"
                   position="3.42816 0.06978 -8.93613"
-                />
+                /> */}
                 {/* <a-entity
                   id="cabinet3"
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/cabinet_double.gltf)"
                   position="1.599 0.06978 -9.97823"
                   rotation="0 -90 0"
                 /> */}
-                <a-entity
+                {/* <a-entity
                   id="aircon"
                   gltf-model="url(https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf)"
                   scale="0.0025 0.0025 0.0025"
@@ -652,7 +663,7 @@ class docVRoom extends Component {
                   scale="0.0025 0.0025 0.0025"
                   position={{ x: -3.77, y: 2.5, z: -3.3 }}
                   rotation={{ x: 0, y: 90, z: 0 }}
-                />
+                /> */}
               </a-entity>
               {/* <a-entity>
             <Entity 
