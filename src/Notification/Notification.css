@@ -28,7 +28,7 @@
   flex-direction: column;
   justify-content: center;
   /* margin: 0 0 0 15vw; */
-  margin-left: 8rem;
+  /* margin-left: 2rem; */
   /* width: auto; */
   /* background-color: purple; */
 }
@@ -55,12 +55,34 @@
 
 .contact-level-infomation-content {
   margin: 10px 0 0 0;
-  margin-left: 10vw;
+  margin-left: 13vw;
 }
 
 @media screen and (max-width: 600px) {
   .contact-level-infomation-content {
     margin: 10px 0 0 0;
     margin-left: 3vw;
+  }
+}
+
+.roomTitleNotification {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  color: rgba(42, 157, 244);
+  margin-top: 2%;
+  margin-left: 4%;
+}
+
+@media screen and (max-width: 600px) {
+  .roomTitleNotification {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    color: rgba(42, 157, 244);
+    margin-top: 2%;
+    margin-left: 14%;
   }
 }

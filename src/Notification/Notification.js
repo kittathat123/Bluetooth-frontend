@@ -37,7 +37,7 @@ export default function Notification() {
         </div>
         <div className="col">
           <div className="pageContent">
-            <h1 className="roomTitle">Notification</h1>
+            <h1 className="roomTitleNotification">Notification</h1>
             <div className="contact-level-information-group">
               <div className="contact-level-infomation-content">
                 <div className="contact-level-infomation-heading">
