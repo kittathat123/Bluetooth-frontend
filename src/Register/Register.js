@@ -188,7 +188,7 @@ export default function Register() {
           ></img>
         </CardHeader>
         <CardBody>
-          <CardTitle tag="h5">WELCOME TO REGISTRATIOM PAGE</CardTitle>
+          <CardTitle tag="h5">WELCOME TO REGISTRATION PAGE</CardTitle>
           <Form onSubmit={handleSubmit}>
             <CardText>First Name :</CardText>
             <input

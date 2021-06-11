@@ -27,7 +27,7 @@ class docVRoom extends Component {
   setXandY(x_coord, y_coord) {
     console.log("x and y" + x_coord + "and " + y_coord);
     this.setState({
-      spherePosition: { x: x_coord, y: y_coord, z: 1 },
+      spherePosition: { x: ((-x_coord)*(-2.667))-3.5 , y: (y_coord)*(-3.267), z: 1 },
     });
   }
 
