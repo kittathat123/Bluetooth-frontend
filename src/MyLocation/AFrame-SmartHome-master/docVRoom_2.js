@@ -11,9 +11,9 @@ class docVRoom extends Component {
       username: "window_1234",
       message: "",
       spherePosition: {
-        x: -2.8,
-        y: 1.2,
-        z: -2.45,
+        x: 4.5,
+        y: -10,
+        z: 1.1,
       },
     };
 
@@ -95,7 +95,7 @@ class docVRoom extends Component {
           datas.payload.bt_tag_owner.localeCompare(this.getUsername()) === 0
         ) {
           console.log("[docVRoom.js] DATA : ", datas.payload);
-          this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
+          // this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
           // this.setXandY(2.3, 2);
         }
       }
@@ -325,6 +325,26 @@ class docVRoom extends Component {
                 //   z: this.state.spherePosition.z,
                 // }}
               ></a-entity> */}
+
+                <a-box
+                  position="-3 0.3 -1"
+                  rotation="0 45 0"
+                  scale="0.5 0.5 0.5"
+                  color="#4CC3D9"
+                ></a-box>
+                <a-box
+                  position="-3 0.3 -9.5"
+                  rotation="0 45 0"
+                  scale="0.5 0.5 0.5"
+                  color="#4CC3D9"
+                ></a-box>
+                <a-box
+                  position="4.5 0.3 -0.5"
+                  rotation="0 45 0"
+                  scale="0.5 0.5 0.5"
+                  color="#4CC3D9"
+                ></a-box>
+
                 <a-entity
                   gltf-model="url(https://cdn.jsdelivr.net/gh/kittathat123/Bluetooth-frontend/src/MyLocation/AFrame-SmartHome-master/patruck/patrick.gltf)"
                   position={`${spherePosition.x} ${spherePosition.z} ${spherePosition.y}`}
