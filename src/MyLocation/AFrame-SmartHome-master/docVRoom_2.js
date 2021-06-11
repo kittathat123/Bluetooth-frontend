@@ -11,8 +11,8 @@ class docVRoom extends Component {
       username: "window_1234",
       message: "",
       spherePosition: {
-        x: 4.5,
-        y: -10,
+        x: 0,
+        y: 0,
         z: 1.1,
       },
     };
@@ -95,7 +95,7 @@ class docVRoom extends Component {
           datas.payload.bt_tag_owner.localeCompare(this.getUsername()) === 0
         ) {
           console.log("[docVRoom.js] DATA : ", datas.payload);
-          // this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
+          this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
           // this.setXandY(2.3, 2);
         }
       }
