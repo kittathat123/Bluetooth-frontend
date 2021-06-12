@@ -72,9 +72,9 @@ const TableHistory = (props) => {
               <td>{item.timestamp}</td>
               <td>{item.x_coord}</td>
               <td>{item.y_coord}</td>
-              <td>{item.location}</td>
-              <td>{item.floor}</td>
               <td>{item.room}</td>
+              <td>{item.floor}</td>
+              <td>{item.location}</td>
             </tr>
           ))}
       </tbody>

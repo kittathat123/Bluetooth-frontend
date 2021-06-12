@@ -25,9 +25,13 @@ class docVRoom extends Component {
   }
 
   setXandY(x_coord, y_coord) {
-    console.log("x and y" + x_coord + "and " + y_coord);
+    // console.log("x and y" + x_coord + "and " + y_coord);
     this.setState({
-      spherePosition: { x: ((-x_coord)*(-2.667))-3.5 , y: (y_coord)*(-3.267), z: 1 },
+      spherePosition: {
+        x: x_coord * 2.667 - 3.5,
+        y: y_coord * -3.267 - 0.2,
+        z: 1.1,
+      },
     });
   }
 
@@ -94,14 +98,20 @@ class docVRoom extends Component {
         if (
           datas.payload.bt_tag_owner.localeCompare(this.getUsername()) === 0
         ) {
-          console.log("[docVRoom.js] DATA : ", datas.payload);
+          // console.log("[docVRoom.js] DATA : ", datas.payload);
           this.setXandY(datas.payload.x_coord, datas.payload.y_coord);
+          // console.log(datas.payload);
+          console.log("(docVRoom.js) show position X: ", datas.payload.x_coord);
+          console.log("position Y: ", datas.payload.y_coord);
+          // console.log("position Z: ", this.state.spherePosition.z);
+          console.log("---------------------------------------------");
           // this.setXandY(2.3, 2);
         }
       }
     };
 
-    socket.onclose = () => {
+    socket.onclose = (e) => {
+      socket.close();
       console.log("[docVRoom_2.js] socket.onclose", socket.onclose());
     };
     // socket.close();
@@ -110,7 +120,9 @@ class docVRoom extends Component {
 
   render() {
     const datass = Object.values(this.state.spherePosition);
-    console.log("(docVRoom.js) show sphere position: " + datass);
+
+    // console.log("x and y and z before calculation: " + datass);
+
     // var sceneEl = document.querySelector("a-scene");
     // var entity = document.querySelector("#maleModel").getAttribute("position");
     // document
